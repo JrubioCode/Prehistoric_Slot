@@ -1,0 +1,243 @@
+/* Estilo general */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("./assets/fondo.png");
+  background-position: center;
+  background-size: cover;
+  font-family: "Rock Salt";
+  color: #f2e5c4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  
+}
+
+.header img {
+  width: 200px;
+  border-radius: 50%;
+}
+
+.header h1 {
+  font-size: 32px;
+  color: #f9e4be;
+  margin-left: -30px;
+}
+
+/* Separar secciones */
+.barraSeparadora {
+  width: 2px;
+  height: 100px;
+  background-color: #e0c799;
+}
+
+/* Boton monedas */
+.botonMonedas {
+  background-color: #f9e4be;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: "Rock Salt";
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.botonMonedas:hover {
+  background-color: #e0c799;
+}
+
+/* Estilo contenedor reloj y ajustes */
+.ajustes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+/* Reloj */
+.reloj-container {
+  height: 50px;
+  width: 100px;
+  color: #f9e4be;
+  background: #7b7764;
+  font-size: 20px;
+  padding: 5px 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+}
+
+.icono-ajustes {
+  font-size: 50px;
+  cursor: pointer;
+}
+
+/* Estilo dentro del header */
+.contenidoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5e5b4d;
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid #e0c799;
+  border-radius: 20px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo contenedor de la tragaperras */
+.contenedor {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin-top: 50px;
+  background: #4e4b3d;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo tragaperras */
+.tragaperras {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #5e5b4d;
+  padding: 0px 30px;
+  border-radius: 10px;
+  width: 60%;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo pantalla tragaperras */
+.pantalla {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #786b5a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+  width: 90%;
+}
+
+.carril {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #d6c5a3;
+  width: 100px;
+  height: 150px;
+  border: 2px solid #a68857;
+  border-radius: 8px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.carril img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.palanca img{
+  width: 100px;
+  height: 100px;
+}
+
+/* Contenedor pantalla y palanca */
+.pantalla-palanca {
+  display: flex;
+}
+
+/* Estilo palanca */
+.palanca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.palanca img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+/* Premios */
+.premios {
+  background: #5e5b4d;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.premios h2 {
+  font-size: 24px;
+  color: #f9e4be;
+  margin-bottom: 10px;
+}
+
+.premio {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #d6c5a3;
+  margin-bottom: 8px;
+  background: #786b5a;
+  padding: 6px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.premio img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+/* Estilo modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 250px;
+  left: 1615px;
+  width: auto;
+  padding: 15px;
+  background-color: #5e5b4d;
+  border: 2px solid #e0c799;
+  border-radius: 20px;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.contenido-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: #f9e4be;
+  font-family: "Rock Salt";
+}
+
+.contenido-modal p {
+  font-size: 18px;
+  color: #f9e4be;
+  margin: 0;
+}
+
+.contenido-modal img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+}

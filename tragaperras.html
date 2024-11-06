@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tragaperras Peleolitica</title>
+    <link rel="stylesheet" href="./tragaperras.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="contenidoHeader">
+      <div class="header">
+        <a href="./../_PROYECTO_CASINO/index.html">
+          <img src="./assets/logo.webp" alt="Logo del Casino" />
+        </a>
+        <h1>PREHISTORIC SLOT</h1>
+        <div class="barraSeparadora"></div>
+        <!-- Monedas -->
+        <div class="gestion-monedas">
+          <div class="monedas">
+            <label>Meter puntos</label>
+            <br>
+            <input type="number" id="ingresar" name="ingresar">
+          </div>
+          <div class="monedas">
+            <label>Retirar puntos</label>
+            <br>
+            <input type="number" id="retirar" name="retirar">
+          </div>
+        </div>
+        <!-- Botón para realizar la acción -->
+        <input type="submit" id="botonMonedas" class="botonMonedas" value="Realizar operación">
+        <div class="barraSeparadora"></div>
+        <!-- Ajustes -->
+        <div class="ajustes">
+          <!-- Contenedor reloj -->
+          <div class="reloj-container">
+            <div id="reloj"></div>
+          </div>
+          <!-- Icono musica -->
+          <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
+          <!-- Modal para ajustes -->
+          <div class="modal" id="modal-ajustes">
+            <div class="contenido-modal">
+              <p>Idioma</p>
+              <img src="./assets/ajustes/español.png" alt="Idioma">
+              <p>Sonido</p>
+              <img src="./assets/ajustes/volumen.png" id="volumen" alt="Sonido">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contenedor">
+      <!-- Contenedor de premios -->
+      <div class="premios" id="lista-premios">
+        <h2>Premios</h2>
+        <div class="premio"><img src="./assets/tragaperras/grupoCavernicolas.png" alt="Grupo de Cavernícolas"> 1000 puntos</div>
+        <div class="premio"><img src="./assets/tragaperras/mamut.png" alt="Mamut"> 500 puntos</div>
+        <div class="premio"><img src="./assets/tragaperras/pollo.png" alt="Pollo"> 300 puntos</div>
+        <div class="premio"><img src="./assets/tragaperras/fuego.png" alt="Fuego"> 200 puntos</div>
+        <div class="premio"><img src="./assets/tragaperras/cavernicola.png" alt="Cavernícola"> 100 puntos</div>
+      </div>
+      <!-- Contenedor de la tragaperras con la palanca al lado de la pantalla -->
+      <div class="tragaperras">
+        <!-- Saldo actual -->
+        <p id="saldo">SALDO ACTUAL: </p>
+        <!-- Contenedor para la pantalla y la palanca juntos -->
+        <div class="pantalla-palanca">
+          <!-- Pantalla de la tragaperras -->
+          <div class="pantalla">
+            <div class="carril" id="carril1">
+              <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 1">
+            </div>
+            <div class="carril" id="carril2">
+              <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 2">
+            </div>
+            <div class="carril" id="carril3">
+              <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 3">
+            </div>
+          </div>
+          <!-- Palanca -->
+          <div class="palanca">
+            <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca">
+          </div>
+        </div>
+      </div>
+    </div>   
+    <script src="./tragaperras.js"></script>
+  </body>
+</html>
