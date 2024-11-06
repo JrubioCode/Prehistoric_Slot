@@ -84,6 +84,9 @@ volumenImg.addEventListener("click", function() {
   }
 });
 
+// Cambiar idioma
+
+
 // FUNCIONALIDADES TRAGAPERRAS
 
 // Símbolos tragaperras
@@ -98,6 +101,7 @@ const simbolos = [
 // Evento al pulsar espacio
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
+    cambiarPalanca();
     iniciarGiro();
   }
 });
@@ -130,7 +134,7 @@ function iniciarGiro() {
 // Función para girar cada carril
 function giroCarriles(carrilId, duracion) {
   const carril = document.getElementById(carrilId);
-  var tiempoInicio = null;
+  let tiempoInicio = null;
 
   function animarGiro(timestamp) {
     if (!tiempoInicio) tiempoInicio = timestamp;
@@ -140,12 +144,15 @@ function giroCarriles(carrilId, duracion) {
     const imagen = document.createElement("img");
     imagen.src = simboloAleatorio;
     imagen.classList.add("simbolo_Imagen");
+    
     carril.appendChild(imagen);
 
-    if (carril.childNodes.length > 5) {
+    // Si hay más de 10 elementos, elimina el primer hijo para mantener el tamaño constante
+    if (carril.childNodes.length > 10) {
       carril.removeChild(carril.firstChild);
     }
 
+    // Continua la animación mientras no se haya alcanzado la duración
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
