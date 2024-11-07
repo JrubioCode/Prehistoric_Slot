@@ -84,12 +84,7 @@ volumenImg.addEventListener("click", function() {
   }
 });
 
-// Cambiar idioma
-
-
-// FUNCIONALIDADES TRAGAPERRAS
-
-// Símbolos tragaperras
+// Símbolos y premios tragaperras
 const simbolos = [
   "./assets/tragaperras/cavernicola.png",
   "./assets/tragaperras/fuego.png",
@@ -97,6 +92,19 @@ const simbolos = [
   "./assets/tragaperras/mamut.png",
   "./assets/tragaperras/grupoCavernicolas.png",
 ];
+
+const premios = {
+  "./assets/tragaperras/cavernicola.png": 100,
+  "./assets/tragaperras/fuego.png": 200,
+  "./assets/tragaperras/pollo.png": 300,
+  "./assets/tragaperras/mamut.png": 500,
+  "./assets/tragaperras/grupoCavernicolas.png": 1000,
+};
+
+// Variables para almacenar el símbolo final de cada carril
+let simboloCarril1 = null;
+let simboloCarril2 = null;
+let simboloCarril3 = null;
 
 // Evento al pulsar espacio
 document.addEventListener("keydown", function (event) {
@@ -110,6 +118,7 @@ document.addEventListener("keydown", function (event) {
 var palanca = document.getElementById("palanca");
 palanca.addEventListener("click", function () {
   cambiarPalanca();
+  iniciarGiro();
 });
 
 function cambiarPalanca() {
@@ -121,18 +130,18 @@ function cambiarPalanca() {
   }, 200);
 }
 
-// Evento al hacer clic en la palanca
-palanca.addEventListener("click", iniciarGiro);
-
 // Iniciar el giro de los carriles
 function iniciarGiro() {
-  giroCarriles("carril1", 2000);
-  giroCarriles("carril2", 4000);
-  giroCarriles("carril3", 6000);
+  simboloCarril1 = simboloCarril2 = simboloCarril3 = null; // Reinicia los símbolos
+  giroCarriles("carril1", 2000, (simbolo) => simboloCarril1 = simbolo);
+  giroCarriles("carril2", 3000, (simbolo) => simboloCarril2 = simbolo);
+  giroCarriles("carril3", 4000, (simbolo) => { simboloCarril3 = simbolo;
+    verificarPremio(); // Llama a la verificación después del último carril
+  });
 }
 
 // Función para girar cada carril
-function giroCarriles(carrilId, duracion) {
+function giroCarriles(carrilId, duracion, callback) {
   const carril = document.getElementById(carrilId);
   let tiempoInicio = null;
 
@@ -156,7 +165,7 @@ function giroCarriles(carrilId, duracion) {
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
-      detenerGiro(carril);
+      detenerGiro(carril, simboloAleatorio, callback); // Pasa el símbolo final y la función callback
     }
   }
 
@@ -164,7 +173,22 @@ function giroCarriles(carrilId, duracion) {
 }
 
 // Función para detener el giro y mostrar el símbolo final
-function detenerGiro(carril) {
-  const simboloFinal = simbolos[Math.floor(Math.random() * simbolos.length)];
+function detenerGiro(carril, simboloFinal, callback) {
   carril.innerHTML = `<img src="${simboloFinal}" alt="símbolo" class="simbolo_Imagen">`;
+  callback(simboloFinal); // Llama al callback con el símbolo final
+}
+
+// Función para verificar si hay tres símbolos iguales
+function verificarPremio() {
+
+  setTimeout(() => {
+    if (simboloCarril1 && simboloCarril1 === simboloCarril2 && simboloCarril2 === simboloCarril3) {
+      const premio = premios[simboloCarril1] || 0;
+      saldo += premio;
+      actualizarSaldo();
+      alert(`¡Felicidades! Has ganado ${premio} puntos.`);
+    } else {
+      alert("No hubo premio esta vez. ¡Intenta de nuevo!");
+    }
+  }, 500); // Retraso de 1 segundo
 }
