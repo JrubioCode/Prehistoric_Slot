@@ -190,5 +190,22 @@ function verificarPremio() {
     } else {
       alert("No hubo premio esta vez. ¡Intenta de nuevo!");
     }
-  }, 500); // Retraso de 1 segundo
+  }, 500);
 }
+
+// Blanco y negro
+document.getElementById("blanco-negro").addEventListener("click", function(){
+  
+  // Cambiar de fondo
+  document.body.style.backgroundImage= "url('./assets/fondo-blanco-negro.png')";
+  
+  // Cambiar el fondo de todas las imágenes
+  document.querySelectorAll("img").forEach((element) => {
+    element.style.backgroundColor = "grey";
+  });
+
+  // Cambiar el fondo de todos los inputs
+  document.querySelectorAll("input").forEach((element) => {
+    element.style.backgroundColor = "grey";
+  });
+});
