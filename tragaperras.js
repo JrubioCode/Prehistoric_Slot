@@ -190,7 +190,7 @@ function verificarPremio() {
     } else {
       alert("No hubo premio esta vez. ¡Intenta de nuevo!");
     }
-  }, 500);
+  }, 300);
 }
 
 // Blanco y negro
