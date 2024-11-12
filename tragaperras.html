@@ -28,6 +28,8 @@
             <br>
             <input type="number" id="retirar" name="retirar">
           </div>
+          <!-- Sonido de la palanca -->
+          <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
         </div>
         <!-- Botón para realizar la acción -->
         <input type="submit" id="botonMonedas" class="botonMonedas" value="Realizar operación">
@@ -52,6 +54,8 @@
               <input type="range" id="control-volumen" min="0" max="1" step="0.1" value="0.5">
               <p>Volumen de la palanca</p>
               <input type="range" id="control-volumen-palanca" min="0" max="1" step="0.1" value="0.5">
+              <p>Volumen del premio</p>
+              <input type="range" id="control-volumen-premio" min="0" max="1" step="0.1" value="0.5">
               <!-- Sonido de la palanca -->
               <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3" type="audio/mp3"></audio>
               <!-- Blanco y negro -->
@@ -96,6 +100,8 @@
             <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3"></audio>
           </div>
         </div>
+        <!-- Mensaje variable del premio -->
+         <p id="mensajePremio"></p>
       </div>
     </div>   
     <script src="./tragaperras.js"></script>

@@ -227,6 +227,19 @@ function detenerGiro(carril, simboloFinal, callback) {
   callback(simboloFinal);
 }
 
+function sonidoPremio(){
+  // Obtener el elemento de audio de la palanca
+  const sonidoPremio = document.getElementById("sonidoPremio");
+
+  // Obtener el control de volumen de la palanca
+  const controlVolumenPremio = document.getElementById("control-volumen-premio");
+
+  // Ajustar el volumen según el control
+  sonidoPremio.volume = parseFloat(controlVolumenPremio.value);
+
+  // Reproducir el sonido cuando se hace clic en la palanca
+  sonidoPremio.play();
+}
 
 // Función para verificar si hay tres símbolos iguales
 function verificarPremio() {
@@ -234,10 +247,17 @@ function verificarPremio() {
     if (simboloCarril1 && simboloCarril1 === simboloCarril2 && simboloCarril2 === simboloCarril3) {
       const premio = premios[simboloCarril1] || 0;
       saldo += premio;
+      sonidoPremio();
       actualizarSaldo();
-      alert(`¡Felicidades! Has ganado ${premio} puntos.`);
+      document.getElementById("mensajePremio").innerHTML = "PREMIO";
+      setTimeout(() => {
+        document.getElementById("mensajePremio").innerHTML = "";
+      }, 2000);
     } else {
-      alert("No hubo premio esta vez. ¡Intenta de nuevo!");
+      document.getElementById("mensajePremio").innerHTML = "UNA MAS Y TE TOCA";
+      setTimeout(() => {
+        document.getElementById("mensajePremio").innerHTML = "";
+      }, 2000);
     }
   }, 300);
 }
