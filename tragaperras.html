@@ -40,17 +40,6 @@
           </div>
           <!-- Icono musica -->
           <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
-          <!-- Modal para ajustes -->
-          <div class="modal" id="modal-ajustes">
-            <div class="contenido-modal">
-              <p>Idioma</p>
-              <img src="./assets/ajustes/español.png" alt="Idioma">
-              <p>Sonido</p>
-              <img src="./assets/ajustes/volumen.png" id="volumen" alt="Sonido">
-              <p>Blanco y negro</p>
-              <img src="./assets/ajustes/español.png" id="blanco-negro" alt="Blanco y negro">
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -88,7 +77,24 @@
           </div>
         </div>
       </div>
-    </div>   
+    </div>
+    <!-- Modal para ajustes -->
+    <div class="modal" id="modal-ajustes">
+      <div class="contenido-modal">
+        <p>Idioma</p>
+        <div>
+          <img src="./assets/ajustes/español.png" alt="Idioma Español" id="idioma-espanol" class="idioma-img">
+          <img src="./assets/ajustes/ingles.png" alt="Idioma Inglés" id="idioma-ingles" class="idioma-img">
+        </div>
+        <p>Sonido</p>
+        <div>
+          <img src="./assets/ajustes/volumen.png" id="volumen-icon" alt="Icono Sonido">
+          <input type="range" id="control-volumen" min="0" max="100" value="50" step="1">
+        </div>
+        <p>Blanco y negro</p>
+        <img src="./assets/ajustes/blanco-negro.png" id="blanco-negro" alt="Blanco y negro">
+      </div>
+    </div>  
     <script src="./tragaperras.js"></script>
   </body>
 </html>

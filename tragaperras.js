@@ -209,3 +209,21 @@ document.getElementById("blanco-negro").addEventListener("click", function(){
     element.style.backgroundColor = "grey";
   });
 });
+
+// Cambio de idioma (ejemplo con español e inglés)
+document.getElementById("idioma-espanol").addEventListener("click", () => {
+  console.log("Idioma seleccionado: Español");
+  // Aquí puedes agregar la lógica para cambiar el idioma de la página.
+});
+
+document.getElementById("idioma-ingles").addEventListener("click", () => {
+  console.log("Idioma seleccionado: Inglés");
+  // Aquí puedes agregar la lógica para cambiar el idioma de la página.
+});
+
+// Control de volumen
+document.getElementById("control-volumen").addEventListener("input", (event) => {
+  let volumen = event.target.value;
+  console.log(`Volumen ajustado a: ${volumen}`);
+  // Aquí puedes agregar la lógica para ajustar el volumen de algún sonido en la página.
+});
