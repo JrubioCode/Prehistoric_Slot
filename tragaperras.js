@@ -62,26 +62,56 @@ function cerrarModal(event) {
   }
 }
 
-// Audio general
-var audio = new Audio("./audios/audio-principal.mp3");
-audio.loop = true;
+// Musica de fondo
+window.onload = () => {
+  const audio = document.getElementById('musicaFondo');
+  const controlVolumen = document.getElementById('control-volumen');
+  const modalAjustes = document.getElementById('modal-ajustes');
+  var haIniciado = false;
 
-var sonando = false;
-var volumenImg = document.getElementById("volumen");
-
-volumenImg.addEventListener("click", function() {
-  if (!sonando) {
-    audio.play();
-    sonando = true;
-  } else {
-    if (audio.volume > 0) {
-      audio.volume = 0;
-      volumenImg.src="./assets/ajustes/sin-volumen.png";
-    } else {
-      audio.volume = 1;
-      volumenImg.src="./assets/ajustes/volumen.png";
-    }
+  // Función para iniciar la música al interactuar
+  function iniciarMusica() {
+      if (!haIniciado) {
+          audio.volume = parseFloat(controlVolumen.value);
+          audio.play().then(() => {
+              console.log("Música iniciada tras la interacción");
+          }).catch(error => {
+              console.log("No se pudo reproducir el audio:", error);
+          });
+          haIniciado = true;
+      }
   }
+
+  // Escuchar eventos de interacción del usuario
+  document.addEventListener('click', iniciarMusica);
+  document.addEventListener('scroll', iniciarMusica);
+  document.addEventListener('keydown', iniciarMusica);
+  document.addEventListener('touchstart', iniciarMusica);
+
+  // Ajustar el volumen del audio
+  controlVolumen.addEventListener('input', (event) => {
+      audio.volume = parseFloat(event.target.value);
+  });
+
+  // Iniciar música si se abre el modal de ajustes
+  modalAjustes.addEventListener('click', iniciarMusica);
+};
+
+// Blanco y negro
+document.getElementById("blanco-negro").addEventListener("click", function(){
+  
+  // Cambiar de fondo
+  document.body.style.backgroundImage= "url('./assets/fondo-blanco-negro.png')";
+  
+  // Cambiar el fondo de todas las imágenes
+  document.querySelectorAll("img").forEach((element) => {
+    element.style.backgroundColor = "grey";
+  });
+
+  // Cambiar el fondo de todos los inputs
+  document.querySelectorAll("input").forEach((element) => {
+    element.style.backgroundColor = "grey";
+  });
 });
 
 // Símbolos y premios tragaperras
@@ -102,11 +132,11 @@ const premios = {
 };
 
 // Variables para almacenar el símbolo final de cada carril
-let simboloCarril1 = null;
-let simboloCarril2 = null;
-let simboloCarril3 = null;
+var simboloCarril1 = null;
+var simboloCarril2 = null;
+var simboloCarril3 = null;
 
-// Evento al pulsar espacio
+// Giro y movimiento de palanca al pulsar el espacio
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
     cambiarPalanca();
@@ -114,13 +144,13 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-// Palanca
-var palanca = document.getElementById("palanca");
-palanca.addEventListener("click", function () {
+// Giro y movimiento de palanca al pulsar en la palanca
+document.getElementById("palanca").addEventListener("click", function () {
   cambiarPalanca();
   iniciarGiro();
 });
 
+// Cambiar de posicion la palanca
 function cambiarPalanca() {
   palanca.src = "./assets/tragaperras/palanca_abajo.png";
 
@@ -130,13 +160,13 @@ function cambiarPalanca() {
   }, 200);
 }
 
-// Iniciar el giro de los carriles
+// Giro de la tragaperras
 function iniciarGiro() {
-  simboloCarril1 = simboloCarril2 = simboloCarril3 = null; // Reinicia los símbolos
-  giroCarriles("carril1", 2000, (simbolo) => simboloCarril1 = simbolo);
-  giroCarriles("carril2", 3000, (simbolo) => simboloCarril2 = simbolo);
-  giroCarriles("carril3", 4000, (simbolo) => { simboloCarril3 = simbolo;
-    verificarPremio(); // Llama a la verificación después del último carril
+  simboloCarril1 = simboloCarril2 = simboloCarril3 = null;
+    giroCarriles("carril1", 2000, (simbolo) => simboloCarril1 = simbolo);
+    giroCarriles("carril2", 3000, (simbolo) => simboloCarril2 = simbolo);
+    giroCarriles("carril3", 4000, (simbolo) => { simboloCarril3 = simbolo;
+    verificarPremio();
   });
 }
 
@@ -149,23 +179,25 @@ function giroCarriles(carrilId, duracion, callback) {
     if (!tiempoInicio) tiempoInicio = timestamp;
     const progreso = timestamp - tiempoInicio;
 
+    // Crear símbolo aleatorio
     const simboloAleatorio = simbolos[Math.floor(Math.random() * simbolos.length)];
     const imagen = document.createElement("img");
     imagen.src = simboloAleatorio;
     imagen.classList.add("simbolo_Imagen");
-    
-    carril.appendChild(imagen);
 
-    // Si hay más de 10 elementos, elimina el primer hijo para mantener el tamaño constante
-    if (carril.childNodes.length > 10) {
-      carril.removeChild(carril.firstChild);
+    // Añadir la imagen al inicio del carril (para efecto de movimiento hacia abajo)
+    carril.prepend(imagen);
+
+    // Controlar el límite de elementos en el carril
+    if (carril.childNodes.length > 3) {
+      carril.removeChild(carril.lastChild); // Eliminamos el último hijo para mantener tamaño fijo
     }
 
-    // Continua la animación mientras no se haya alcanzado la duración
+    // Continuar la animación mientras no se haya alcanzado la duración
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
-      detenerGiro(carril, simboloAleatorio, callback); // Pasa el símbolo final y la función callback
+      detenerGiro(carril, simboloAleatorio, callback); // Detener giro y devolver símbolo final
     }
   }
 
@@ -174,13 +206,14 @@ function giroCarriles(carrilId, duracion, callback) {
 
 // Función para detener el giro y mostrar el símbolo final
 function detenerGiro(carril, simboloFinal, callback) {
+  // Limpiamos el carril y mostramos solo el símbolo final
   carril.innerHTML = `<img src="${simboloFinal}" alt="símbolo" class="simbolo_Imagen">`;
-  callback(simboloFinal); // Llama al callback con el símbolo final
+  callback(simboloFinal);
 }
+
 
 // Función para verificar si hay tres símbolos iguales
 function verificarPremio() {
-
   setTimeout(() => {
     if (simboloCarril1 && simboloCarril1 === simboloCarril2 && simboloCarril2 === simboloCarril3) {
       const premio = premios[simboloCarril1] || 0;
@@ -192,20 +225,3 @@ function verificarPremio() {
     }
   }, 300);
 }
-
-// Blanco y negro
-document.getElementById("blanco-negro").addEventListener("click", function(){
-  
-  // Cambiar de fondo
-  document.body.style.backgroundImage= "url('./assets/fondo-blanco-negro.png')";
-  
-  // Cambiar el fondo de todas las imágenes
-  document.querySelectorAll("img").forEach((element) => {
-    element.style.backgroundColor = "grey";
-  });
-
-  // Cambiar el fondo de todos los inputs
-  document.querySelectorAll("input").forEach((element) => {
-    element.style.backgroundColor = "grey";
-  });
-});
