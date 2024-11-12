@@ -98,21 +98,21 @@ window.onload = () => {
 };
 
 // Blanco y negro
-document.getElementById("blanco-negro").addEventListener("click", function(){
-  
-  // Cambiar de fondo
-  document.body.style.backgroundImage= "url('./assets/fondo-blanco-negro.png')";
-  
-  // Cambiar el fondo de todas las imágenes
-  document.querySelectorAll("img").forEach((element) => {
-    element.style.backgroundColor = "grey";
-  });
+const blancoNegroImg = document.getElementById('blanco-negro');
+const colorImg = document.getElementById('color');
 
-  // Cambiar el fondo de todos los inputs
-  document.querySelectorAll("input").forEach((element) => {
-    element.style.backgroundColor = "grey";
-  });
+// Función para aplicar el filtro blanco y negro
+blancoNegroImg.addEventListener('click', () => {
+  document.body.classList.add('blanco-negro');
+  document.body.style.backgroundImage= "url('./assets/fondo-blanco-negro.png')";
 });
+
+// Función para quitar el filtro y volver a color
+colorImg.addEventListener('click', () => {
+  document.body.classList.remove('blanco-negro');
+  document.body.style.backgroundImage= "url('./assets/fondo.png')";
+});
+
 
 // Símbolos y premios tragaperras
 const simbolos = [

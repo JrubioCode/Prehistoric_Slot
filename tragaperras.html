@@ -28,8 +28,6 @@
             <br>
             <input type="number" id="retirar" name="retirar">
           </div>
-          <!-- Sonido de la palanca -->
-          <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
         </div>
         <!-- Botón para realizar la acción -->
         <input type="submit" id="botonMonedas" class="botonMonedas" value="Realizar operación">
@@ -45,22 +43,24 @@
           <!-- Modal para ajustes -->
           <div class="modal" id="modal-ajustes">
             <div class="contenido-modal">
+              <!-- Idiomas -->
               <p>Idioma</p>
               <img src="./assets/ajustes/español.png" alt="Idioma">
-              <p>Sonido</p>
-              <!-- Audio principal -->
-              <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
+              <!-- Audios y control de volumen -->
               <p>Volumen principal</p>
+              <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
               <input type="range" id="control-volumen" min="0" max="1" step="0.1" value="0.5">
               <p>Volumen de la palanca</p>
+              <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3" type="audio/mp3"></audio>
               <input type="range" id="control-volumen-palanca" min="0" max="1" step="0.1" value="0.5">
               <p>Volumen del premio</p>
+              <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
               <input type="range" id="control-volumen-premio" min="0" max="1" step="0.1" value="0.5">
-              <!-- Sonido de la palanca -->
-              <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3" type="audio/mp3"></audio>
-              <!-- Blanco y negro -->
+              <!-- Modo de color -->
               <p>Blanco y negro</p>
-              <img src="./assets/ajustes/español.png" id="blanco-negro" alt="Blanco y negro">
+              <img src="./assets/ajustes/blanco-negro.png" id="blanco-negro" alt="Blanco y negro">
+              <p>Color</p>
+              <img src="./assets/ajustes/color.png" id="color" alt="Color">
             </div>                      
           </div>
         </div>
@@ -97,7 +97,6 @@
           <!-- Palanca -->
           <div class="palanca">
             <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca">
-            <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3"></audio>
           </div>
         </div>
         <!-- Mensaje variable del premio -->
