@@ -136,9 +136,24 @@ var simboloCarril1 = null;
 var simboloCarril2 = null;
 var simboloCarril3 = null;
 
+function sonidoPalanca(){
+    // Obtener el elemento de audio de la palanca
+    const sonidoPalanca = document.getElementById("sonidoPalanca");
+
+    // Obtener el control de volumen de la palanca
+    const controlVolumenPalanca = document.getElementById("control-volumen-palanca");
+  
+    // Ajustar el volumen según el control
+    sonidoPalanca.volume = parseFloat(controlVolumenPalanca.value);
+  
+    // Reproducir el sonido cuando se hace clic en la palanca
+    sonidoPalanca.play();
+}
+
 // Giro y movimiento de palanca al pulsar el espacio
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
+    sonidoPalanca();
     cambiarPalanca();
     iniciarGiro();
   }
@@ -146,20 +161,9 @@ document.addEventListener("keydown", function (event) {
 
 // Giro y movimiento de palanca al pulsar en la palanca
 document.getElementById("palanca").addEventListener("click", function () {
+  sonidoPalanca();
   cambiarPalanca();
   iniciarGiro();
-
-  // Obtener el elemento de audio de la palanca
-  const sonidoPalanca = document.getElementById("sonidoPalanca");
-
-  // Obtener el control de volumen de la palanca
-  const controlVolumenPalanca = document.getElementById("control-volumen-palanca");
-
-  // Ajustar el volumen según el control
-  sonidoPalanca.volume = parseFloat(controlVolumenPalanca.value);
-
-  // Reproducir el sonido cuando se hace clic en la palanca
-  sonidoPalanca.play();
 });
 
 // Cambiar de posicion la palanca
