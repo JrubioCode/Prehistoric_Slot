@@ -146,6 +146,16 @@ document.addEventListener("keydown", function (event) {
 
 // Giro y movimiento de palanca al pulsar en la palanca
 document.getElementById("palanca").addEventListener("click", function () {
+    // Obtener el elemento de la palanca
+    const palanca = document.getElementById('palanca'); // Asegúrate de que el ID sea correcto
+
+    // Obtener el audio
+    const sonidoPalanca = document.getElementById('sonidoPalanca');
+  
+    // Añadir evento de clic para reproducir el sonido
+    palanca.addEventListener('click', function() {
+      sonidoPalanca.play();  // Reproduce el sonido cuando se hace clic
+    });
   cambiarPalanca();
   iniciarGiro();
 });
