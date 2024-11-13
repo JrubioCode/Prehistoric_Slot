@@ -226,3 +226,66 @@ function verificarPremio() {
     }, 2000);
   }, 300);
 }
+
+// Inicialización de i18next
+i18next.init({
+  lng: 'es',
+  resources: {
+    es: {
+      translation: {
+        titulo: "PREHISTORIC SLOT",
+        meter_puntos: "Meter puntos",
+        retirar_puntos: "Retirar puntos",
+        realizar_operacion: "Realizar operación",
+        premios_titulo: "Premios",
+        premio_cavernicola: "Cavernícola - 100 puntos",
+        premio_fuego: "Fuego - 200 puntos",
+        premio_pollo: "Pollo - 300 puntos",
+        premio_mamut: "Mamut - 500 puntos",
+        premio_grupoCavernicolas: "Grupo de Cavernícolas - 1000 puntos",
+        mensaje_premio: "PREMIO",
+        mensaje_intentarlo: "SIGUE INTENTANDOLO. YA CASI ESTÁ",
+        reloj: "Hora actual",
+      },
+    },
+    en: {
+      translation: {
+        titulo: "PREHISTORIC SLOT",
+        meter_puntos: "Enter points",
+        retirar_puntos: "Withdraw points",
+        realizar_operacion: "Perform operation",
+        premios_titulo: "Prizes",
+        premio_cavernicola: "Caveman - 100 points",
+        premio_fuego: "Fire - 200 points",
+        premio_pollo: "Chicken - 300 points",
+        premio_mamut: "Mammoth - 500 points",
+        premio_grupoCavernicolas: "Group of Cavemen - 1000 points",
+        mensaje_premio: "PRIZE",
+        mensaje_intentarlo: "KEEP TRYING. YOU'RE ALMOST THERE",
+        reloj: "Current Time",
+      },
+    },
+  },
+}, function () {
+  actualizarTraducciones();
+});
+
+// Función para actualizar las traducciones
+function actualizarTraducciones() {
+  document.querySelectorAll("[data-i18n]").forEach((elemento) => {
+    const clave = elemento.getAttribute("data-i18n");
+    const textoTraducido = i18next.t(clave);
+    if (elemento.tagName === "INPUT") {
+      elemento.value = textoTraducido;
+    } else {
+      elemento.textContent = textoTraducido;
+    }
+  });
+}
+
+// Función para cambiar el idioma
+function cambiarIdioma(idioma) {
+  i18next.changeLanguage(idioma, () => {
+    actualizarTraducciones();
+  });
+}

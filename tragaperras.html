@@ -6,6 +6,7 @@
     <title>Tragaperras Peleolitica</title>
     <link rel="stylesheet" href="./tragaperras.css" />
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
   </head>
   <body id="body">
     <!-- Header -->
@@ -45,7 +46,8 @@
             <div class="contenido-modal">
               <!-- Idiomas -->
               <p>Idioma</p>
-              <img src="./assets/ajustes/español.png" alt="Idioma">
+              <img src="./assets/ajustes/español.png" alt="Español">
+              <img src="./assets/ajustes/ingles.png" onclick="traducir()" alt="Ingles">
               <!-- Audios y control de volumen -->
               <p>Volumen principal</p>
               <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
