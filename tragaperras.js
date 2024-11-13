@@ -117,10 +117,7 @@ colorImg.addEventListener('click', () => {
 // Símbolos y premios tragaperras
 const simbolos = [
   "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/mamut.png",
-  "./assets/tragaperras/grupoCavernicolas.png",
+
 ];
 
 const premios = {
