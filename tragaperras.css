@@ -1,258 +1,333 @@
-:root{
-  --primary-color: #f2e5c4;
-  --secundary-color: #4e4b3d;
-}
-
 /* Estilo general */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Rock Salt', cursive;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: url("./assets/fondo.png");
+  background-image: url('./assets/fondo.png');
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Rock Salt";
-  color: var(--primary-color);
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  transition: filter 0.3s ease;
 }
 
-/* Aplica el filtro blanco y negro */
-.blanco-negro {
-  filter: grayscale(100%);
+/* Estilos para el header */
+.contenido-header {
+  width: 100%;
+  min-width: 800px;
+  border-radius: 50px;
+  background-color: #2f2f2f;
+  padding: 20px;
 }
 
-/* Estilo header */
 .header {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  
-}
-
-.header img {
-  width: 200px;
-  border-radius: 50%;
-}
-
-.header h1 {
-  font-size: 32px;
-  color: #f9e4be;
-  margin-left: -30px;
-}
-
-/* Separar secciones */
-.barraSeparadora {
-  width: 2px;
-  height: 100px;
-  background-color: #e0c799;
-}
-
-/* Boton monedas */
-.botonMonedas {
-  background-color: #f9e4be;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-family: "Rock Salt";
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.botonMonedas:hover {
-  background-color: #e0c799;
-}
-
-/* Estilo contenedor reloj y ajustes */
-.ajustes {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 10px;
-}
-
-/* Reloj */
-.reloj-container {
-  height: 50px;
-  width: 100px;
-  color: #f9e4be;
-  background: #7b7764;
-  font-size: 20px;
-  padding: 5px 20px;
-  text-align: center;
-  border-radius: 8px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  margin-bottom: 10px;
-}
-
-.icono-ajustes {
-  font-size: 50px;
-  cursor: pointer;
-}
-
-/* Estilo dentro del header */
-.contenidoHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #5e5b4d;
-  margin-top: 10px;
-  padding: 10px;
-  border: 2px solid #e0c799;
-  border-radius: 20px;
-  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Estilo contenedor de la tragaperras */
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #e1c6b0;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.logo-titulo img {
+  width: auto;
+  height: 120px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.barraSeparadora {
+  width: 2px;
+  height: 120px;
+  background-color: #e1c6b0;
+}
+
+/* Estilo de los botones */
+.botones-dinero input {
+  background-color: #4a3f31;
+  color: #e1c6b0;
+  border: none;
+  font-size: 12px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 20px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Efecto hover en los botones */
+.botones-dinero input:hover {
+  background-color: #3b2e1b;
+}
+
+/* Estilo para el texto dinero actual */
+.dinero-actual {
+  font-size: 16px;
+  color: #e1c6b0;
+  font-weight: bold;
+  margin: 20px 0 0 20px;
+}
+
+/* Estilo para los ajustes */
+.ajustes {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 150px;
+}
+
+.reloj-container {
+  font-size: 22px;
+  color: #e1c6b0;
+  margin: 15px;
+  font-weight: bold;
+}
+
+.icono-ajustes {
+  font-size: 41px;
+  cursor: pointer;
+  color: #e1c6b0;
+  transition: color 0.3s ease;
+  margin-left: 45px;
+}
+
+.icono-ajustes:hover {
+  color: #d98f44;
+}
+
+/* Estilo para el contenedor general */
 .contenedor {
   display: flex;
-  gap: 30px;
-  padding: 20px;
-  max-width: 1200px;
-  margin-top: 50px;
-  background: #4e4b3d;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  gap: 20px;
+  padding: 20px 10px;
 }
 
-/* Estilo tragaperras */
-.tragaperras {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #5e5b4d;
-  padding: 0px 30px;
-  border-radius: 10px;
-  width: 60%;
-  gap: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* Estilo pantalla tragaperras */
-.pantalla {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #786b5a;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
-  width: 90%;
-}
-
-.carril {
-  display: flex;
-  flex-direction: column; /* Cambiamos a columna para el giro vertical */
-  justify-content: center; 
-  align-items: center;
-  overflow: hidden;
-  background: #d6c5a3;
-  width: 100px; /* Puedes ajustar el ancho según prefieras */
-  height: 150px; /* Aumentamos un poco la altura para acomodar mejor los elementos */
-  border: 2px solid #a68857;
-  border-radius: 8px;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
-}
-
-.carril img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.palanca img{
-  width: 100px;
-  height: 100px;
-}
-
-/* Contenedor pantalla y palanca */
-.pantalla-palanca {
-  display: flex;
-}
-
-/* Estilo palanca */
-.palanca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.palanca img {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-}
-
-/* Premios */
+/* Estilo para el contenedor de premios */
 .premios {
-  background: #5e5b4d;
-  padding: 15px;
+  width: 15%;
+  background-color: #2f2a25;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.3s ease;
 }
 
 .premios h2 {
-  font-size: 24px;
-  color: #f9e4be;
-  margin-bottom: 10px;
+  text-align: center;
+  color: #bfa67b;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 .premio {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  color: #d6c5a3;
-  margin-bottom: 8px;
-  background: #786b5a;
-  padding: 6px;
-  border-radius: 6px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #bfa67b;
 }
 
 .premio img {
-  width: 25px;
+  width: 70px;
+  height: 70px;
   margin-right: 10px;
+  border-radius: 50%;
+  border: 3px solid #8e7047;
 }
 
-/* Estilo modal */
-.modal {
-  display: none;
-  position: fixed;
-  top: 250px;
-  left: 1615px;
-  width: auto;
-  padding: 15px;
-  background-color: #5e5b4d;
-  border: 2px solid #e0c799;
-  border-radius: 20px;
-  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-}
-
-.contenido-modal {
+/* Estilo para el contenedor de la tragaperras */
+.tragaperras {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  color: #f9e4be;
-  font-family: "Rock Salt";
+  width: 65%;
+  background-color: #2c2419;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.3s ease;
+  margin-left: 25px;
+  position: relative;
 }
 
-.contenido-modal p {
+/* Estilo para el mensaje de fichas */
+#fichas {
+  color: #bfa67b;
   font-size: 18px;
-  color: #f9e4be;
-  margin: 0;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  position: absolute;
+  bottom: 440px;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
 }
 
-.contenido-modal img {
-  width: 40px;
-  height: 40px;
+/* Estilo para el contenedor de la pantalla y la palanca */
+.pantalla-palanca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1000px;
+  height: 200px;
+  margin-left: 130px;
+}
+
+.pantalla {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  background-color: #4e3f33;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.carril {
+  width: 100px; 
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6e5a42;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.carril img {
+  width: 80%;
+  height: 80%;
   object-fit: cover;
+}
+
+.palanca img {
+  width: 140px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Estilo para el mensaje de premio */
+#mensajePremio {
+  font-size: 18px;
+  color: #bfa67b;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1px;
+  position: absolute;
+  top: 450px;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+}
+
+
+
+/* Modal de Ajustes */
+.modal-ajustes {
+  display: none; 
+  position: absolute;
+  top: 260px; 
+  right: 20px;
+  width: 15%;
+  height: 600px;
+  z-index: 10;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.contenido-modal-ajustes {
+  background-color: #2f2f2f;
+  padding: 10px;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.contenedor-imagenes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.contenido-modal-ajustes img {
+  width: auto;
+  height: 40px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+/* Inputs en el modal de ajustes */
+.contenido-modal-ajustes input {
+  padding: 8px; 
+  font-size: 10px;
+  border-radius: 5px;
+  border: 1px solid #c3a28b; 
+  width: 100%;
+}
+
+/* Efecto hover para el botón de submit en el modal */
+.contenido-modal-ajustes input:hover {
+  background-color: #d98f44; 
+  cursor: pointer;
+}
+
+/* Modal de Dinero */
+.modal-dinero {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo del contenido del modal de dinero */
+.contenido-modal-dinero {
+  background-color: #2f2f2f;
+  padding: 20px;
+  border-radius: 12px;
+  width: 25%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+/* Estilo para los inputs del modal */
+.contenido-modal-dinero input {
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 5px;
+  border: 1px solid #c3a28b;
+  width: 100%;
+}
+
+/* Efecto hover para botones del modal */
+.contenido-modal-dinero input[type="button"]:hover {
+  background-color: #d98f44;
   cursor: pointer;
 }
