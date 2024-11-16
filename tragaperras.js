@@ -80,7 +80,7 @@ document.getElementById("sacar-dinero").addEventListener("click", function () {
   abrirModal("Sacar dinero");
 });
 
-// Función para abrir el modal y definir el tipo de transacción
+// Función para abrir el modal de dinero
 function abrirModal(tipo) {
   document.getElementById("modal-dinero").style.display = "flex";
   document.getElementById("modal-dinero").setAttribute("data-tipo", tipo);
@@ -109,16 +109,37 @@ document.getElementById("boton-meter-dinero-modal").addEventListener("click", fu
   }
 });
 
-// Función para cerrar el modal
+// Función para cerrar el modal de dinero
 document.getElementById("boton-cerrar-modal").addEventListener("click", cerrarModal);
 function cerrarModal() {
   document.getElementById("modal-dinero").style.display = "none";
   document.getElementById("introducirDinero").value = ''; // Limpiar el campo de entrada
 }
 
+// Función para abrir el modal de conversión a fichas
+function abrirModalConversionFichas() {
+  document.getElementById("modal-conversion-fichas").style.display = "flex";
+}
+
+// Función para abrir el modal de conversión a saldo
+function abrirModalConversionSaldo() {
+  document.getElementById("modal-conversion-saldo").style.display = "flex";
+}
+
 // Evento para "Convertir a fichas"
 document.getElementById("convertirFichas").addEventListener("click", function () {
-  const cantidad = parseFloat(prompt("Ingresa la cantidad de dinero a convertir en fichas:"));
+  abrirModalConversionFichas();
+});
+
+// Evento para "Convertir a dinero"
+document.getElementById("convertirDinero").addEventListener("click", function () {
+  abrirModalConversionSaldo();
+});
+
+// Evento para aceptar la conversión a fichas en el modal
+document.getElementById("boton-convertir-fichas").addEventListener("click", function () {
+  const cantidad = parseFloat(document.getElementById("cantidadConversionFichas").value);
+
   if (!isNaN(cantidad) && cantidad > 0) {
     if (saldo >= cantidad) {
       const fichasObtenidas = cantidad * 50; // 1€ = 50 fichas
@@ -129,17 +150,19 @@ document.getElementById("convertirFichas").addEventListener("click", function ()
     } else {
       alert("No tienes suficiente dinero para convertir.");
     }
+    cerrarModalConversionFichas();
   } else {
     alert("Por favor, ingresa una cantidad válida.");
   }
 });
 
-// Evento para "Convertir a dinero"
-document.getElementById("convertirDinero").addEventListener("click", function () {
-  const cantidadFichas = parseInt(prompt("Ingresa la cantidad de fichas a convertir en dinero:"));
+// Evento para aceptar la conversión a saldo en el modal
+document.getElementById("boton-convertir-saldo").addEventListener("click", function () {
+  const cantidadFichas = parseInt(document.getElementById("cantidadConversionSaldo").value);
+
   if (!isNaN(cantidadFichas) && cantidadFichas > 0) {
-    const eurosObtenidos = cantidadFichas / 50; // 50 fichas = 1€
     if (fichas >= cantidadFichas) {
+      const eurosObtenidos = cantidadFichas / 50; // 50 fichas = 1€
       fichas -= cantidadFichas;
       saldo += eurosObtenidos;
       actualizarSaldo();
@@ -147,10 +170,27 @@ document.getElementById("convertirDinero").addEventListener("click", function ()
     } else {
       alert("No tienes suficientes fichas para convertir.");
     }
+    cerrarModalConversionSaldo();
   } else {
     alert("Por favor, ingresa una cantidad válida.");
   }
 });
+
+// Función para cerrar el modal de conversión a fichas
+document.getElementById("boton-cerrar-conversion-fichas").addEventListener("click", cerrarModalConversionFichas);
+function cerrarModalConversionFichas() {
+  document.getElementById("modal-conversion-fichas").style.display = "none";
+  document.getElementById("cantidadConversionFichas").value = ''; // Limpiar el campo de entrada
+}
+
+// Función para cerrar el modal de conversión a saldo
+document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click", cerrarModalConversionSaldo);
+function cerrarModalConversionSaldo() {
+  document.getElementById("modal-conversion-saldo").style.display = "none";
+  document.getElementById("cantidadConversionSaldo").value = ''; // Limpiar el campo de entrada
+}
+
+
 
 
 
