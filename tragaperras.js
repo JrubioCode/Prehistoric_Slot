@@ -401,11 +401,13 @@ function verificarPremio() {
 function actualizarSaldo() {
   if(estaEnIngles()){
     document.getElementById("dinero-actual").textContent = "CURRENT MONEY: " + saldo + "€";
+    document.getElementById("fichas").textContent = "CURRENT CHIPS: " + fichas + "🎫";
   setTimeout(() => {
     document.getElementById("mensajePremio").textContent = "";
   }, 1000);
   } else{
     document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo + "€";
+    document.getElementById("fichas").textContent = "FICHAS ACTUALES: " + fichas + "🎫";
   setTimeout(() => {
     document.getElementById("mensajePremio").textContent = "";
   }, 1000);
