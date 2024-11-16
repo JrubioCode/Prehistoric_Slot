@@ -57,14 +57,123 @@ document.getElementById("color").addEventListener("click", () => {
     document.body.style.backgroundImage = "url('./assets/fondo.png')";
 });
 
+
+
+
+// Variables para el saldo y fichas
+let saldo = 0;
+let fichas = 0;
+
+// Actualizar visualización del saldo y fichas
+function actualizarSaldo() {
+  document.getElementById("dinero-actual").textContent = `DINERO ACTUAL: ${saldo.toFixed(2)}€`;
+  document.getElementById("fichas").textContent = `FICHAS: ${fichas}`;
+}
+
+// Evento para "Meter dinero"
+document.getElementById("meter-dinero").addEventListener("click", function () {
+  abrirModal("Meter dinero");
+});
+
+// Evento para "Sacar dinero"
+document.getElementById("sacar-dinero").addEventListener("click", function () {
+  abrirModal("Sacar dinero");
+});
+
+// Función para abrir el modal y definir el tipo de transacción
+function abrirModal(tipo) {
+  document.getElementById("modal-dinero").style.display = "flex";
+  document.getElementById("modal-dinero").setAttribute("data-tipo", tipo);
+}
+
+// Función para aceptar el cambio de dinero en el modal
+document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
+  const tipoTransaccion = document.getElementById("modal-dinero").getAttribute("data-tipo");
+  const cantidad = parseFloat(document.getElementById("introducirDinero").value);
+
+  if (!isNaN(cantidad) && cantidad > 0) {
+    if (tipoTransaccion === "Meter dinero") {
+      saldo += cantidad;
+    } else if (tipoTransaccion === "Sacar dinero") {
+      if (saldo >= cantidad) {
+        saldo -= cantidad;
+      } else {
+        alert("No tienes suficiente saldo.");
+        return;
+      }
+    }
+    actualizarSaldo();
+    cerrarModal();
+  } else {
+    alert("Por favor, ingresa una cantidad válida.");
+  }
+});
+
+// Función para cerrar el modal
+document.getElementById("boton-cerrar-modal").addEventListener("click", cerrarModal);
+function cerrarModal() {
+  document.getElementById("modal-dinero").style.display = "none";
+  document.getElementById("introducirDinero").value = ''; // Limpiar el campo de entrada
+}
+
+// Evento para "Convertir a fichas"
+document.getElementById("convertirFichas").addEventListener("click", function () {
+  const cantidad = parseFloat(prompt("Ingresa la cantidad de dinero a convertir en fichas:"));
+  if (!isNaN(cantidad) && cantidad > 0) {
+    if (saldo >= cantidad) {
+      const fichasObtenidas = cantidad * 50; // 1€ = 50 fichas
+      saldo -= cantidad;
+      fichas += fichasObtenidas;
+      actualizarSaldo();
+      alert(`Has convertido ${cantidad}€ en ${fichasObtenidas} fichas.`);
+    } else {
+      alert("No tienes suficiente dinero para convertir.");
+    }
+  } else {
+    alert("Por favor, ingresa una cantidad válida.");
+  }
+});
+
+// Evento para "Convertir a dinero"
+document.getElementById("convertirDinero").addEventListener("click", function () {
+  const cantidadFichas = parseInt(prompt("Ingresa la cantidad de fichas a convertir en dinero:"));
+  if (!isNaN(cantidadFichas) && cantidadFichas > 0) {
+    const eurosObtenidos = cantidadFichas / 50; // 50 fichas = 1€
+    if (fichas >= cantidadFichas) {
+      fichas -= cantidadFichas;
+      saldo += eurosObtenidos;
+      actualizarSaldo();
+      alert(`Has convertido ${cantidadFichas} fichas en ${eurosObtenidos.toFixed(2)}€.`);
+    } else {
+      alert("No tienes suficientes fichas para convertir.");
+    }
+  } else {
+    alert("Por favor, ingresa una cantidad válida.");
+  }
+});
+
+
+
+
+
+
 /* TRAGAPERRAS FUNCIONALIDAD */
-let saldo = 100;
 
 /* SIMBOLOS TRAGAPERRAS */
 const simbolos = [
   "./assets/tragaperras/cavernicola.png",
+  "./assets/tragaperras/cavernicola.png",
+  "./assets/tragaperras/cavernicola.png",
+  "./assets/tragaperras/cavernicola.png",
+  "./assets/tragaperras/cavernicola.png",
+  "./assets/tragaperras/fuego.png",
+  "./assets/tragaperras/fuego.png",
+  "./assets/tragaperras/fuego.png",
   "./assets/tragaperras/fuego.png",
   "./assets/tragaperras/pollo.png",
+  "./assets/tragaperras/pollo.png",
+  "./assets/tragaperras/pollo.png",
+  "./assets/tragaperras/mamut.png",
   "./assets/tragaperras/mamut.png",
   "./assets/tragaperras/grupoCavernicolas.png",
 ];
@@ -262,45 +371,6 @@ function actualizarSaldo() {
   }, 1000);
   }
 }
-
-// Abrir el modal de dinero al hacer clic en los botones
-document.getElementById("meter-dinero").addEventListener("click", function () {
-  document.getElementById("modal-dinero").style.display = "flex";
-  document.getElementById("tipo-transaccion").textContent = "Meter dinero";
-});
-
-document.getElementById("sacar-dinero").addEventListener("click", function () {
-  document.getElementById("modal-dinero").style.display = "flex";
-  document.getElementById("tipo-transaccion").textContent = "Sacar dinero";
-});
-
-// Función para aceptar el cambio de dinero
-document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
-  const cantidad = parseFloat(document.getElementById("introducirDinero").value);
-  if (!isNaN(cantidad) && cantidad > 0) {
-    if (document.getElementById("tipo-transaccion").textContent === "Meter dinero") {
-      saldo += cantidad;  // Aumentar saldo
-    } else if (document.getElementById("tipo-transaccion").textContent === "Sacar dinero") {
-      if (saldo >= cantidad) {
-        saldo -= cantidad;  // Disminuir saldo
-      } else {
-
-
-        alert("No tienes suficiente saldo.");
-        return;
-      }
-    }
-    actualizarSaldo();  // Actualizar el saldo en la interfaz
-    document.getElementById("modal-dinero").style.display = "none";  // Cerrar modal
-  } else {
-    alert("Por favor, ingresa una cantidad válida.");
-  }
-});
-
-// Cerrar el modal sin hacer cambios
-document.getElementById("boton-cerrar-modal").addEventListener("click", function () {
-  document.getElementById("modal-dinero").style.display = "none";
-});
 
 /* TRADUCIR A INGLES */
 i18next.init({
