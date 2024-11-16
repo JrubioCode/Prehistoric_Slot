@@ -240,10 +240,10 @@ function sonidoPalanca() {
   sonidoPalanca.play();
 }
 
-/* COMPROBACION DE SALDO EN LAS TIRADAS */
+/* COMPROBACION DE FICHAS EN LAS TIRADAS */
 function puedeTirar() {
-  if (saldo >= 50) {
-    saldo -= 50;
+  if (fichas >= 50) {
+    fichas -= 50;
     actualizarSaldo();
     return true;
   } else {
@@ -253,7 +253,7 @@ function puedeTirar() {
       document.getElementById("mensajePremio").textContent = "";
     }, 1000);
     } else{
-      document.getElementById("mensajePremio").textContent = "SALDO INSUFICIENTE";
+      document.getElementById("mensajePremio").textContent = "FICHAS INSUFICIENTE";
     setTimeout(() => {
       document.getElementById("mensajePremio").textContent = "";
     }, 1000);
@@ -361,7 +361,7 @@ function verificarPremio() {
     if (simboloCarril1[1] === simboloCarril2[1] && simboloCarril2[1] === simboloCarril3[1]) {
       // Si los tres símbolos del medio son iguales
       const premio = premios[simboloCarril1[1]] || 0;  // Obtener el premio según el símbolo del medio
-      saldo += premio;  // Aumenta el saldo con el premio
+      fichas += premio;  // Aumenta el fichas con el premio
       sonidoPremio();  // Reproduce el sonido de premio
       actualizarSaldo();  // Actualiza el saldo en la interfaz
       if(estaEnIngles()){
@@ -421,7 +421,8 @@ i18next.init({
         titulo: "Tragaperras Prehistóricas",
         meterDinero: "Meter dinero",
         sacarDinero: "Sacar dinero",
-        convertirDinero: "Convertir a fichas",
+        convertirDinero: "Convertir a dinero",
+        convertirFichas: "Convertir a fichas",
         dineroActual: "DINERO ACTUAL: 0€",
         premios: "Premios",
         premio1: "1000 puntos",
@@ -447,7 +448,8 @@ i18next.init({
         titulo: "Prehistoric Slots",
         meterDinero: "Deposit money",
         sacarDinero: "Withdraw money",
-        convertirDinero: "Convert to chips",
+        convertirFichas: "Convert to chips",
+        convertirDinero: "Convert to money",
         dineroActual: "CURRENT MONEY: 0€",
         premios: "Prizes",
         premio1: "1000 points",
