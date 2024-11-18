@@ -1,7 +1,7 @@
 /* FUNCIONALIDAD DEL RELOJ */
 var actualizarReloj = () => {
   document.getElementById("reloj").textContent = new Date().toLocaleTimeString();
-  setTimeout(actualizarReloj, 1000); // Llama a la función cada segundo
+  setTimeout(actualizarReloj, 1000);
 };
 actualizarReloj(); // Inicia la actualización del reloj
 
@@ -9,13 +9,10 @@ actualizarReloj(); // Inicia la actualización del reloj
 function modalAjustes() {
   document.getElementById("modal-ajustes").style.display = "flex";
 }
-/* CERRAR MODAL DE AJUSTES */
-function cerrarModal() {
-  document.getElementById("modal-ajustes").style.display = "none";
-}
-/* EVENTO A BOTON DE CERRAR DE AJUSTES */
+
+// EVENTO A BOTON DE CERRAR DE AJUSTES
 document.getElementById("boton-cerrar").addEventListener("click", (event) => {
-  cerrarModal();
+  document.getElementById("modal-ajustes").style.display = "none";
 });
 
 /* MUSICA DE FONDO */
@@ -57,17 +54,14 @@ document.getElementById("color").addEventListener("click", () => {
     document.body.style.backgroundImage = "url('./assets/fondo.png')";
 });
 
-
-
-
 // Variables para el saldo y fichas
 let saldo = 0;
 let fichas = 0;
 
 // Actualizar visualización del saldo y fichas
 function actualizarSaldo() {
-  document.getElementById("dinero-actual").textContent = `DINERO ACTUAL: ${saldo.toFixed(2)}€`;
-  document.getElementById("fichas").textContent = `FICHAS: ${fichas}`;
+  document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo;
+  document.getElementById("fichas").textContent = "FICHAS: " + fichas;
 }
 
 // Evento para "Meter dinero"
@@ -142,7 +136,7 @@ document.getElementById("boton-convertir-fichas").addEventListener("click", func
 
   if (!isNaN(cantidad) && cantidad > 0) {
     if (saldo >= cantidad) {
-      const fichasObtenidas = cantidad * 50; // 1€ = 50 fichas
+      const fichasObtenidas = cantidad * 100; // 1€ = 100 fichas
       saldo -= cantidad;
       fichas += fichasObtenidas;
       actualizarSaldo();
@@ -190,13 +184,6 @@ function cerrarModalConversionSaldo() {
   document.getElementById("cantidadConversionSaldo").value = ''; // Limpiar el campo de entrada
 }
 
-
-
-
-
-
-
-
 /* TRAGAPERRAS FUNCIONALIDAD */
 
 /* SIMBOLOS TRAGAPERRAS */
@@ -242,8 +229,8 @@ function sonidoPalanca() {
 
 /* COMPROBACION DE FICHAS EN LAS TIRADAS */
 function puedeTirar() {
-  if (fichas >= 50) {
-    fichas -= 50;
+  if (fichas >= 25) {
+    fichas -= 25;
     actualizarSaldo();
     return true;
   } else {
@@ -361,9 +348,9 @@ function verificarPremio() {
     if (simboloCarril1[1] === simboloCarril2[1] && simboloCarril2[1] === simboloCarril3[1]) {
       // Si los tres símbolos del medio son iguales
       const premio = premios[simboloCarril1[1]] || 0;  // Obtener el premio según el símbolo del medio
-      fichas += premio;  // Aumenta el fichas con el premio
-      sonidoPremio();  // Reproduce el sonido de premio
-      actualizarSaldo();  // Actualiza el saldo en la interfaz
+      fichas += premio;
+      actualizarSaldo();
+      sonidoPremio();
       if(estaEnIngles()){
         document.getElementById("mensajePremio").textContent = "WINNER";
       setTimeout(() => {
