@@ -1,21 +1,21 @@
-/* FUNCIONALIDAD DEL RELOJ */
+// FUNCIONALIDAD DEL RELOJ
 var actualizarReloj = () => {
   document.getElementById("reloj").textContent = new Date().toLocaleTimeString();
   setTimeout(actualizarReloj, 1000);
 };
-actualizarReloj(); // Inicia la actualización del reloj
+actualizarReloj();
 
-/* ABRIR MODAL DE AJUSTES */
+// ABRIR MODAL DE AJUSTE
 function modalAjustes() {
   document.getElementById("modal-ajustes").style.display = "flex";
 }
 
-// EVENTO A BOTON DE CERRAR DE AJUSTES
+// EVENTO PARA CERRAR EL MODAL DE AJUSTES
 document.getElementById("boton-cerrar").addEventListener("click", (event) => {
   document.getElementById("modal-ajustes").style.display = "none";
 });
 
-/* MUSICA DE FONDO */
+// MUSCIA DE FONDO
 window.onload = () => {
   const audio = document.getElementById('musicaFondo');
   const controlVolumen = document.getElementById('control-volumen');
@@ -42,23 +42,23 @@ window.onload = () => {
   modalAjustes.addEventListener('click', iniciarMusica);
 };
 
-/* EVENTO PARA EL CAMBIO A BLANCO Y NEGRO */
+// EVENTO PARA CAMBIAR A BLANCO Y NEGRO
 document.getElementById("blanco-negro").addEventListener("click", () => {
     document.body.style.filter = "grayscale(100%)";
     document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')";
 });
 
-/* EVENTO PARA EL CAMBIO A COLOR */
+// EVENTO PARA CAMBIAR A COLOR
 document.getElementById("color").addEventListener("click", () => {
     document.body.style.filter = "none";
     document.body.style.backgroundImage = "url('./assets/fondo.png')";
 });
 
-// Variables para el saldo y fichas
-let saldo = 0;
-let fichas = 0;
+// VARIABLE PARA EL SALDO Y LAS FICHAS
+var saldo = 0;
+var fichas = 0;
 
-// Actualizar visualización del saldo y fichas
+// ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
   if(estaEnIngles()){
     document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo;
@@ -69,23 +69,23 @@ function actualizarSaldo() {
   }
 }
 
-// Evento para "Meter dinero"
+// EVENTO METER DINERO
 document.getElementById("meter-dinero").addEventListener("click", function () {
   abrirModal("Meter dinero");
 });
 
-// Evento para "Sacar dinero"
+// EVENTO SACAR DINERO
 document.getElementById("sacar-dinero").addEventListener("click", function () {
   abrirModal("Sacar dinero");
 });
 
-// Función para abrir el modal de dinero
+// ABRIR MODAL DEL DINERO
 function abrirModal(tipo) {
   document.getElementById("modal-dinero").style.display = "flex";
   document.getElementById("modal-dinero").setAttribute("data-tipo", tipo);
 }
 
-// Función para aceptar el cambio de dinero en el modal
+// FUNCION PARA METER O SACAR DINERO
 document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
   const tipoTransaccion = document.getElementById("modal-dinero").getAttribute("data-tipo");
   const cantidad = parseFloat(document.getElementById("introducirDinero").value);
@@ -118,40 +118,40 @@ document.getElementById("boton-meter-dinero-modal").addEventListener("click", fu
   }
 });
 
-// Función para cerrar el modal de dinero
+// FUNCION PARA CERRAR EL MODAL DEL DINERO
 document.getElementById("boton-cerrar-modal").addEventListener("click", cerrarModal);
 function cerrarModal() {
   document.getElementById("modal-dinero").style.display = "none";
   document.getElementById("introducirDinero").value = ''; // Limpiar el campo de entrada
 }
 
-// Función para abrir el modal de conversión a fichas
+// FUNCION ABRIR MODAL CONVERSION A FICHAS
 function abrirModalConversionFichas() {
   document.getElementById("modal-conversion-fichas").style.display = "flex";
 }
 
-// Función para abrir el modal de conversión a saldo
+// FUNCION ABRIR MODAL CONVERSION A SALDO
 function abrirModalConversionSaldo() {
   document.getElementById("modal-conversion-saldo").style.display = "flex";
 }
 
-// Evento para "Convertir a fichas"
+// CONVERTIR A FICHAS
 document.getElementById("convertirFichas").addEventListener("click", function () {
   abrirModalConversionFichas();
 });
 
-// Evento para "Convertir a dinero"
+// CONVERTIR A DINERO
 document.getElementById("convertirDinero").addEventListener("click", function () {
   abrirModalConversionSaldo();
 });
 
-// Evento para aceptar la conversión a fichas en el modal
+// EVENTO PARA ACEPTAR LA CONVERSION A FICHAS
 document.getElementById("boton-convertir-fichas").addEventListener("click", function () {
   const cantidad = parseFloat(document.getElementById("cantidadConversionFichas").value);
 
   if (!isNaN(cantidad) && cantidad > 0) {
     if (saldo >= cantidad) {
-      const fichasObtenidas = cantidad * 100; // Conversión 1€ = 100 fichas
+      const fichasObtenidas = cantidad * 100;
       saldo -= cantidad;
       fichas += fichasObtenidas;
       actualizarSaldo();
@@ -167,7 +167,7 @@ document.getElementById("boton-convertir-fichas").addEventListener("click", func
   }
 });
 
-// Evento para aceptar la conversión a saldo en el modal
+// EVENTO PARA ACEPTAR LA CONVERSION A SALDO
 document.getElementById("boton-convertir-saldo").addEventListener("click", function () {
   const cantidadFichas = parseInt(document.getElementById("cantidadConversionSaldo").value);
 
@@ -189,21 +189,19 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
   }
 });
 
-// Función para cerrar el modal de conversión a fichas
+// CERRAR MODAL CONVERSION A FICHAS
 document.getElementById("boton-cerrar-conversion-fichas").addEventListener("click", cerrarModalConversionFichas);
 function cerrarModalConversionFichas() {
   document.getElementById("modal-conversion-fichas").style.display = "none";
   document.getElementById("cantidadConversionFichas").value = ''; // Limpiar el campo de entrada
 }
 
-// Función para cerrar el modal de conversión a saldo
+// CERRAR MODAL CONVERSION A SALDO
 document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click", cerrarModalConversionSaldo);
 function cerrarModalConversionSaldo() {
   document.getElementById("modal-conversion-saldo").style.display = "none";
   document.getElementById("cantidadConversionSaldo").value = ''; // Limpiar el campo de entrada
 }
-
-/* TRAGAPERRAS FUNCIONALIDAD */
 
 /* SIMBOLOS TRAGAPERRAS */
 const simbolos = [
