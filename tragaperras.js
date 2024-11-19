@@ -388,53 +388,187 @@ function sonidoPremio() {
 
 // VERIFICAR PREMIOS
 function verificarPremio() {
-  setTimeout(() => {
-    // Verificar si los símbolos del medio son iguales
-    if (
-      simboloCarril1[1] === simboloCarril2[1] &&
-      simboloCarril2[1] === simboloCarril3[1]
-    ) {
-      const simboloGanador = simboloCarril1[1];
-      const premio = premios[simboloGanador] || 0;
-      fichas += premio;
+  // Comprobación de premio completo (tres en el medio)
+  setTimeout(verificarPremioCompleto, 500);
+
+  // Comprobación de premio reducido (dos en el medio y uno arriba o abajo)
+  setTimeout(verificarPremioReducido, 1000);
+
+  // Comprobación de jackpot (todos los carriles tienen el mismo símbolo)
+  setTimeout(verificarPremioJackpot, 1500);
+
+  // Comprobación de premio por 6 o más símbolos iguales
+  setTimeout(verificarPremio6Simbolos, 2000);
+}
+
+// FUNCIÓN PARA PREMIOS COMPLETOS
+function verificarPremioCompleto() {
+  const simboloMedio1 = simboloCarril1[1];
+  const simboloMedio2 = simboloCarril2[1];
+  const simboloMedio3 = simboloCarril3[1];
+
+  if (simboloMedio1 === simboloMedio2 && simboloMedio2 === simboloMedio3) {
+    const simboloGanador = simboloMedio1;
+    const premio = premios[simboloGanador] || 0;
+    fichas += premio;
+    actualizarSaldo();
+    sonidoPremio();
+
+    // SELECCIONAR IMÁGENES GANADORAS
+    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
+    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
+    const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
+
+    // AGREGAR LA CLASE PARPADEANTE DEL CSS
+    [imagen1, imagen2, imagen3].forEach((imagen) => {
+      if (imagen) {
+        imagen.classList.add("borde-ganador");
+      }
+    });
+
+    // QUITAR EL PARPADEO A LOS 3s
+    setTimeout(() => {
+      [imagen1, imagen2, imagen3].forEach((imagen) => {
+        if (imagen) {
+          imagen.classList.remove("borde-ganador");
+        }
+      });
+    }, 3000);
+    mostrarMensajePremio("WINNER", "PREMIO", premio);
+  }
+}
+
+// FUNCIÓN PARA PREMIOS REDUCIDOS
+function verificarPremioReducido() {
+  const simboloMedio1 = simboloCarril1[1];
+  const simboloMedio2 = simboloCarril2[1];
+  const simboloArriba3 = simboloCarril3[0];
+  const simboloAbajo3 = simboloCarril3[2];
+
+  if (simboloMedio1 === simboloMedio2 && (simboloMedio1 === simboloArriba3 || simboloMedio1 === simboloAbajo3)) {
+    const simboloGanador = simboloMedio1;
+    const premioReducido = (premios[simboloGanador] || 0) / 2;
+    fichas += premioReducido;
+    actualizarSaldo();
+    sonidoPremio();
+
+    // SELECCIONAR IMÁGENES GANADORAS
+    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
+    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
+    const imagenGanadora3 = simboloMedio1 === simboloArriba3
+      ? document.querySelector("#carril3 .simbolo_Imagen:nth-child(1)") // Arriba
+      : document.querySelector("#carril3 .simbolo_Imagen:nth-child(3)"); // Abajo
+
+    // AGREGAR LA CLASE PARPADEANTE DEL CSS
+    [imagen1, imagen2, imagenGanadora3].forEach((imagen) => {
+      if (imagen) {
+        imagen.classList.add("borde-ganador");
+      }
+    });
+
+    // QUITAR EL PARPADEO A LOS 3s
+    setTimeout(() => {
+      [imagen1, imagen2, imagenGanadora3].forEach((imagen) => {
+        if (imagen) {
+          imagen.classList.remove("borde-ganador");
+        }
+      });
+    }, 3000);
+    mostrarMensajePremio("WINNER (HALF PRIZE)", "PREMIO REDUCIDO", premioReducido);
+  }
+}
+
+// FUNCIÓN PARA PREMIOS JACKPOT
+function verificarPremioJackpot() {
+  const simbolo1 = simboloCarril1[1];
+  const simbolo2 = simboloCarril2[1];
+  const simbolo3 = simboloCarril3[1];
+
+  if (simbolo1 === simbolo2 && simbolo2 === simbolo3) {
+    const premioJackpot = (premios[simbolo1] || 0) * 5;
+    fichas += premioJackpot;
+    actualizarSaldo();
+    sonidoPremio();
+
+    // SELECCIONAR IMÁGENES GANADORAS
+    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
+    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
+    const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
+
+    // AGREGAR LA CLASE PARPADEANTE DEL CSS
+    [imagen1, imagen2, imagen3].forEach((imagen) => {
+      if (imagen) {
+        imagen.classList.add("borde-ganador");
+      }
+    });
+
+    // QUITAR EL PARPADEO A LOS 3s
+    setTimeout(() => {
+      [imagen1, imagen2, imagen3].forEach((imagen) => {
+        if (imagen) {
+          imagen.classList.remove("borde-ganador");
+        }
+      });
+    }, 3000);
+    mostrarMensajePremio("JACKPOT", "JACKPOT", premioJackpot);
+  }
+}
+
+// FUNCIÓN PARA PREMIOS POR 6 O MÁS SÍMBOLOS IGUALES
+function verificarPremio6Simbolos() {
+  const todosLosSimbolos = [
+    ...simboloCarril1,
+    ...simboloCarril2,
+    ...simboloCarril3
+  ];
+
+  // Contamos cuántas veces aparece cada símbolo
+  const conteoSimbolos = todosLosSimbolos.reduce((conteo, simbolo) => {
+    conteo[simbolo] = (conteo[simbolo] || 0) + 1;
+    return conteo;
+  }, {});
+
+  // Verificamos si algún símbolo aparece 6 o más veces
+  for (let simbolo in conteoSimbolos) {
+    if (conteoSimbolos[simbolo] >= 6) {
+      const premio6Simbolos = (premios[simbolo] || 0) * 2;
+      fichas += premio6Simbolos;
       actualizarSaldo();
       sonidoPremio();
 
-      // Seleccionar imágenes del medio en cada carril
-      const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
-      const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
-      const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
+      // SELECCIONAR IMÁGENES GANADORAS
+      const imagenesGanadoras = [
+        ...document.querySelectorAll(`#carril1 .simbolo_Imagen[src='${simbolo}']`),
+        ...document.querySelectorAll(`#carril2 .simbolo_Imagen[src='${simbolo}']`),
+        ...document.querySelectorAll(`#carril3 .simbolo_Imagen[src='${simbolo}']`)
+      ];
 
-      // Agregar clase de borde parpadeante
-      [imagen1, imagen2, imagen3].forEach((imagen) => {
-        if (imagen) {
-          imagen.classList.add("borde-ganador");
-        }
+      // AGREGAR LA CLASE PARPADEANTE DEL CSS
+      imagenesGanadoras.forEach((imagen) => {
+        imagen.classList.add("borde-ganador");
       });
 
-      // Remover la clase después de un tiempo
+      // QUITAR EL PARPADEO A LOS 3s
       setTimeout(() => {
-        [imagen1, imagen2, imagen3].forEach((imagen) => {
-          if (imagen) {
-            imagen.classList.remove("borde-ganador");
-          }
+        imagenesGanadoras.forEach((imagen) => {
+          imagen.classList.remove("borde-ganador");
         });
-      }, 2000);
-
-      mostrarMensajePremio("WINNER", "PREMIO", premio);
-    } else {
-      mostrarMensajePremio("CONTINUE PLAYING", "SIGUE TIRANDO");
+      }, 3000);
+      mostrarMensajePremio("WINNER (2X)", "PREMIO X2", premio6Simbolos);
+      break;
     }
-  }, 500);
+  }
 }
 
-// MENSAJE DEL PREMIO
-function mostrarMensajePremio(mensajeIngles, mensajeEspanol, premio = 0) {
-  const mensaje = estaEnIngles() ? mensajeIngles : mensajeEspanol;
-  document.getElementById("mensajePremio").textContent = premio ? `${mensaje} +${premio}` : mensaje;
+// FUNCIÓN PARA MOSTRAR EL MENSAJE DE PREMIO
+function mostrarMensajePremio(mensajeEn, mensajeEs, premio = null) {
+  const mensaje = estaEnIngles() ? mensajeEn : mensajeEs;
+  const premioTexto = premio ? `: ${premio} fichas` : "";
+
+  document.getElementById("mensajePremio").textContent = mensaje + premioTexto;
   setTimeout(() => {
     document.getElementById("mensajePremio").textContent = "";
-  }, 1000);
+  }, 2000);
 }
 
 // ACTUALIZAR SALDO EN LA PANTALLA
