@@ -124,10 +124,11 @@
                 <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
                 <input type="range" id="control-volumen-premio" min="0" max="1" step="1" value="0.5" />
                 <!-- Modo blanco y negro -->
-                <p data-i18n="blancoYNegro">Blanco y negro</p>
-                <div class="contenedor-imagenes">
-                    <img src="./assets/ajustes/color.png" id="modo" alt="Modo" />
-                </div>
+                <p>Modo de color</p>
+                <label for="switch" class="switch">
+                    <input id="switch" type="checkbox" checked />
+                    <span class="slider"></span>
+                </label>
                 <!-- Boton cerrar -->
                 <input type="submit" value="Cerrar" name="boton-cerrar" id="boton-cerrar" data-i18n="cerrar">
             </div>

@@ -42,18 +42,29 @@ window.onload = () => {
 };
 
 // EVENTO PARA CAMBIAR EL TIPO DE COLOR
-document.getElementById("modo").addEventListener("click", () => {
-  const isBlancoNegro = document.body.style.filter === "grayscale(100%)"; // Comprobar si está en blanco y negro
+window.addEventListener("DOMContentLoaded", () => {
+  const switchElement = document.getElementById("switch");
   
-  if (isBlancoNegro) {
-      document.body.style.filter = "none"; // Quitar filtro de blanco y negro
-      document.body.style.backgroundImage = "url('./assets/fondo.png')"; // Cambiar imagen de fondo a color
-      document.getElementById("modo").src = "./assets/ajustes/color.png"; // Cambiar imagen del botón a color
-  } else {
-      document.body.style.filter = "grayscale(100%)"; // Aplicar filtro en blanco y negro
-      document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')"; // Cambiar imagen de fondo a blanco y negro
-      document.getElementById("modo").src = "./assets/ajustes/blanco-negro.png"; // Cambiar imagen del botón a blanco y negro
+  // Establecer el modo claro (luz) por defecto
+  if (!switchElement.checked) {
+    document.body.style.filter = "none";
+    document.body.style.backgroundImage = "url('./assets/fondo.png')";
+    document.getElementById("switch").setAttribute("aria-label", "Modo claro");
   }
+
+  switchElement.addEventListener("change", (event) => {
+    const isChecked = event.target.checked;
+
+    if (!isChecked) {
+      document.body.style.filter = "grayscale(100%)";
+      document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')";
+      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
+    } else {
+      document.body.style.filter = "none";
+      document.body.style.backgroundImage = "url('./assets/fondo.png')";
+      document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+    }
+  });
 });
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
