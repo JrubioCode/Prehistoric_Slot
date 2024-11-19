@@ -653,11 +653,7 @@ function(err, t) {
   });
 });
 
-// SI ESTA EN INGLES DEVUELVE TRUE, SI ESTA EN ESPAÑOL DEVUELVE FALSE
-function estaEnIngles() {
-  return i18next.language === 'en';
-}
-
+// Función para cambiar el tamaño del título según el idioma
 function traducir() {
   const nuevoIdioma = i18next.language === 'es' ? 'en' : 'es';
   
@@ -671,16 +667,24 @@ function traducir() {
       }
     });
 
-    // CAMBIAR ICONO DEPENDIENDO DEL IDIOMA
+    // Cambiar el ícono dependiendo del idioma
     if (estaEnIngles()) {
       document.getElementById('icono-idioma').src = './assets/ajustes/ingles.png';
     } else {
       document.getElementById('icono-idioma').src = './assets/ajustes/español.png';
     }
   });
+
+  // Cambiar el tamaño de fuente solo si el idioma es español
+  if (!estaEnIngles()) {
+    document.querySelector('h1').style.fontSize = "12px";
+  } else {
+    // Asegurarse de que el tamaño de la fuente vuelva a su tamaño original si está en inglés
+    document.querySelector('h1').style.fontSize = "";
+  }
 }
 
-// FUNCION PARA COMPROBAR EN QUE IDIOMA ESTA
+// Función para comprobar si el idioma es inglés
 function estaEnIngles() {
   return i18next.language === 'en';
 }
