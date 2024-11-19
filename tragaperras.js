@@ -60,8 +60,13 @@ let fichas = 0;
 
 // Actualizar visualización del saldo y fichas
 function actualizarSaldo() {
-  document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo;
-  document.getElementById("fichas").textContent = "FICHAS: " + fichas;
+  if(estaEnIngles()){
+    document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo;
+    document.getElementById("fichas").textContent = "FICHAS: " + fichas;
+  } else{
+    document.getElementById("dinero-actual").textContent = "CURRENT MONEY: " + saldo;
+    document.getElementById("fichas").textContent = "CHIPS: " + fichas;
+  }
 }
 
 // Evento para "Meter dinero"
@@ -92,14 +97,24 @@ document.getElementById("boton-meter-dinero-modal").addEventListener("click", fu
       if (saldo >= cantidad) {
         saldo -= cantidad;
       } else {
-        alert("No tienes suficiente saldo.");
+        document.getElementById("comprobacionSaldo").textContent = "Saldo insuficiente";
+        document.getElementById("comprobacionSaldo").style.color = "red";
+        document.getElementById("comprobacionSaldo").style.fontSize = "15px";
+        setTimeout(() => {
+          document.getElementById("comprobacionSaldo").textContent = "";
+        }, 1500);
         return;
       }
     }
     actualizarSaldo();
     cerrarModal();
   } else {
-    alert("Por favor, ingresa una cantidad válida.");
+      document.getElementById("comprobacionSaldo").textContent = "Por favor, ingresa una cantidad valida";
+      document.getElementById("comprobacionSaldo").style.color = "red";
+      document.getElementById("comprobacionSaldo").style.fontSize = "15px";
+      setTimeout(() => {
+        document.getElementById("comprobacionSaldo").textContent = "";
+      }, 1500);
   }
 });
 
@@ -136,17 +151,19 @@ document.getElementById("boton-convertir-fichas").addEventListener("click", func
 
   if (!isNaN(cantidad) && cantidad > 0) {
     if (saldo >= cantidad) {
-      const fichasObtenidas = cantidad * 100; // 1€ = 100 fichas
+      const fichasObtenidas = cantidad * 100; // Conversión 1€ = 100 fichas
       saldo -= cantidad;
       fichas += fichasObtenidas;
       actualizarSaldo();
-      alert(`Has convertido ${cantidad}€ en ${fichasObtenidas} fichas.`);
+      document.getElementById("comprobacionConversionFichas").textContent = `Has convertido ${cantidad}€ en ${fichasObtenidas} fichas.`;
+      document.getElementById("comprobacionConversionFichas").style.color = "green";
     } else {
-      alert("No tienes suficiente dinero para convertir.");
+      document.getElementById("comprobacionConversionFichas").textContent = "Saldo insuficiente.";
+      document.getElementById("comprobacionConversionFichas").style.color = "red";
     }
-    cerrarModalConversionFichas();
   } else {
-    alert("Por favor, ingresa una cantidad válida.");
+    document.getElementById("comprobacionConversionFichas").textContent = "Por favor, ingresa una cantidad válida.";
+    document.getElementById("comprobacionConversionFichas").style.color = "red";
   }
 });
 
@@ -156,17 +173,19 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
 
   if (!isNaN(cantidadFichas) && cantidadFichas > 0) {
     if (fichas >= cantidadFichas) {
-      const eurosObtenidos = cantidadFichas / 50; // 50 fichas = 1€
+      const eurosObtenidos = cantidadFichas / 100;
       fichas -= cantidadFichas;
       saldo += eurosObtenidos;
       actualizarSaldo();
-      alert(`Has convertido ${cantidadFichas} fichas en ${eurosObtenidos.toFixed(2)}€.`);
+      document.getElementById("comprobacionConversionDinero").textContent = `Has convertido ${cantidadFichas} fichas en ${eurosObtenidos.toFixed(2)}€.`;
+      document.getElementById("comprobacionConversionDinero").style.color = "green";
     } else {
-      alert("No tienes suficientes fichas para convertir.");
+      document.getElementById("comprobacionConversionDinero").textContent = "No tienes suficientes fichas.";
+      document.getElementById("comprobacionConversionDinero").style.color = "red";
     }
-    cerrarModalConversionSaldo();
   } else {
-    alert("Por favor, ingresa una cantidad válida.");
+    document.getElementById("comprobacionConversionDinero").textContent = "Por favor, ingresa una cantidad válida.";
+    document.getElementById("comprobacionConversionDinero").style.color = "red";
   }
 });
 

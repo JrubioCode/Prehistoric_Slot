@@ -153,6 +153,7 @@
         <div class="contenido-modal-dinero">
             <!-- Campo para meter dinero -->
             <label for="introducirDinero" data-i18n="introducirDineroLabel">Introduce dinero</label>
+            <div id="comprobacionSaldo"></div>
             <input type="number" id="introducirDinero" name="introducirDinero" />
             <!-- Botón de aceptar -->
             <input type="button" id="boton-meter-dinero-modal" value="Aceptar" data-i18n="aceptar" />
@@ -165,6 +166,7 @@
     <div class="modal-conversion-fichas" id="modal-conversion-fichas">
         <div class="contenido-modal-conversion-fichas">
             <h3>Convertir a fichas</h3>
+            <div id="comprobacionConversionFichas"></div>
             <label for="cantidadConversionFichas">Cantidad en €:</label>
             <input type="number" id="cantidadConversionFichas" name="cantidadConversionFichas" />
             <input type="button" id="boton-convertir-fichas" value="Aceptar" />
@@ -177,6 +179,7 @@
     <div class="modal-conversion-saldo" id="modal-conversion-saldo">
         <div class="contenido-modal-conversion-saldo">
             <h3>Convertir a saldo</h3>
+            <div id="comprobacionConversionDinero"></div>
             <label for="cantidadConversionSaldo">Cantidad de fichas:</label>
             <input type="number" id="cantidadConversionSaldo" name="cantidadConversionSaldo" />
             <input type="button" id="boton-convertir-saldo" value="Aceptar" />
