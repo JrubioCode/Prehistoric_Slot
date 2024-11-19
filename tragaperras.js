@@ -389,12 +389,38 @@ function sonidoPremio() {
 // VERIFICAR PREMIOS
 function verificarPremio() {
   setTimeout(() => {
-    if (simboloCarril1[1] === simboloCarril2[1] && simboloCarril2[1] === simboloCarril3[1]) {
+    // Verificar si los símbolos del medio son iguales
+    if (
+      simboloCarril1[1] === simboloCarril2[1] &&
+      simboloCarril2[1] === simboloCarril3[1]
+    ) {
       const simboloGanador = simboloCarril1[1];
       const premio = premios[simboloGanador] || 0;
       fichas += premio;
       actualizarSaldo();
       sonidoPremio();
+
+      // Seleccionar imágenes del medio en cada carril
+      const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
+      const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
+      const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
+
+      // Agregar clase de borde parpadeante
+      [imagen1, imagen2, imagen3].forEach((imagen) => {
+        if (imagen) {
+          imagen.classList.add("borde-ganador");
+        }
+      });
+
+      // Remover la clase después de un tiempo
+      setTimeout(() => {
+        [imagen1, imagen2, imagen3].forEach((imagen) => {
+          if (imagen) {
+            imagen.classList.remove("borde-ganador");
+          }
+        });
+      }, 2000);
+
       mostrarMensajePremio("WINNER", "PREMIO", premio);
     } else {
       mostrarMensajePremio("CONTINUE PLAYING", "SIGUE TIRANDO");
@@ -410,7 +436,6 @@ function mostrarMensajePremio(mensajeIngles, mensajeEspanol, premio = 0) {
     document.getElementById("mensajePremio").textContent = "";
   }, 1000);
 }
-
 
 // ACTUALIZAR SALDO EN LA PANTALLA
 function actualizarSaldo() {

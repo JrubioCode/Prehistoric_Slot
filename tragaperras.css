@@ -417,3 +417,21 @@ body {
   background-color: #d98f44;
   cursor: pointer;
 }
+
+/* Borde parpadeante para el premio */
+@keyframes bordeParpadeante {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: green;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.borde-ganador {
+  border: 3px solid green;
+  animation: bordeParpadeante 0.5s infinite;
+}
