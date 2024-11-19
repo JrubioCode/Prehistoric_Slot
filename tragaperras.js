@@ -157,13 +157,23 @@ document.getElementById("boton-convertir-fichas").addEventListener("click", func
       actualizarSaldo();
       document.getElementById("comprobacionConversionFichas").textContent = `Has convertido ${cantidad}€ en ${fichasObtenidas} fichas.`;
       document.getElementById("comprobacionConversionFichas").style.color = "green";
+      setTimeout(() => {
+        document.getElementById("comprobacionConversionFichas").textContent = "";
+        cerrarModalConversionFichas();
+      }, 1500);
     } else {
       document.getElementById("comprobacionConversionFichas").textContent = "Saldo insuficiente.";
       document.getElementById("comprobacionConversionFichas").style.color = "red";
+      setTimeout(() => {
+        document.getElementById("comprobacionConversionFichas").textContent = "";
+      }, 1500);
     }
   } else {
     document.getElementById("comprobacionConversionFichas").textContent = "Por favor, ingresa una cantidad válida.";
     document.getElementById("comprobacionConversionFichas").style.color = "red";
+    setTimeout(() => {
+      document.getElementById("comprobacionConversionFichas").textContent = "";
+    }, 1500);
   }
 });
 
@@ -179,13 +189,23 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
       actualizarSaldo();
       document.getElementById("comprobacionConversionDinero").textContent = `Has convertido ${cantidadFichas} fichas en ${eurosObtenidos.toFixed(2)}€.`;
       document.getElementById("comprobacionConversionDinero").style.color = "green";
+      setTimeout(() => {
+        document.getElementById("comprobacionConversionDinero").textContent = "";
+        cerrarModalConversionSaldo();
+      }, 1500);
     } else {
       document.getElementById("comprobacionConversionDinero").textContent = "No tienes suficientes fichas.";
       document.getElementById("comprobacionConversionDinero").style.color = "red";
+      setTimeout(() => {
+        document.getElementById("comprobacionConversionDinero").textContent = "";
+      }, 1500);
     }
   } else {
     document.getElementById("comprobacionConversionDinero").textContent = "Por favor, ingresa una cantidad válida.";
     document.getElementById("comprobacionConversionDinero").style.color = "red";
+    setTimeout(() => {
+      document.getElementById("comprobacionConversionDinero").textContent = "";
+    }, 1500);
   }
 });
 
@@ -406,15 +426,9 @@ function actualizarSaldo() {
   if(estaEnIngles()){
     document.getElementById("dinero-actual").textContent = "CURRENT MONEY: " + saldo + "€";
     document.getElementById("fichas").textContent = "CURRENT CHIPS: " + fichas + "🎫";
-  setTimeout(() => {
-    document.getElementById("mensajePremio").textContent = "";
-  }, 1000);
   } else{
     document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo + "€";
     document.getElementById("fichas").textContent = "FICHAS ACTUALES: " + fichas + "🎫";
-  setTimeout(() => {
-    document.getElementById("mensajePremio").textContent = "";
-  }, 1000);
   }
 }
 
@@ -479,7 +493,7 @@ i18next.init({
   }
 },
 function(err, t) {
-  // Actualizamos los elementos con las traducciones
+  // ACTUALIZAR TRADUCCIONES
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     el.innerHTML = t(key);
@@ -489,7 +503,7 @@ function(err, t) {
   });
 });
 
-// Función que devuelve true si está en inglés, false si está en español
+// SI ESTA EN INGLES DEVUELVE TRUE, SI ESTA EN ESPAÑOL DEVUELVE FALSE
 function estaEnIngles() {
   return i18next.language === 'en';
 }
@@ -507,7 +521,7 @@ function traducir() {
       }
     });
 
-    // Cambiar el icono dependiendo del idioma
+    // CAMBIAR ICONO DEPENDIENDO DEL IDIOMA
     if (estaEnIngles()) {
       document.getElementById('icono-idioma').src = './assets/ajustes/ingles.png';
     } else {
@@ -516,7 +530,7 @@ function traducir() {
   });
 }
 
-// Función que devuelve true si está en inglés, false si está en español
+// FUNCION PARA COMPROBAR EN QUE IDIOMA ESTA
 function estaEnIngles() {
   return i18next.language === 'en';
 }
