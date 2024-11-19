@@ -213,48 +213,52 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
 document.getElementById("boton-cerrar-conversion-fichas").addEventListener("click", cerrarModalConversionFichas);
 function cerrarModalConversionFichas() {
   document.getElementById("modal-conversion-fichas").style.display = "none";
-  document.getElementById("cantidadConversionFichas").value = ''; // Limpiar el campo de entrada
+  document.getElementById("cantidadConversionFichas").value = '';
 }
 
 // CERRAR MODAL CONVERSION A SALDO
 document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click", cerrarModalConversionSaldo);
 function cerrarModalConversionSaldo() {
   document.getElementById("modal-conversion-saldo").style.display = "none";
-  document.getElementById("cantidadConversionSaldo").value = ''; // Limpiar el campo de entrada
+  document.getElementById("cantidadConversionSaldo").value = '';
 }
 
-/* SIMBOLOS TRAGAPERRAS */
+// SIMBOLOS
 const simbolos = [
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/mamut.png",
-  "./assets/tragaperras/mamut.png",
-  "./assets/tragaperras/grupoCavernicolas.png",
+  "cavernicola",
+  "cavernicola",
+  "cavernicola",
+  "cavernicola",
+  "cavernicola",
+  "fuego",
+  "fuego",
+  "fuego",
+  "fuego",
+  "pollo",
+  "pollo",
+  "pollo",
+  "mamut",
+  "mamut",
+  "grupoCavernicolas"
 ];
 
-/* PREMIOS TRAGAPERRAS */
-const premios = {
-  "./assets/tragaperras/cavernicola.png": 100,
-  "./assets/tragaperras/fuego.png": 200,
-  "./assets/tragaperras/pollo.png": 300,
-  "./assets/tragaperras/mamut.png": 500,
-  "./assets/tragaperras/grupoCavernicolas.png": 1000,
+const simbolosRutas = {
+  cavernicola: "./assets/tragaperras/cavernicola.png",
+  fuego: "./assets/tragaperras/fuego.png",
+  pollo: "./assets/tragaperras/pollo.png",
+  mamut: "./assets/tragaperras/mamut.png",
+  grupoCavernicolas: "./assets/tragaperras/grupoCavernicolas.png"
 };
 
-/* SIMBOLOS CARRILES */
-var simboloCarril1 = null;
-var simboloCarril2 = null;
-var simboloCarril3 = null;
+// PREMIOS
+const premios = {
+  cavernicola: 100,
+  fuego: 200,
+  pollo: 300,
+  mamut: 500,
+  grupoCavernicolas: 1000
+};
+
 
 /* SONIDO DE PALANCA */
 function sonidoPalanca() {
@@ -286,7 +290,7 @@ function puedeTirar() {
   }
 }
 
-// Agregar evento para la palanca y para la tecla "espacio"
+// JUGAR CON ESPACIO
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space" && !enGiro && puedeTirar()) {
     sonidoPalanca();
@@ -295,6 +299,7 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+// JUGAR CON PALANCA
 document.getElementById("palanca").addEventListener("click", function () {
   if (!enGiro && puedeTirar()) {
     sonidoPalanca();
@@ -303,7 +308,7 @@ document.getElementById("palanca").addEventListener("click", function () {
   }
 });
 
-// Cambiar la imagen de la palanca
+// CAMBIAR ESTILO DE PALANCA
 function cambiarPalanca() {
   const palanca = document.getElementById("palanca");
   palanca.src = "./assets/tragaperras/palanca_abajo.png";
@@ -313,64 +318,67 @@ function cambiarPalanca() {
   }, 200);
 }
 
-// Estado para verificar si la máquina está girando
-let enGiro = false;
+// GENERAR SIMBOLOS ALEATORIOS
+function generarSimbolosAleatorios() {
+  const simbolosPesados = [
+    ...Array(5).fill("cavernicola"),
+    ...Array(4).fill("fuego"),
+    ...Array(3).fill("pollo"),
+    ...Array(2).fill("mamut"),
+    "grupoCavernicolas"
+  ];
+  return simbolosPesados;
+}
 
-// Iniciar los giros
+const simbolosPesados = generarSimbolosAleatorios();
+
+// COMPROBACION DE GIRO
+var enGiro = false;
+
+// INICIAR GIRO
 function iniciarGiro() {
   if (enGiro) return;
 
   enGiro = true;
   simboloCarril1 = simboloCarril2 = simboloCarril3 = null;
 
-  // Inicia los giros de cada carril con duraciones diferentes
-  giroCarriles("carril1", 2000, (simbolos) => simboloCarril1 = simbolos);
-  giroCarriles("carril2", 3000, (simbolos) => simboloCarril2 = simbolos);
-  giroCarriles("carril3", 4000, (simbolos) => {
-    simboloCarril3 = simbolos;
+  giroCarriles("carril1", 2000, (simbolo) => (simboloCarril1 = simbolo));
+  giroCarriles("carril2", 3000, (simbolo) => (simboloCarril2 = simbolo));
+  giroCarriles("carril3", 4000, (simbolo) => {
+    simboloCarril3 = simbolo;
     verificarPremio();
     enGiro = false;
   });
 }
 
-// Animar el giro de cada carril
+// GIRAR CARRILES
 function giroCarriles(carrilId, duracion, callback) {
   const carril = document.getElementById(carrilId);
   let tiempoInicio = null;
 
-  // Crear un array para las tres imágenes
-  let imagenes = [
-    "<img src='' class='simbolo_Imagen'>",
-    "<img src='' class='simbolo_Imagen'>",
-    "<img src='' class='simbolo_Imagen'>"
-  ];
+  const imagenes = Array(3).fill(""); // Espacio para 3 imágenes por carril
 
-  // Función para animar el carril
   function animarGiro(timestamp) {
     if (!tiempoInicio) tiempoInicio = timestamp;
     const progreso = timestamp - tiempoInicio;
 
-    // Actualizar las imágenes con símbolos aleatorios
     for (let i = 0; i < imagenes.length; i++) {
-      const simboloAleatorio = simbolos[Math.floor(Math.random() * simbolos.length)];
-      imagenes[i] = `<img src="${simboloAleatorio}" class="simbolo_Imagen">`;
+      const simbolo = simbolosPesados[Math.floor(Math.random() * simbolosPesados.length)];
+      imagenes[i] = `<img src="${simbolosRutas[simbolo]}" class="simbolo_Imagen" data-simbolo="${simbolo}">`;
     }
 
-    // Reemplazar las imágenes en el carril
-    carril.innerHTML = imagenes.join(''); // Unir las imágenes en el carril
+    carril.innerHTML = imagenes.join("");
 
-    // Continuar la animación hasta que pase el tiempo
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
-      callback(imagenes);  // Llamar al callback con las tres imágenes
+      callback(imagenes.map((img) => img.match(/data-simbolo="(.*?)"/)[1])); // Extraer símbolos
     }
   }
-
-  requestAnimationFrame(animarGiro); // Iniciar la animación
+  requestAnimationFrame(animarGiro);
 }
 
-// Función para sonar el premio
+// SONIDO CUANDO TOQUE PREMIO
 function sonidoPremio() {
   const sonidoPremio = document.getElementById("sonidoPremio");
   const controlVolumenPremio = document.getElementById("control-volumen-premio");
@@ -378,50 +386,33 @@ function sonidoPremio() {
   sonidoPremio.play();
 }
 
-// Función para verificar el premio
+// VERIFICAR PREMIOS
 function verificarPremio() {
   setTimeout(() => {
-    // Verificar si los símbolos del medio (índice 1) de los tres carriles son iguales
     if (simboloCarril1[1] === simboloCarril2[1] && simboloCarril2[1] === simboloCarril3[1]) {
-      // Si los tres símbolos del medio son iguales
-      const premio = premios[simboloCarril1[1]] || 0;  // Obtener el premio según el símbolo del medio
+      const simboloGanador = simboloCarril1[1];
+      const premio = premios[simboloGanador] || 0;
       fichas += premio;
       actualizarSaldo();
       sonidoPremio();
-      if(estaEnIngles()){
-        document.getElementById("mensajePremio").textContent = "WINNER";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      } else{
-        document.getElementById("mensajePremio").textContent = "PREMIO";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      }
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
+      mostrarMensajePremio("WINNER", "PREMIO", premio);
     } else {
-      if(estaEnIngles()){
-        document.getElementById("mensajePremio").textContent = "CONTINUE PLAYING";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      } else{
-        document.getElementById("mensajePremio").textContent = "SIGUE TIRANDO";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      }
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
+      mostrarMensajePremio("CONTINUE PLAYING", "SIGUE TIRANDO");
     }
   }, 500);
 }
 
-// Función para actualizar el saldo en la interfaz
+// MENSAJE DEL PREMIO
+function mostrarMensajePremio(mensajeIngles, mensajeEspanol, premio = 0) {
+  const mensaje = estaEnIngles() ? mensajeIngles : mensajeEspanol;
+  document.getElementById("mensajePremio").textContent = premio ? `${mensaje} +${premio}` : mensaje;
+  setTimeout(() => {
+    document.getElementById("mensajePremio").textContent = "";
+  }, 1000);
+}
+
+
+// ACTUALIZAR SALDO EN LA PANTALLA
 function actualizarSaldo() {
   if(estaEnIngles()){
     document.getElementById("dinero-actual").textContent = "CURRENT MONEY: " + saldo + "€";
@@ -445,11 +436,11 @@ i18next.init({
         convertirFichas: "Convertir a fichas",
         dineroActual: "DINERO ACTUAL: 0€",
         premios: "Premios",
-        premio1: "1000 puntos",
-        premio2: "500 puntos",
-        premio3: "300 puntos",
-        premio4: "200 puntos",
-        premio5: "100 puntos",
+        premio1: "1000 fichas",
+        premio2: "500 fichas",
+        premio3: "300 fichas",
+        premio4: "200 fichas",
+        premio5: "100 fichas",
         fichas: "FICHAS: ",
         mensajePremio: "",
         idioma: "Idioma",
@@ -472,11 +463,11 @@ i18next.init({
         convertirDinero: "Convert to money",
         dineroActual: "CURRENT MONEY: 0€",
         premios: "Prizes",
-        premio1: "1000 points",
-        premio2: "500 points",
-        premio3: "300 points",
-        premio4: "200 points",
-        premio5: "100 points",
+        premio1: "1000 chips",
+        premio2: "500 chips",
+        premio3: "300 chips",
+        premio4: "200 chips",
+        premio5: "100 chips",
         fichas: "CHIPS: ",
         mensajePremio: "",
         idioma: "Language",
