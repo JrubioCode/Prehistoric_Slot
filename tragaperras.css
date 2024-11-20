@@ -24,7 +24,7 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(8px);
+  filter: blur(5px);
   z-index: -1;
   transition: filter 0.3s ease, background-image 0.3s ease;
 }
@@ -47,6 +47,7 @@ body::before {
 .contenedor-header{
   display: flex;
   justify-content: center;
+  margin-top: 5px;
 }
 
 /* CONTENEDOR HIJO DEL PRINCIPAL */
@@ -127,7 +128,7 @@ body::before {
 
 /* RELOJ */
 .reloj-container {
-  font-size: 22px;
+  font-size: 17px;
   color: #e1c6b0;
   margin: 15px;
   font-weight: bold;
@@ -146,6 +147,8 @@ body::before {
 .icono-ajustes:hover {
   color: #d98f44;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* CONTENEDOR DE PREMIOS */
 .premios {
@@ -182,6 +185,8 @@ body::before {
   border-radius: 50%;
   border: 3px solid #8e7047;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* Estilo para el contenedor general */
 .contenedor {
@@ -278,6 +283,8 @@ body::before {
   line-height: 30px;
 }
 
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 /* Modal de Ajustes */
 .modal-ajustes {
   display: none; 
@@ -302,53 +309,6 @@ body::before {
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-}
-
-/* ESTILO DEL MODO DE COLOR */
-.switch {
-  font-size: 17px;
-  position: relative;
-  display: inline-block;
-  width: 3.5em;
-  height: 2em;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.slider {
-  --background: #20262c;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--background);
-  transition: 0.5s;
-  border-radius: 30px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 1.4em;
-  width: 1.4em;
-  border-radius: 50%;
-  left: 10%;
-  bottom: 15%;
-  box-shadow: inset 8px -4px 0px 0px #ececd9, -4px 1px 4px 0px #dadada;
-  background: var(--background);
-  transition: 0.5s;
-}
-
-input:checked + .slider {
-  background-color: #5494de;
-}
-
-input:checked + .slider:before {
-  transform: translateX(100%);
-  box-shadow: inset 15px -4px 0px 15px #efdf2b, 0 0 10px 0px #efdf2b;
 }
 
 .contenido-modal-ajustes img {
@@ -501,6 +461,57 @@ input:checked + .slider:before {
   background-color: #d98f44;
   cursor: pointer;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* ESTILO DEL MODO DE COLOR */
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.slider {
+  --background: #20262c;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background);
+  transition: 0.5s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 50%;
+  left: 10%;
+  bottom: 15%;
+  box-shadow: inset 8px -4px 0px 0px #ececd9, -4px 1px 4px 0px #dadada;
+  background: var(--background);
+  transition: 0.5s;
+}
+
+input:checked + .slider {
+  background-color: #5494de;
+}
+
+input:checked + .slider:before {
+  transform: translateX(100%);
+  box-shadow: inset 15px -4px 0px 15px #efdf2b, 0 0 10px 0px #efdf2b;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* Borde parpadeante para el premio */
 @keyframes bordeParpadeante {
