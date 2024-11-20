@@ -44,32 +44,34 @@ window.onload = () => {
 // EVENTO PARA CAMBIAR EL TIPO DE COLOR
 window.addEventListener("DOMContentLoaded", () => {
   const switchElement = document.getElementById("switch");
-  
-  // Establecer el modo claro (luz) por defecto
-  if (!switchElement.checked) {
-    document.body.style.filter = "none";
-    document.body.style.backgroundImage = "url('./assets/fondo.png')";
+  const filtro = document.getElementById("blancoYnegro");
+
+  // Establecer el modo inicial (claro o noche)
+  if (switchElement.checked) {
+    filtro.style.display = "none"; // Modo claro
     document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+  } else {
+    filtro.style.display = "block"; // Modo noche
+    document.getElementById("switch").setAttribute("aria-label", "Modo noche");
   }
 
+  // Evento para alternar entre modos
   switchElement.addEventListener("change", (event) => {
     const isChecked = event.target.checked;
 
-    if (!isChecked) {
-      document.body.style.filter = "grayscale(100%)";
-      document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')";
-      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
-    } else {
-      document.body.style.filter = "none";
-      document.body.style.backgroundImage = "url('./assets/fondo.png')";
+    if (isChecked) {
+      filtro.style.display = "none"; // Modo claro
       document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+    } else {
+      filtro.style.display = "block"; // Modo noche
+      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
     }
   });
 });
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
 var saldo = 0;
-var fichas = 0;
+var fichas = 1000;
 
 // ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
@@ -596,7 +598,7 @@ i18next.init({
         volumenPrincipal: "Volumen principal",
         volumenPalanca: "Volumen de la palanca",
         volumenPremio: "Volumen del premio",
-        blancoYNegro: "Blanco y negro",
+        ModoColor: "Modo de color",
         cerrar: "Cerrar",
         introducirDineroLabel: "Introduce dinero",
         aceptar: "Aceptar",
@@ -622,7 +624,7 @@ i18next.init({
         volumenPrincipal: "Main volume",
         volumenPalanca: "Lever volume",
         volumenPremio: "Prize volume",
-        blancoYNegro: "Black and white",
+        ModoColor: "Color mode",
         cerrar: "Close",
         introducirDineroLabel: "Enter money",
         aceptar: "Accept",

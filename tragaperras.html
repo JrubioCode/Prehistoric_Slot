@@ -13,35 +13,37 @@
     </head>
     <body>
         <!-- Header -->
-        <div class="contenido-header">
-            <div class="header">
-                <!-- Logo y título -->
-                <div class="logo-titulo">
-                    <a href="./../Prehistoric_Jackpot/index.html">
-                        <img src="./assets/logo.webp" alt="Logo del Casino" />
-                    </a>
-                    <h1>PREHISTORIC SLOT</h1>
-                </div>
-                <div class="barraSeparadora"></div>
-                <!-- Gestión de dinero -->
-                <div class="gestion-dinero">
-                    <div class="botones-dinero">
-                        <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
-                        <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
-                        <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
-                        <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                        <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+        <div class="contenedor-header">
+            <div class="contenido-header">
+                <div class="header">
+                    <!-- Logo y título -->
+                    <div class="logo-titulo">
+                        <a href="./../Prehistoric_Jackpot/index.html">
+                            <img src="./assets/logo.webp" alt="Logo del Casino" />
+                        </a>
+                        <h1>PREHISTORIC SLOT</h1>
                     </div>
-                </div>
-                <div class="barraSeparadora"></div>
-                <!-- Ajustes -->
-                <div class="ajustes">
-                    <!-- Contenedor reloj -->
-                    <div class="reloj-container">
-                        <div id="reloj"></div>
+                    <div class="barraSeparadora"></div>
+                    <!-- Gestión de dinero -->
+                    <div class="gestion-dinero">
+                        <div class="botones-dinero">
+                            <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
+                            <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
+                            <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
+                            <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
+                            <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+                        </div>
                     </div>
-                    <!-- Icono ajustes -->
-                    <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
+                    <div class="barraSeparadora"></div>
+                    <!-- Ajustes -->
+                    <div class="ajustes">
+                        <!-- Contenedor reloj -->
+                        <div class="reloj-container">
+                            <div id="reloj"></div>
+                        </div>
+                        <!-- Icono ajustes -->
+                        <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,8 +125,10 @@
                 <p data-i18n="volumenPremio">Volumen del premio</p>
                 <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
                 <input type="range" id="control-volumen-premio" min="0" max="1" step="1" value="0.5" />
+                <!-- Contenedor para el efecto blanco y negro -->
+                <div id="blancoYnegro" class="filtro-blanco-negro"></div>
                 <!-- Modo blanco y negro -->
-                <p>Modo de color</p>
+                <p data-i18n="ModoColor">Modo de color</p>
                 <label for="switch" class="switch">
                     <input id="switch" type="checkbox" checked />
                     <span class="slider"></span>

@@ -7,15 +7,48 @@
 }
 
 body {
+  position: relative;
+  background: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-image: url('./assets/fondo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  filter: blur(8px); /* Efecto inicial */
+  z-index: -1;
+  transition: filter 0.3s ease, background-image 0.3s ease;
+}
+
+/* Contenedor del filtro blanco y negro */
+#blancoYnegro {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+  backdrop-filter: grayscale(100%);
+  transition: backdrop-filter 0.3s ease, display 0.3s ease;
 }
 
 /* Estilos para el header */
+.contenedor-header{
+  display: flex;
+  justify-content: center;
+}
+
 .contenido-header {
-  width: 100%;
+  width: 1900px; /* Valor fijo en lugar de porcentaje */
   min-width: 800px;
   border-radius: 50px;
   background-color: #2f2f2f;
@@ -38,7 +71,6 @@ body {
 }
 
 .logo-titulo img {
-  width: auto;
   height: 120px;
   margin-right: 10px;
   border-radius: 50%;
@@ -105,13 +137,6 @@ body {
   color: #d98f44;
 }
 
-/* Estilo para el contenedor general */
-.contenedor {
-  display: flex;
-  gap: 20px;
-  padding: 20px 10px;
-}
-
 /* Estilo para el contenedor de premios */
 .premios {
   width: 15%;
@@ -143,6 +168,13 @@ body {
   margin-right: 10px;
   border-radius: 50%;
   border: 3px solid #8e7047;
+}
+
+/* Estilo para el contenedor general */
+.contenedor {
+  display: flex;
+  gap: 20px;
+  padding: 20px 10px;
 }
 
 /* Estilo para el contenedor de la tragaperras */
