@@ -56,42 +56,38 @@
                 <img src="./assets/premios/cartel-premios-español.png" alt="Cartel" id="cartel-premios">
             </div>
             <!-- Contenedor de la tragaperras -->
-<div class="tragaperras">
-    <div class="cavernicola-gif">
-        <img src="./assets/cavernicola-machacando.gif" alt="">
-    </div>
-    <!-- Contenedor para la pantalla y la palanca -->
-    <div class="pantalla-palanca">
-        <!-- Pantalla de la tragaperras -->
-        <div class="pantalla">
-            <div class="carril" id="carril1">
-                <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 1" />
-                <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 1" />
-                <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 1" />
+            <div class="tragaperras">
+                <div class="cavernicola-gif">
+                    <!-- <img src="./assets/cavernicola-machacando.gif" alt=""> -->
+                </div>
+                <!-- Contenedor para la pantalla y la palanca -->
+                <div class="pantalla-palanca">
+                    <!-- Pantalla de la tragaperras -->
+                    <div class="pantalla">
+                    <div class="carril" id="carril1">
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                    </div>
+                    <div class="carril" id="carril2">
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                    </div>
+                    <div class="carril" id="carril3">
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                    </div>
+                    </div>
+                    <!-- Palanca -->
+                    <div class="palanca">
+                    <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca" />
+                    </div>
+                </div>
+                <!-- Mensaje variable del premio -->
+                <p id="mensajePremio" data-i18n="mensajePremio"></p>
             </div>
-            <div class="carril" id="carril2">
-                <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 2" />
-                <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 2" />
-                <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 2" />
-            </div>
-            <div class="carril" id="carril3">
-                <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 3" />
-                <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 3" />
-                <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 3" />
-            </div>
-        </div>
-        <!-- Palanca -->
-        <div class="palanca">
-            <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca" />
-        </div>
-    </div>
-    <!-- Mensaje variable del premio -->
-    <p id="mensajePremio" data-i18n="mensajePremio"></p>
-</div>
-
-<!-- Canvas para crear el fondo dinámico -->
-<canvas id="fondoCanvas" width="900" height="600"></canvas>
-
         </div>
         <!-- Modal para ajustes -->
         <div class="modal-ajustes" id="modal-ajustes">

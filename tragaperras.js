@@ -358,35 +358,44 @@ function iniciarGiro() {
 
 // GIRAR CARRILES
 function giroCarriles(carrilId, duracion, callback) {
-  const carril = document.getElementById(carrilId);
-  var tiempoInicio = null;
-  const imagenes = Array(3).fill(""); // Espacio para 3 imágenes por carril
+  const carril = document.getElementById(carrilId); // Elemento del carril
+  const slots = Array.from(carril.children); // Espacios (slots) fijos dentro del carril
+  let tiempoInicio = null; // Marca de inicio del giro
 
-  var retardo = 50;
-  var ultimoCambio = 50; // Marca de tiempo para controlar el retardo
+  const retardo = 100; // Tiempo entre cambios de imagen
+  let ultimoCambio = 0; // Controla la actualización de imágenes
 
   function animarGiro(timestamp) {
     if (!tiempoInicio) tiempoInicio = timestamp;
     const progreso = timestamp - tiempoInicio;
 
-    // Controlar el retardo entre actualizaciones
+    // Actualizar imágenes en los slots solo si ha pasado el retardo
     if (timestamp - ultimoCambio >= retardo) {
-      for (var i = 0; i < imagenes.length; i++) {
+      slots.forEach((slot) => {
         const simbolo = simbolosPesados[Math.floor(Math.random() * simbolosPesados.length)];
-        imagenes[i] = `<img src="${simbolosRutas[simbolo]}" class="simbolo_Imagen" data-simbolo="${simbolo}">`;
-      }
-      carril.innerHTML = imagenes.join("");
+        slot.innerHTML = `<img src="${simbolosRutas[simbolo]}" 
+                              class="simbolo_Imagen" 
+                              data-simbolo="${simbolo}">`;
+      });
       ultimoCambio = timestamp;
     }
 
+    // Continuar animación hasta que termine la duración
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
-      callback(imagenes.map((img) => img.match(/data-simbolo="(.*?)"/)[1])); // Extraer símbolos
+      // Al finalizar, devolver los símbolos visibles
+      const resultado = slots.map((slot) => {
+        const img = slot.querySelector(".simbolo_Imagen");
+        return img.dataset.simbolo;
+      });
+      callback(resultado);
     }
   }
-  requestAnimationFrame(animarGiro);
+
+  requestAnimationFrame(animarGiro); // Iniciar la animación
 }
+
 
 
 // SONIDO CUANDO TOQUE PREMIO
