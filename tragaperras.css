@@ -109,8 +109,14 @@ body::before {
   background-color: #3b2e1b;
 }
 
+.mensajes-dinero{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 /* SALDO ACTUAL */
-.dinero-actual {
+.dinero-actual, .fichas {
   font-size: 16px;
   color: #e1c6b0;
   font-weight: bold;
@@ -211,37 +217,18 @@ body::before {
   position: relative;
 }
 
-/* Estilo para el mensaje de fichas */
-#fichas {
-  color: #bfa67b;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-  position: absolute;
-  bottom: 440px;
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-}
-
 /* Estilo para el contenedor de la pantalla y la palanca */
 .pantalla-palanca {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1000px;
-  height: 200px;
+  width: auto;
+  height: auto;
   margin-left: 130px;
 }
 
 .pantalla {
   display: flex;
-  justify-content: space-around;
-  width: 90%;
-  background-color: #4e3f33;
-  padding: 20px;
-  border-radius: 8px;
 }
 
 .carril {

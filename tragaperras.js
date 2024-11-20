@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
 var saldo = 0;
-var fichas = 1000;
+var fichas = 0;
 
 // ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
@@ -592,7 +592,7 @@ i18next.init({
         premio3: "300 fichas",
         premio4: "200 fichas",
         premio5: "100 fichas",
-        fichas: "FICHAS: ",
+        fichas: "FICHAS: " + fichas + "🎫",
         mensajePremio: "",
         idioma: "Idioma",
         volumenPrincipal: "Volumen principal",
@@ -611,14 +611,14 @@ i18next.init({
         sacarDinero: "Withdraw money",
         convertirFichas: "Convert to chips",
         convertirDinero: "Convert to money",
-        dineroActual: "CURRENT MONEY: 0€",
+        dineroActual: "CURRENT MONEY: "  + saldo + "€",
         premios: "Prizes",
         premio1: "1000 chips",
         premio2: "500 chips",
         premio3: "300 chips",
         premio4: "200 chips",
         premio5: "100 chips",
-        fichas: "CHIPS: " + fichas,
+        fichas: "CHIPS: " + fichas + "🎫",
         mensajePremio: "",
         idioma: "Language",
         volumenPrincipal: "Main volume",

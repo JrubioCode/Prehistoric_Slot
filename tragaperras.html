@@ -31,7 +31,10 @@
                             <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
                             <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
                             <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                            <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+                            <div class="mensajes-dinero">
+                                <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+                                <p id="fichas" class="fichas" data-i18n="fichas">FICHAS: </p>
+                            </div>
                         </div>
                     </div>
                     <div class="barraSeparadora"></div>
@@ -74,8 +77,6 @@
             </div>
             <!-- Contenedor de la tragaperras -->
             <div class="tragaperras">
-                <!-- Fichas actuales -->
-                <p id="fichas" data-i18n="fichas">FICHAS: </p>
                 <!-- Contenedor para la pantalla y la palanca -->
                 <div class="pantalla-palanca">
                     <!-- Pantalla de la tragaperras -->
