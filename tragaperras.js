@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
 var saldo = 0;
-var fichas = 0;
+var fichas = 100000;
 
 // ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
