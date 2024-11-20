@@ -1,4 +1,4 @@
-/* Estilo general */
+/* ESTILO GENERAL */
 * {
   margin: 0px;
   padding: 0px;
@@ -6,11 +6,13 @@
   font-family: 'Rock Salt', cursive;
 }
 
+/* BODY */
 body {
   position: relative;
   background: none;
 }
 
+/* BODY DESPUES */
 body::before {
   content: "";
   position: fixed;
@@ -22,12 +24,12 @@ body::before {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(8px); /* Efecto inicial */
+  filter: blur(8px);
   z-index: -1;
   transition: filter 0.3s ease, background-image 0.3s ease;
 }
 
-/* Contenedor del filtro blanco y negro */
+/* CONTENEDOR PARA APLICAR BLANCO Y NEGRO */
 #blancoYnegro {
   display: none;
   position: fixed;
@@ -41,12 +43,13 @@ body::before {
   transition: backdrop-filter 0.3s ease, display 0.3s ease;
 }
 
-/* Estilos para el header */
+/* CONTENEDOR PADRE HEADER */
 .contenedor-header{
   display: flex;
   justify-content: center;
 }
 
+/* CONTENEDOR HIJO DEL PRINCIPAL */
 .contenido-header {
   width: 1900px; /* Valor fijo en lugar de porcentaje */
   min-width: 800px;
@@ -55,12 +58,14 @@ body::before {
   padding: 20px;
 }
 
+/* CONTENEDOR HIJO DEL SECUNDARIO */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* LOGO Y TITULO */
 .logo-titulo {
   display: flex;
   align-items: center;
@@ -70,19 +75,21 @@ body::before {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+/* LOGO */
 .logo-titulo img {
   height: 120px;
   margin-right: 10px;
   border-radius: 50%;
 }
 
+/* BARRA PARA SEPARAR */
 .barraSeparadora {
   width: 2px;
   height: 120px;
   background-color: #e1c6b0;
 }
 
-/* Estilo de los botones */
+/* BOTONES DEL DINERO */
 .botones-dinero input {
   background-color: #4a3f31;
   color: #e1c6b0;
@@ -96,12 +103,12 @@ body::before {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* Efecto hover en los botones */
+/* HOVER BOTONES DEL DINERO */
 .botones-dinero input:hover {
   background-color: #3b2e1b;
 }
 
-/* Estilo para el texto dinero actual */
+/* SALDO ACTUAL */
 .dinero-actual {
   font-size: 16px;
   color: #e1c6b0;
@@ -109,8 +116,8 @@ body::before {
   margin: 20px 0 0 20px;
 }
 
-/* Estilo para los ajustes */
-.ajustes {
+/* CONTENEDOR AJUSTES Y RELOJ */
+.ajustes-reloj {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -118,6 +125,7 @@ body::before {
   min-width: 150px;
 }
 
+/* RELOJ */
 .reloj-container {
   font-size: 22px;
   color: #e1c6b0;
@@ -125,6 +133,7 @@ body::before {
   font-weight: bold;
 }
 
+/* ICONO DE AJUSTES */
 .icono-ajustes {
   font-size: 41px;
   cursor: pointer;
@@ -133,11 +142,12 @@ body::before {
   margin-left: 45px;
 }
 
+/* HOVER ICONO AJUSTES */
 .icono-ajustes:hover {
   color: #d98f44;
 }
 
-/* Estilo para el contenedor de premios */
+/* CONTENEDOR DE PREMIOS */
 .premios {
   width: 15%;
   background-color: #2f2a25;
@@ -147,6 +157,7 @@ body::before {
   transition: background-color 0.3s ease;
 }
 
+/* TITULO PREMIOS */
 .premios h2 {
   text-align: center;
   color: #bfa67b;
@@ -154,6 +165,7 @@ body::before {
   margin-bottom: 15px;
 }
 
+/* CONTENEDOR HIJO PREMIOS */
 .premio {
   display: flex;
   align-items: center;
@@ -162,6 +174,7 @@ body::before {
   color: #bfa67b;
 }
 
+/* IMAGENES PREMIOS */
 .premio img {
   width: 70px;
   height: 70px;
