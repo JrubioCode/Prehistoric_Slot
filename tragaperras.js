@@ -448,25 +448,29 @@ function verificarPremioJackpot() {
     actualizarSaldo();
     sonidoPremio();
 
-    const imagenesGanadoras = [
-      ...document.querySelectorAll("#carril1 .simbolo_Imagen"),
-      ...document.querySelectorAll("#carril2 .simbolo_Imagen"),
-      ...document.querySelectorAll("#carril3 .simbolo_Imagen")
+    // Seleccionar los slots ganadores
+    const slotsGanadores = [
+      ...document.querySelectorAll("#carril1 .slot"),
+      ...document.querySelectorAll("#carril2 .slot"),
+      ...document.querySelectorAll("#carril3 .slot")
     ];
 
-    imagenesGanadoras.forEach((imagen) => imagen.classList.add("borde-ganador"));
+    // Agregar clase de borde ganador
+    slotsGanadores.forEach((slot) => slot.classList.add("borde-ganador"));
 
+    // Eliminar clase después de 4 segundos
     setTimeout(() => {
-      imagenesGanadoras.forEach((imagen) => imagen.classList.remove("borde-ganador"));
+      slotsGanadores.forEach((slot) => slot.classList.remove("borde-ganador"));
     }, 4000);
 
+    // Mostrar mensaje del premio
     mostrarMensajePremio("JACKPOT!!!", "JACKPOT PREMIO X5", premioJackpot);
     return true;
   }
   return false;
 }
 
-// FUNCIÓN PARA PREMIOS POR 6 O MÁS SÍMBOLOS IGUALES
+// FUNCIÓN PARA PREMIOS DE 6 SIMBOLOS
 function verificarPremio6Simbolos() {
   const todosLosSimbolos = [...simboloCarril1, ...simboloCarril2, ...simboloCarril3];
 
@@ -476,20 +480,29 @@ function verificarPremio6Simbolos() {
   }, {});
 
   for (let simbolo in conteoSimbolos) {
-    if (conteoSimbolos[simbolo] >= 6) {
+    if (conteoSimbolos[simbolo] >= 6 && conteoSimbolos[simbolo] < 9) {
       const premio6Simbolos = (premios[simbolo] || 0) * 2;
       fichas += premio6Simbolos;
       actualizarSaldo();
       sonidoPremio();
 
-      const imagenesGanadoras = [
-        ...document.querySelectorAll(`.simbolo_Imagen[data-simbolo='${simbolo}']`)
-      ];
+      // Seleccionar los slots con el símbolo ganador
+      const slotsGanadores = document.querySelectorAll(
+        `.carril .slot img[data-simbolo='${simbolo}']`
+      );
 
-      imagenesGanadoras.forEach((imagen) => imagen.classList.add("borde-ganador"));
+      // Aplicar la clase para el borde ganador
+      slotsGanadores.forEach((slot) => {
+        const parentSlot = slot.closest('.slot'); // Seleccionar el contenedor del slot
+        parentSlot.classList.add("borde-ganador");
+      });
 
+      // Remover la clase después de 4 segundos
       setTimeout(() => {
-        imagenesGanadoras.forEach((imagen) => imagen.classList.remove("borde-ganador"));
+        slotsGanadores.forEach((slot) => {
+          const parentSlot = slot.closest('.slot'); // Seleccionar el contenedor del slot
+          parentSlot.classList.remove("borde-ganador");
+        });
       }, 4000);
 
       mostrarMensajePremio("WINNER (2X)", "PREMIO X2", premio6Simbolos);
@@ -498,6 +511,8 @@ function verificarPremio6Simbolos() {
   }
   return false;
 }
+
+
 
 // FUNCIÓN PARA PREMIOS COMPLETOS
 function verificarPremioCompleto() {
@@ -512,14 +527,16 @@ function verificarPremioCompleto() {
     actualizarSaldo();
     sonidoPremio();
 
-    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
-    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
-    const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
+    // Seleccionar los slots centrales
+    const slot1 = document.querySelector("#carril1 .slot:nth-child(2)");
+    const slot2 = document.querySelector("#carril2 .slot:nth-child(2)");
+    const slot3 = document.querySelector("#carril3 .slot:nth-child(2)");
 
-    [imagen1, imagen2, imagen3].forEach((imagen) => imagen.classList.add("borde-ganador"));
+    [slot1, slot2, slot3].forEach((slot) => slot.classList.add("borde-ganador"));
 
+    // Remover la clase después de 5 segundos
     setTimeout(() => {
-      [imagen1, imagen2, imagen3].forEach((imagen) => imagen.classList.remove("borde-ganador"));
+      [slot1, slot2, slot3].forEach((slot) => slot.classList.remove("borde-ganador"));
     }, 5000);
 
     mostrarMensajePremio("WINNER", "PREMIO", premio);
@@ -527,6 +544,7 @@ function verificarPremioCompleto() {
   }
   return false;
 }
+
 
 // FUNCIÓN PARA PREMIOS REDUCIDOS
 function verificarPremioReducido() {
@@ -542,16 +560,18 @@ function verificarPremioReducido() {
     actualizarSaldo();
     sonidoPremio();
 
-    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
-    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
-    const imagenGanadora3 = simboloMedio1 === simboloArriba3
-      ? document.querySelector("#carril3 .simbolo_Imagen:nth-child(1)")
-      : document.querySelector("#carril3 .simbolo_Imagen:nth-child(3)");
+    // Seleccionar los slots ganadores
+    const slot1 = document.querySelector("#carril1 .slot:nth-child(2)");
+    const slot2 = document.querySelector("#carril2 .slot:nth-child(2)");
+    const slot3 = simboloMedio1 === simboloArriba3
+      ? document.querySelector("#carril3 .slot:nth-child(1)")
+      : document.querySelector("#carril3 .slot:nth-child(3)");
 
-    [imagen1, imagen2, imagenGanadora3].forEach((imagen) => imagen.classList.add("borde-ganador"));
+    [slot1, slot2, slot3].forEach((slot) => slot.classList.add("borde-ganador"));
 
+    // Remover la clase después de 4 segundos
     setTimeout(() => {
-      [imagen1, imagen2, imagenGanadora3].forEach((imagen) => imagen.classList.remove("borde-ganador"));
+      [slot1, slot2, slot3].forEach((slot) => slot.classList.remove("borde-ganador"));
     }, 4000);
 
     mostrarMensajePremio("WINNER (HALF PRIZE)", "PREMIO REDUCIDO", premioReducido);
@@ -559,6 +579,7 @@ function verificarPremioReducido() {
   }
   return false;
 }
+
 
 // FUNCIÓN PARA MOSTRAR EL MENSAJE DE PREMIO
 function mostrarMensajePremio(mensajeEn, mensajeEs, premio = null) {

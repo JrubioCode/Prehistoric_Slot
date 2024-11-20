@@ -461,20 +461,19 @@ input:checked + .slider:before {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-/* Borde parpadeante para el premio */
-@keyframes bordeParpadeante {
-  0% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: green;
-  }
-  100% {
-    border-color: transparent;
-  }
+/* Estilo para el borde ganador */
+.borde-ganador {
+  border: 3px solid #378b3a;
+  border-radius: 5px;
+  animation: parpadeo 1s infinite;
 }
 
-.borde-ganador {
-  border: 3px solid green;
-  animation: bordeParpadeante 0.5s infinite;
+/* Animación de parpadeo */
+@keyframes parpadeo {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
