@@ -373,9 +373,7 @@ function giroCarriles(carrilId, duracion, callback) {
     if (timestamp - ultimoCambio >= retardo) {
       slots.forEach((slot) => {
         const simbolo = simbolosPesados[Math.floor(Math.random() * simbolosPesados.length)];
-        slot.innerHTML = `<img src="${simbolosRutas[simbolo]}" 
-                              class="simbolo_Imagen" 
-                              data-simbolo="${simbolo}">`;
+        slot.innerHTML = `<img src="${simbolosRutas[simbolo]}" class="simbolo_Imagen" data-simbolo="${simbolo}">`;
       });
       ultimoCambio = timestamp;
     }
