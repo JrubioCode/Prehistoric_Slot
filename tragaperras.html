@@ -14,78 +14,67 @@
     </head>
     <body>
         <!-- Header -->
-        <div class="contenido-header">
-            <div class="header">
-                <!-- Logo y título -->
-                <div class="logo-titulo">
-                    <a href="./../Prehistoric_Jackpot/index.html">
-                        <img src="./assets/logo.webp" alt="Logo del Casino" />
-                    </a>
-                    <h1>PREHISTORIC SLOT</h1>
-                </div>
-                <div class="barraSeparadora"></div>
-                <!-- Gestión de dinero -->
-                <div class="gestion-dinero">
-                    <div class="botones-dinero">
-                        <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
-                        <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
-                        <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
-                        <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                        <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+        <div class="contenedor-header">
+            <div class="contenido-header">
+                <div class="header">
+                    <!-- Logo y título -->
+                    <div class="logo-titulo">
+                        <a href="./../Prehistoric_Jackpot/index.html">
+                            <img src="./assets/logo.webp" alt="Logo del Casino" />
+                        </a>
+                        <h1>PREHISTORIC SLOT</h1>
                     </div>
-                </div>
-                <div class="barraSeparadora"></div>
-                <!-- Ajustes -->
-                <div class="ajustes">
-                    <!-- Contenedor reloj -->
-                    <div class="reloj-container">
-                        <div id="reloj"></div>
+                    <div class="barraSeparadora"></div>
+                    <!-- Gestión de dinero -->
+                    <div class="gestion-dinero">
+                        <div class="botones-dinero">
+                            <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
+                            <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
+                            <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
+                            <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
+                            <div class="mensajes-dinero">
+                                <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+                                <p id="fichas" class="fichas" data-i18n="fichas">FICHAS: </p>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Icono ajustes -->
-                    <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
-=======
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tragaperras Peleolitica</title>
-    <!-- Link css -->
-    <link rel="stylesheet" href="./tragaperras.css" />
-    <!-- Link tipo de letra -->
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-    <!-- I18next -->
-    <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
-</head>
-
-<body>
-    <!-- Header -->
-    <div class="contenido-header">
-        <div class="header">
-            <!-- Logo y título -->
-            <div class="logo-titulo">
-                <a href="./../Prehistoric_Jackpot/index.html">
-                    <img src="./assets/logo.webp" alt="Logo del Casino" />
-                </a>
-                <h1 data-i18n="titulo">PREHISTORIC SLOT</h1>
-            </div>
-            <div class="barraSeparadora"></div>
-
-            <!-- Gestión de dinero -->
-            <div class="gestion-dinero">
-                <div class="botones-dinero">
-                    <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
-                    <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
-                    <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
-                    <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                    <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
+                    <div class="barraSeparadora"></div>
+                    <!-- Ajustes -->
+                    <div class="ajustes-reloj">
+                        <!-- Contenedor reloj -->
+                        <div class="reloj-container">
+                            <div id="reloj"></div>
+                        </div>
+                        <!-- Icono ajustes -->
+                        <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="contenedor">
             <!-- Contenedor de premios -->
             <div class="premios" id="lista-premios">
-                <img src="./assets/premios/cartel-premios-español.png" alt="Cartel" id="cartel-premios">
+                <h2 data-i18n="premios">Premios</h2>
+                <div class="premio">
+                    <img src="./assets/tragaperras/grupoCavernicolas.png" alt="Grupo de Cavernícolas" />
+                    <span data-i18n="premio1">1000 fichas</span>
+                </div>
+                <div class="premio">
+                    <img src="./assets/tragaperras/mamut.png" alt="Mamut" />
+                    <span data-i18n="premio2">500 fichas</span>
+                </div>
+                <div class="premio">
+                    <img src="./assets/tragaperras/pollo.png" alt="Pollo" />
+                    <span data-i18n="premio3">300 fichas</span>
+                </div>
+                <div class="premio">
+                    <img src="./assets/tragaperras/fuego.png" alt="Fuego" />
+                    <span data-i18n="premio4">200 fichas</span>
+                </div>
+                <div class="premio">
+                    <img src="./assets/tragaperras/cavernicola.png" alt="Cavernícola" />
+                    <span data-i18n="premio5">100 fichas</span>
+                </div>
             </div>
             <!-- Contenedor de la tragaperras -->
             <div class="tragaperras">
