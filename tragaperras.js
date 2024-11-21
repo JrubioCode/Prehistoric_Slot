@@ -46,26 +46,33 @@ window.addEventListener("DOMContentLoaded", () => {
   const switchElement = document.getElementById("switch");
   const filtro = document.getElementById("blancoYnegro");
 
-  // Establecer el modo inicial (claro o noche)
-  if (switchElement.checked) {
-    filtro.style.display = "none"; // Modo claro
-    document.getElementById("switch").setAttribute("aria-label", "Modo claro");
-  } else {
-    filtro.style.display = "block"; // Modo noche
-    document.getElementById("switch").setAttribute("aria-label", "Modo noche");
-  }
+  // Función para aplicar el modo (claro/noche)
+  const aplicarModo = (modo) => {
+    if (modo === "claro") {
+      filtro.style.display = "none"; // Modo claro
+      switchElement.checked = true;
+      switchElement.setAttribute("aria-label", "Modo claro");
+    } else if (modo === "noche") {
+      filtro.style.display = "block"; // Modo noche
+      switchElement.checked = false;
+      switchElement.setAttribute("aria-label", "Modo noche");
+    }
+  };
+
+  // Leer el estado guardado en localStorage
+  const estadoGuardado = localStorage.getItem("modoColor") || "claro"; // Por defecto: modo claro
+  aplicarModo(estadoGuardado);
 
   // Evento para alternar entre modos
   switchElement.addEventListener("change", (event) => {
     const isChecked = event.target.checked;
+    const nuevoModo = isChecked ? "claro" : "noche";
 
-    if (isChecked) {
-      filtro.style.display = "none"; // Modo claro
-      document.getElementById("switch").setAttribute("aria-label", "Modo claro");
-    } else {
-      filtro.style.display = "block"; // Modo noche
-      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
-    }
+    // Guardar en localStorage
+    localStorage.setItem("modoColor", nuevoModo);
+
+    // Aplicar el modo
+    aplicarModo(nuevoModo);
   });
 });
 

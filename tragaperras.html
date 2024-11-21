@@ -86,6 +86,8 @@
                 <p id="mensajePremio" data-i18n="mensajePremio"></p>
             </div>
         </div>
+        <!-- Contenedor para el efecto blanco y negro -->
+        <div id="blancoYnegro" class="filtro-blanco-negro"></div>
         <!-- Modal para ajustes -->
         <div class="modal-ajustes" id="modal-ajustes">
             <div class="contenido-modal-ajustes">
@@ -106,8 +108,6 @@
                 <p data-i18n="volumenPremio">Volumen del premio</p>
                 <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
                 <input type="range" id="control-volumen-premio" min="0" max="10" step="1" value="1" />
-                <!-- Contenedor para el efecto blanco y negro -->
-                <div id="blancoYnegro" class="filtro-blanco-negro"></div>
                 <!-- Modo blanco y negro -->
                 <p data-i18n="ModoColor">Modo de color</p>
                 <label for="switch" class="switch">
