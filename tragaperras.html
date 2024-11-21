@@ -1,165 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tragaperras Peleolitica</title>
-        <!-- Link css -->
-        <link rel="stylesheet" href="./tragaperras.css" />
-        <!-- Link tipo de letra -->
-        <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-        <!-- I18next -->
-        <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
-    </head>
-    <body>
-        <!-- Header -->
-        <div class="contenedor-header">
-            <div class="contenido-header">
-                <div class="header">
-                    <!-- Logo y título -->
-                    <div class="logo-titulo">
-                        <a href="./../Prehistoric_Jackpot/index.html">
-                            <img src="./assets/logo.webp" alt="Logo del Casino" />
-                        </a>
-                        <h1>PREHISTORIC SLOT</h1>
-                    </div>
-                    <div class="barraSeparadora"></div>
-                    <!-- Gestión de dinero -->
-                    <div class="gestion-dinero">
-                        <div class="botones-dinero">
-                            <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
-                            <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
-                            <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
-                            <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                            <div class="mensajes-dinero">
-                                <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
-                                <p id="fichas" class="fichas" data-i18n="fichas">FICHAS: </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="barraSeparadora"></div>
-                    <!-- Ajustes -->
-                    <div class="ajustes-reloj">
-                        <!-- Contenedor reloj -->
-                        <div class="reloj-container">
-                            <div id="reloj"></div>
-                        </div>
-                        <!-- Icono ajustes -->
-                        <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
-                    </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tragaperras Peleolitica</title>
+    <!-- Link css -->
+    <link rel="stylesheet" href="./tragaperras.css" />
+    <!-- Link tipo de letra -->
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <!-- I18next -->
+    <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="contenido-header">
+        <div class="header">
+            <!-- Logo y título -->
+            <div class="logo-titulo">
+                <a href="./../Prehistoric_Jackpot/index.html">
+                    <img src="./assets/logo.webp" alt="Logo del Casino" />
+                </a>
+                <h1 data-i18n="titulo">PREHISTORIC SLOT</h1>
+            </div>
+            <div class="barraSeparadora"></div>
+
+            <!-- Gestión de dinero -->
+            <div class="gestion-dinero">
+                <div class="botones-dinero">
+                    <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
+                    <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
+                    <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
+                    <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
+                    <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
                 </div>
+            </div>
+
+            <div class="barraSeparadora"></div>
+
+            <!-- Ajustes -->
+            <div class="ajustes">
+                <!-- Contenedor reloj -->
+                <div class="reloj-container">
+                    <div id="reloj"></div>
+                </div>
+                <!-- Icono ajustes -->
+                <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
             </div>
         </div>
-        <div class="contenedor">
-            <!-- Contenedor de premios -->
-            <div class="premios" id="lista-premios">
-                <h2 data-i18n="premios">Premios</h2>
-                <div class="premio">
-                    <img src="./assets/tragaperras/grupoCavernicolas.png" alt="Grupo de Cavernícolas" />
-                    <span data-i18n="premio1">1000 fichas</span>
-                </div>
-                <div class="premio">
-                    <img src="./assets/tragaperras/mamut.png" alt="Mamut" />
-                    <span data-i18n="premio2">500 fichas</span>
-                </div>
-                <div class="premio">
-                    <img src="./assets/tragaperras/pollo.png" alt="Pollo" />
-                    <span data-i18n="premio3">300 fichas</span>
-                </div>
-                <div class="premio">
-                    <img src="./assets/tragaperras/fuego.png" alt="Fuego" />
-                    <span data-i18n="premio4">200 fichas</span>
-                </div>
-                <div class="premio">
-                    <img src="./assets/tragaperras/cavernicola.png" alt="Cavernícola" />
-                    <span data-i18n="premio5">100 fichas</span>
-                </div>
+    </div>
+
+    <div class="contenedor">
+        <!-- Contenedor de premios -->
+        <div class="premios" id="lista-premios">
+            <h2 data-i18n="premios">Premios</h2>
+            <div class="premio">
+                <img src="./assets/tragaperras/grupoCavernicolas.png" alt="Grupo de Cavernícolas" />
+                <span data-i18n="premio1">1000 puntos</span>
             </div>
-            <!-- Contenedor de la tragaperras -->
-            <div class="tragaperras">
-                <!-- Contenedor para la pantalla y la palanca -->
-                <div class="pantalla-palanca">
-                    <!-- Pantalla de la tragaperras -->
-                    <div class="pantalla">
+            <div class="premio">
+                <img src="./assets/tragaperras/mamut.png" alt="Mamut" />
+                <span data-i18n="premio2">500 puntos</span>
+            </div>
+            <div class="premio">
+                <img src="./assets/tragaperras/pollo.png" alt="Pollo" />
+                <span data-i18n="premio3">300 puntos</span>
+            </div>
+            <div class="premio">
+                <img src="./assets/tragaperras/fuego.png" alt="Fuego" />
+                <span data-i18n="premio4">200 puntos</span>
+            </div>
+            <div class="premio">
+                <img src="./assets/tragaperras/cavernicola.png" alt="Cavernícola" />
+                <span data-i18n="premio5">100 puntos</span>
+            </div>
+        </div>
+
+        <!-- Contenedor de la tragaperras -->
+        <div class="tragaperras">
+            <!-- Fichas actuales -->
+            <p id="fichas" data-i18n="fichas">FICHAS: </p>
+            <!-- Contenedor para la pantalla y la palanca -->
+            <div class="pantalla-palanca">
+                <!-- Pantalla de la tragaperras -->
+                <div class="pantalla">
                     <div class="carril" id="carril1">
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
+                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 1" />
+                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 1" />
+                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 1" />
                     </div>
                     <div class="carril" id="carril2">
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
+                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 2" />
+                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 2" />
+                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 2" />
                     </div>
                     <div class="carril" id="carril3">
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
+                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 3" />
+                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 3" />
+                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 3" />
                     </div>
-                    </div>
-                    <!-- Palanca -->
-                    <div class="palanca">
+                </div>
+                <!-- Palanca -->
+                <div class="palanca">
                     <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca" />
-                    </div>
                 </div>
-                <!-- Mensaje variable del premio -->
-                <p id="mensajePremio" data-i18n="mensajePremio"></p>
             </div>
+
+            <!-- Mensaje variable del premio -->
+            <p id="mensajePremio" data-i18n="mensajePremio">Hola</p>
         </div>
-        <!-- Contenedor para el efecto blanco y negro -->
-        <div id="blancoYnegro" class="filtro-blanco-negro"></div>
-        <!-- Modal para ajustes -->
-        <div class="modal-ajustes" id="modal-ajustes">
-            <div class="contenido-modal-ajustes">
-                <!-- Idiomas -->
-                <p data-i18n="idioma">Idioma</p>
-                <div class="contenedor-imagenes">
-                    <img id="icono-idioma" src="./assets/ajustes/español.png" onclick="traducir()" alt="Idioma" />
-                </div>
-                <!-- Volumen principal -->
-                <p data-i18n="volumenPrincipal">Volumen principal</p>
-                <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
-                <input type="range" id="control-volumen" min="0" max="10" step="0.1" value="0" />
-                <!-- Volumen palanca -->
-                <p data-i18n="volumenPalanca">Volumen de la palanca</p>
-                <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3" type="audio/mp3"></audio>
-                <input type="range" id="control-volumen-palanca" min="0" max="10" step="1" value="1" />
-                <!-- Volumen premios -->
-                <p data-i18n="volumenPremio">Volumen del premio</p>
-                <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
-                <input type="range" id="control-volumen-premio" min="0" max="1" step="1" value="0.5" />
-                <!-- Modo blanco y negro -->
-                <p>Modo de color</p>
-                <label for="switch" class="switch">
-                    <input id="switch" type="checkbox" checked />
-                    <span class="slider"></span>
-                </label>
-                <!-- Boton cerrar -->
-                <input type="submit" value="Cerrar" name="boton-cerrar" id="boton-cerrar" data-i18n="cerrar">
+
+    </div>
+
+    <!-- Modal para ajustes -->
+    <div class="modal-ajustes" id="modal-ajustes">
+        <div class="contenido-modal-ajustes">
+            <!-- Idiomas -->
+            <p data-i18n="idioma">Idioma</p>
+            <div class="contenedor-imagenes">
+                <img id="icono-idioma" src="./assets/ajustes/español.png" onclick="traducir()" alt="Idioma" />
             </div>
-        </div>
-        <!-- Modal para el dinero -->
-        <div class="modal-dinero" id="modal-dinero">
-            <div class="contenido-modal-dinero">
-                <!-- Campo para meter dinero -->
-                <label for="introducirDinero" data-i18n="introducirDineroLabel">Introduce dinero</label>
-                <div id="comprobacionSaldo"></div>
-                <input type="number" id="introducirDinero" name="introducirDinero" />
-                <!-- Botón de aceptar -->
-                <input type="button" id="boton-meter-dinero-modal" value="Aceptar" data-i18n="aceptar" />
-                <!-- Botón de cerrar -->
-                <input type="button" id="boton-cerrar-modal" value="Cerrar" data-i18n="cerrarModal" />
-            </div>
-        </div>
-        <!-- Modal para la conversión a fichas -->
-        <div class="modal-conversion-fichas" id="modal-conversion-fichas">
-            <div class="contenido-modal-conversion-fichas">
-                <h3>Convertir a fichas</h3>
-                <div id="comprobacionConversionFichas"></div>
-                <label for="cantidadConversionFichas">Cantidad en €:</label>
-                <input type="number" id="cantidadConversionFichas" name="cantidadConversionFichas" />
-                <input type="button" id="boton-convertir-fichas" value="Aceptar" />
-                <input type="button" id="boton-cerrar-conversion-fichas" value="Cerrar" />
             <!-- Volumen principal -->
             <p data-i18n="volumenPrincipal">Volumen principal</p>
             <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
@@ -181,19 +142,51 @@
                 <img src="./assets/ajustes/blanco-negro.png" id="blanco-negro" alt="Blanco y negro" />
                 <img src="./assets/ajustes/color.png" id="color" alt="Color" />
             </div>
+
+            <!-- Boton cerrar -->
+            <input type="submit" value="Cerrar" name="boton-cerrar" id="boton-cerrar" data-i18n="cerrar">
         </div>
-        <!-- Modal para la conversión a saldo -->
-        <div class="modal-conversion-saldo" id="modal-conversion-saldo">
-            <div class="contenido-modal-conversion-saldo">
-                <h3>Convertir a saldo</h3>
-                <div id="comprobacionConversionDinero"></div>
-                <label for="cantidadConversionSaldo">Cantidad de fichas:</label>
-                <input type="number" id="cantidadConversionSaldo" name="cantidadConversionSaldo" />
-                <input type="button" id="boton-convertir-saldo" value="Aceptar" />
-                <input type="button" id="boton-cerrar-conversion-saldo" value="Cerrar" />
-            </div>
+    </div>
+
+    <!-- Modal para el dinero -->
+    <div class="modal-dinero" id="modal-dinero">
+        <div class="contenido-modal-dinero">
+            <!-- Campo para meter dinero -->
+            <label for="introducirDinero" data-i18n="introducirDineroLabel">Introduce dinero</label>
+            <input type="number" id="introducirDinero" name="introducirDinero" />
+            <!-- Botón de aceptar -->
+            <input type="button" id="boton-meter-dinero-modal" value="Aceptar" data-i18n="aceptar" />
+            <!-- Botón de cerrar -->
+            <input type="button" id="boton-cerrar-modal" value="Cerrar" data-i18n="cerrarModal" />
         </div>
-        <!-- Script -->
-        <script src="./tragaperras.js"></script>
-    </body>
+    </div>
+
+    <!-- Modal para la conversión a fichas -->
+    <div class="modal-conversion-fichas" id="modal-conversion-fichas">
+        <div class="contenido-modal-conversion-fichas">
+            <h3>Convertir a fichas</h3>
+            <label for="cantidadConversionFichas">Cantidad en €:</label>
+            <input type="number" id="cantidadConversionFichas" name="cantidadConversionFichas" />
+            <input type="button" id="boton-convertir-fichas" value="Aceptar" />
+            <input type="button" id="boton-cerrar-conversion-fichas" value="Cerrar" />
+        </div>
+    </div>
+
+
+    <!-- Modal para la conversión a saldo -->
+    <div class="modal-conversion-saldo" id="modal-conversion-saldo">
+        <div class="contenido-modal-conversion-saldo">
+            <h3>Convertir a saldo</h3>
+            <label for="cantidadConversionSaldo">Cantidad de fichas:</label>
+            <input type="number" id="cantidadConversionSaldo" name="cantidadConversionSaldo" />
+            <input type="button" id="boton-convertir-saldo" value="Aceptar" />
+            <input type="button" id="boton-cerrar-conversion-saldo" value="Cerrar" />
+        </div>
+    </div>
+
+
+    <!-- Script -->
+    <script src="./tragaperras.js"></script>
+</body>
+
 </html>
