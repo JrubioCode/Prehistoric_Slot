@@ -368,25 +368,17 @@ function iniciarGiro() {
 
 // GIRAR CARRILES
 function giroCarriles(carrilId, duracion, callback) {
-<<<<<<< HEAD
   const carril = document.getElementById(carrilId); // Elemento del carril
   const slots = Array.from(carril.children); // Espacios (slots) fijos dentro del carril
   let tiempoInicio = null; // Marca de inicio del giro
 
   const retardo = 100; // Tiempo entre cambios de imagen
   let ultimoCambio = 0; // Controla la actualización de imágenes
-=======
-  const carril = document.getElementById(carrilId);
-  let tiempoInicio = null;
-
-  const imagenes = Array(3).fill(""); // Espacio para 3 imágenes por carril
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
 
   function animarGiro(timestamp) {
     if (!tiempoInicio) tiempoInicio = timestamp;
     const progreso = timestamp - tiempoInicio;
 
-<<<<<<< HEAD
     // Actualizar imágenes en los slots solo si ha pasado el retardo
     if (timestamp - ultimoCambio >= retardo) {
       slots.forEach((slot) => {
@@ -397,15 +389,6 @@ function giroCarriles(carrilId, duracion, callback) {
     }
 
     // Continuar animación hasta que termine la duración
-=======
-    for (let i = 0; i < imagenes.length; i++) {
-      const simbolo = simbolosPesados[Math.floor(Math.random() * simbolosPesados.length)];
-      imagenes[i] = `<img src="${simbolosRutas[simbolo]}" class="simbolo_Imagen" data-simbolo="${simbolo}">`;
-    }
-
-    carril.innerHTML = imagenes.join("");
-
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
     if (progreso < duracion) {
       requestAnimationFrame(animarGiro);
     } else {
@@ -421,11 +404,6 @@ function giroCarriles(carrilId, duracion, callback) {
   requestAnimationFrame(animarGiro); // Iniciar la animación
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
 // SONIDO CUANDO TOQUE PREMIO
 function sonidoPremio() {
   const sonidoPremio = document.getElementById("sonidoPremio");
@@ -446,7 +424,6 @@ function verificarPremio() {
   setTimeout(verificarPremioJackpot, 1500);
 
   // Comprobación de premio por 6 o más símbolos iguales
-<<<<<<< HEAD
   if (!premioOtorgado && verificarPremio6Simbolos()) {
     premioOtorgado = true;
   }
@@ -543,9 +520,6 @@ function verificarPremio6Simbolos() {
     }
   }
   return false;
-=======
-  setTimeout(verificarPremio6Simbolos, 2000);
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
 }
 
 
@@ -563,7 +537,6 @@ function verificarPremioCompleto() {
     actualizarSaldo();
     sonidoPremio();
 
-<<<<<<< HEAD
     // Seleccionar los slots centrales
     const slot1 = document.querySelector("#carril1 .slot:nth-child(2)");
     const slot2 = document.querySelector("#carril2 .slot:nth-child(2)");
@@ -576,28 +549,6 @@ function verificarPremioCompleto() {
       [slot1, slot2, slot3].forEach((slot) => slot.classList.remove("borde-ganador"));
     }, 5000);
 
-=======
-    // SELECCIONAR IMÁGENES GANADORAS
-    const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
-    const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
-    const imagen3 = document.querySelector("#carril3 .simbolo_Imagen:nth-child(2)");
-
-    // AGREGAR LA CLASE PARPADEANTE DEL CSS
-    [imagen1, imagen2, imagen3].forEach((imagen) => {
-      if (imagen) {
-        imagen.classList.add("borde-ganador");
-      }
-    });
-
-    // QUITAR EL PARPADEO A LOS 3s
-    setTimeout(() => {
-      [imagen1, imagen2, imagen3].forEach((imagen) => {
-        if (imagen) {
-          imagen.classList.remove("borde-ganador");
-        }
-      });
-    }, 3000);
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
     mostrarMensajePremio("WINNER", "PREMIO", premio);
   }
 }
@@ -617,22 +568,6 @@ function verificarPremioReducido() {
     actualizarSaldo();
     sonidoPremio();
 
-<<<<<<< HEAD
-    // Seleccionar los slots ganadores
-    const slot1 = document.querySelector("#carril1 .slot:nth-child(2)");
-    const slot2 = document.querySelector("#carril2 .slot:nth-child(2)");
-    const slot3 = simboloMedio1 === simboloArriba3
-      ? document.querySelector("#carril3 .slot:nth-child(1)")
-      : document.querySelector("#carril3 .slot:nth-child(3)");
-
-    [slot1, slot2, slot3].forEach((slot) => slot.classList.add("borde-ganador"));
-
-    // Remover la clase después de 4 segundos
-    setTimeout(() => {
-      [slot1, slot2, slot3].forEach((slot) => slot.classList.remove("borde-ganador"));
-    }, 4000);
-
-=======
     // SELECCIONAR IMÁGENES GANADORAS
     const imagen1 = document.querySelector("#carril1 .simbolo_Imagen:nth-child(2)");
     const imagen2 = document.querySelector("#carril2 .simbolo_Imagen:nth-child(2)");
@@ -655,7 +590,6 @@ function verificarPremioReducido() {
         }
       });
     }, 3000);
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
     mostrarMensajePremio("WINNER (HALF PRIZE)", "PREMIO REDUCIDO", premioReducido);
   }
 }
@@ -810,11 +744,7 @@ i18next.init({
         premio3: "300 chips",
         premio4: "200 chips",
         premio5: "100 chips",
-<<<<<<< HEAD
-        fichas: "CHIPS: " + fichas + "🎫",
-=======
         fichas: "CHIPS: ",
->>>>>>> parent of 49784cc (TRAGAPERRAS FUNCIONAL)
         mensajePremio: "",
         idioma: "Language",
         volumenPrincipal: "Main volume",
