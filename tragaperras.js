@@ -44,41 +44,32 @@ window.onload = () => {
 // EVENTO PARA CAMBIAR EL TIPO DE COLOR
 window.addEventListener("DOMContentLoaded", () => {
   const switchElement = document.getElementById("switch");
-  const filtro = document.getElementById("blancoYnegro");
+  
+  // Establecer el modo claro (luz) por defecto
+  if (!switchElement.checked) {
+    document.body.style.filter = "none";
+    document.body.style.backgroundImage = "url('./assets/fondo.png')";
+    document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+  }
 
-  // Función para aplicar el modo (claro/noche)
-  const aplicarModo = (modo) => {
-    if (modo === "claro") {
-      filtro.style.display = "none"; // Modo claro
-      switchElement.checked = true;
-      switchElement.setAttribute("aria-label", "Modo claro");
-    } else if (modo === "noche") {
-      filtro.style.display = "block"; // Modo noche
-      switchElement.checked = false;
-      switchElement.setAttribute("aria-label", "Modo noche");
-    }
-  };
-
-  // Leer el estado guardado en localStorage
-  const estadoGuardado = localStorage.getItem("modoColor") || "claro"; // Por defecto: modo claro
-  aplicarModo(estadoGuardado);
-
-  // Evento para alternar entre modos
   switchElement.addEventListener("change", (event) => {
     const isChecked = event.target.checked;
-    const nuevoModo = isChecked ? "claro" : "noche";
 
-    // Guardar en localStorage
-    localStorage.setItem("modoColor", nuevoModo);
-
-    // Aplicar el modo
-    aplicarModo(nuevoModo);
+    if (!isChecked) {
+      document.body.style.filter = "grayscale(100%)";
+      document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')";
+      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
+    } else {
+      document.body.style.filter = "none";
+      document.body.style.backgroundImage = "url('./assets/fondo.png')";
+      document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+    }
   });
 });
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
 var saldo = 0;
-var fichas = 100000;
+var fichas = 0;
 
 // ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
@@ -633,7 +624,7 @@ i18next.init({
         volumenPrincipal: "Volumen principal",
         volumenPalanca: "Volumen de la palanca",
         volumenPremio: "Volumen del premio",
-        ModoColor: "Modo de color",
+        blancoYNegro: "Blanco y negro",
         cerrar: "Cerrar",
         introducirDineroLabel: "Introduce dinero",
         aceptar: "Aceptar",
@@ -659,7 +650,7 @@ i18next.init({
         volumenPrincipal: "Main volume",
         volumenPalanca: "Lever volume",
         volumenPremio: "Prize volume",
-        ModoColor: "Color mode",
+        blancoYNegro: "Black and white",
         cerrar: "Close",
         introducirDineroLabel: "Enter money",
         aceptar: "Accept",
