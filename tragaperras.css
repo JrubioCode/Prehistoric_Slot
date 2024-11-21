@@ -20,7 +20,7 @@ body::before {
   left: 0;
   height: 100%;
   width: 100%;
-  background-image: url('./assets/fondo.png');
+  background-image: url('./assets/fondos-logos/fondo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -158,38 +158,10 @@ body::before {
 
 /* CONTENEDOR DE PREMIOS */
 .premios {
-  width: 15%;
-  background-color: #2f2a25;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-  transition: background-color 0.3s ease;
-}
-
-/* TITULO PREMIOS */
-.premios h2 {
-  text-align: center;
-  color: #bfa67b;
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-/* CONTENEDOR HIJO PREMIOS */
-.premio {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  color: #bfa67b;
-}
-
-/* IMAGENES PREMIOS */
-.premio img {
-  width: 70px;
-  height: 70px;
-  margin-right: 10px;
-  border-radius: 50%;
-  border: 3px solid #8e7047;
+  margin-left: -60px;
+  margin-top: -50px;
+  width: 450px;
+  height: 460px;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -197,30 +169,27 @@ body::before {
 /* Estilo para el contenedor general */
 .contenedor {
   display: flex;
-  gap: 20px;
+  gap: 100px;
   padding: 20px 10px;
 }
 
 .pantalla-palanca{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1000px;
-  background-color: #2c2419;
-  padding: auto;
-  border-radius: 8px;
-  margin-left: 25px;
 }
 
 /* Pantalla principal */
 .pantalla {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-  width: auto;
-  height: auto;
-  margin-left: 130px;
+  background: #3e2723;
+  border: 5px solid #4e342e;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.8);
+  width: 700px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
 }
 
 .palanca img{
