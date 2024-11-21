@@ -15,13 +15,25 @@ document.getElementById("boton-cerrar").addEventListener("click", (event) => {
   document.getElementById("modal-ajustes").style.display = "none";
 });
 
-// MUSCIA DE FONDO
 window.onload = () => {
-  const audio = document.getElementById('musicaFondo');
-  const controlVolumen = document.getElementById('control-volumen');
-  const modalAjustes = document.getElementById('modal-ajustes');
-  var haIniciado = false;
+  const controlVolumen = document.getElementById("control-volumen");
+  const musicaFondo = document.getElementById("musicaFondo");
+  let haIniciado = false;
 
+  // Recuperar volumen guardado o establecer valor inicial
+  const volumenGuardado = localStorage.getItem("control-volumen");
+  const volumenInicial = volumenGuardado !== null ? parseFloat(volumenGuardado) : 0;
+  controlVolumen.value = volumenInicial;
+  musicaFondo.volume = volumenInicial;
+
+  // Evento para ajustar el volumen y guardar el estado
+  controlVolumen.addEventListener("input", (event) => {
+    const nuevoVolumen = parseFloat(event.target.value);
+    musicaFondo.volume = nuevoVolumen;
+    localStorage.setItem("control-volumen", nuevoVolumen);
+  });
+
+  // Función para iniciar la música de fondo
   function iniciarMusica() {
     if (!haIniciado) {
       audio.volume = parseFloat(controlVolumen.value);
@@ -70,7 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // VARIABLE PARA EL SALDO Y LAS FICHAS
 var saldo = 0;
-var fichas = 0;
+var fichas = 100000;
 
 // ACTUALIZAR LA VISTA DEL SALDO Y LAS FICHAS EN LA PANTALLA
 function actualizarSaldo() {
@@ -273,15 +285,6 @@ const premios = {
   grupoCavernicolas: 1000
 };
 
-
-/* SONIDO DE PALANCA */
-function sonidoPalanca() {
-  const sonidoPalanca = document.getElementById("sonidoPalanca");
-  const controlVolumenPalanca = document.getElementById("control-volumen-palanca");
-  sonidoPalanca.volume = parseFloat(controlVolumenPalanca.value);
-  sonidoPalanca.play();
-}
-
 /* COMPROBACION DE FICHAS EN LAS TIRADAS */
 function puedeTirar() {
   if (fichas >= 25) {
@@ -307,7 +310,6 @@ function puedeTirar() {
 // JUGAR CON ESPACIO
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space" && !enGiro && puedeTirar()) {
-    sonidoPalanca();
     cambiarPalanca();
     iniciarGiro();
   }
@@ -316,7 +318,6 @@ document.addEventListener("keydown", function (event) {
 // JUGAR CON PALANCA
 document.getElementById("palanca").addEventListener("click", function () {
   if (!enGiro && puedeTirar()) {
-    sonidoPalanca();
     cambiarPalanca();
     iniciarGiro();
   }
@@ -788,7 +789,7 @@ i18next.init({
         volumenPrincipal: "Volumen principal",
         volumenPalanca: "Volumen de la palanca",
         volumenPremio: "Volumen del premio",
-        blancoYNegro: "Blanco y negro",
+        ModoColor: "Modo de color",
         cerrar: "Cerrar",
         introducirDineroLabel: "Introduce dinero",
         aceptar: "Aceptar",
@@ -819,7 +820,7 @@ i18next.init({
         volumenPrincipal: "Main volume",
         volumenPalanca: "Lever volume",
         volumenPremio: "Prize volume",
-        blancoYNegro: "Black and white",
+        ModoColor: "Color mode",
         cerrar: "Close",
         introducirDineroLabel: "Enter money",
         aceptar: "Accept",
