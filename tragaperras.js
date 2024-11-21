@@ -689,10 +689,8 @@ function traducir() {
     // Cambiar el ícono dependiendo del idioma
     if (estaEnIngles()) {
       document.getElementById('icono-idioma').src = './assets/ajustes/ingles.png';
-      document.getElementById("cartel-premios").src = './assets/premios/cartel-premios-ingles.png';
     } else {
       document.getElementById('icono-idioma').src = './assets/ajustes/español.png';
-      document.getElementById("cartel-premios").src = './assets/premios/cartel-premios-español.png';
     }
   });
 }
