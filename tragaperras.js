@@ -25,7 +25,7 @@ window.onload = () => {
   function iniciarMusica() {
     if (!haIniciado) {
       audio.volume = parseFloat(controlVolumen.value);
-      audio.play().catch(error => console.log("No se pudo reproducir el audio:", error));
+      audio.play();
       haIniciado = true;
     }
   }
