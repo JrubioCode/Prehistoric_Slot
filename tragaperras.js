@@ -43,6 +43,53 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Crear el objeto de audio
+const musicaFondo = new Audio("./audios/audio-principal.mp3");
+musicaFondo.loop = true; // La música se repetirá
+musicaFondo.volume = 0.5; // Volumen inicial
+
+// Referencia al control de volumen en el HTML
+const iconoVolumen = document.getElementById('icono-volumen');
+const controlVolumen = document.getElementById('control-volumen');
+
+// Estado del sonido
+let musicaMuteada = false;
+
+// Función para reproducir música
+function reproducirMusica() {
+    if (musicaFondo.paused) {
+        musicaFondo.play().catch(err => console.error("Error al reproducir la música:", err));
+    }
+}
+
+// Función para alternar entre silenciar y activar música
+function alternarSonido() {
+    if (musicaMuteada) {
+        // Activar el sonido
+        musicaFondo.muted = false;
+        musicaMuteada = false;
+        iconoVolumen.src = './assets/ajustes/volumen.png'; // Cambiar al icono de volumen activo
+    } else {
+        // Silenciar el sonido
+        musicaFondo.muted = true;
+        musicaMuteada = true;
+        iconoVolumen.src = './assets/ajustes/mute.png'; // Cambiar al icono de silencio
+    }
+}
+
+// Detectar clic en el control de volumen
+controlVolumen.addEventListener('click', alternarSonido);
+
+// Detectar interacción inicial del usuario para iniciar la música
+function iniciarMusicaAlInteraccion() {
+    document.addEventListener('click', reproducirMusica, { once: true });
+    document.addEventListener('scroll', reproducirMusica, { once: true });
+    document.addEventListener('keydown', reproducirMusica, { once: true });
+}
+
+// Llamar a la función para habilitar las interacciones iniciales
+iniciarMusicaAlInteraccion();
+
 /* GESTIÓN DEL SALDO */
 var saldo = 0;
 var fichas = 0;
