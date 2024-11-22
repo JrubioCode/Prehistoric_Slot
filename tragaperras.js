@@ -3,503 +3,461 @@ var actualizarReloj = () => {
   document.getElementById("reloj").textContent = new Date().toLocaleTimeString();
   setTimeout(actualizarReloj, 1000);
 };
-actualizarReloj(); // Inicia la actualización del reloj
+actualizarReloj();
 
-/* ABRIR MODAL DE AJUSTES */
+/* ABRIR Y CERRAR MODAL DE AJUSTES */
 function modalAjustes() {
-  document.getElementById("modal-ajustes").style.display = "flex";
+  const modal = document.getElementById("modal-ajustes");
+
+  if (modal.style.display === "flex") {
+    modal.style.display = "none";
+  } else {
+    modal.style.display = "flex";
+  }
 }
 
-// EVENTO A BOTON DE CERRAR DE AJUSTES
-document.getElementById("boton-cerrar").addEventListener("click", (event) => {
-  document.getElementById("modal-ajustes").style.display = "none";
-});
+/* EVENTO PARA CAMBIAR EL TIPO DE COLOR */
+window.addEventListener("DOMContentLoaded", () => {
+  const switchElement = document.getElementById("switch");
+  const filtro = document.getElementById("blancoYnegro");
 
-/* MUSICA DE FONDO */
-window.onload = () => {
-  const audio = document.getElementById('musicaFondo');
-  const controlVolumen = document.getElementById('control-volumen');
-  const modalAjustes = document.getElementById('modal-ajustes');
-  var haIniciado = false;
-
-  function iniciarMusica() {
-    if (!haIniciado) {
-      audio.volume = parseFloat(controlVolumen.value);
-      audio.play().catch(error => console.log("No se pudo reproducir el audio:", error));
-      haIniciado = true;
-    }
+  if (switchElement.checked) {
+    filtro.style.display = "none"; // Modo claro
+    document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+  } else {
+    filtro.style.display = "block"; // Modo noche
+    document.getElementById("switch").setAttribute("aria-label", "Modo noche");
   }
 
-  document.addEventListener('click', iniciarMusica);
-  document.addEventListener('scroll', iniciarMusica);
-  document.addEventListener('keydown', iniciarMusica);
-  document.addEventListener('touchstart', iniciarMusica);
+  // Evento para alternar entre modos
+  switchElement.addEventListener("change", (event) => {
+    const isChecked = event.target.checked;
 
-  controlVolumen.addEventListener('input', (event) => {
-    audio.volume = parseFloat(event.target.value);
+    if (isChecked) {
+      filtro.style.display = "none"; // Modo claro
+      document.getElementById("switch").setAttribute("aria-label", "Modo claro");
+    } else {
+      filtro.style.display = "block"; // Modo noche
+      document.getElementById("switch").setAttribute("aria-label", "Modo noche");
+    }
   });
-
-  modalAjustes.addEventListener('click', iniciarMusica);
-};
-
-/* EVENTO PARA EL CAMBIO A BLANCO Y NEGRO */
-document.getElementById("blanco-negro").addEventListener("click", () => {
-    document.body.style.filter = "grayscale(100%)";
-    document.body.style.backgroundImage = "url('./assets/fondo-blanco-negro.png')";
 });
 
-/* EVENTO PARA EL CAMBIO A COLOR */
-document.getElementById("color").addEventListener("click", () => {
-    document.body.style.filter = "none";
-    document.body.style.backgroundImage = "url('./assets/fondo.png')";
-});
+/* GESTIÓN DEL SALDO */
+var saldo = 0;
+var fichas = 0;
 
-// Variables para el saldo y fichas
-let saldo = 0;
-let fichas = 0;
-
-// Actualizar visualización del saldo y fichas
-function actualizarSaldo() {
-  document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo;
-  document.getElementById("fichas").textContent = "FICHAS: " + fichas;
+// Función para mostrar un modal
+function mostrarModal(modal) {
+    modal.style.display = "flex";
 }
 
-// Evento para "Meter dinero"
-document.getElementById("meter-dinero").addEventListener("click", function () {
-  abrirModal("Meter dinero");
-});
-
-// Evento para "Sacar dinero"
-document.getElementById("sacar-dinero").addEventListener("click", function () {
-  abrirModal("Sacar dinero");
-});
-
-// Función para abrir el modal de dinero
-function abrirModal(tipo) {
-  document.getElementById("modal-dinero").style.display = "flex";
-  document.getElementById("modal-dinero").setAttribute("data-tipo", tipo);
+// Función para cerrar un modal
+function cerrarModal(modal) {
+    modal.style.display = "none";
 }
 
-// Función para aceptar el cambio de dinero en el modal
+// Mostrar modales
+document.getElementById("boton-ingresar-dinero").addEventListener("click", function () {
+    mostrarModal(document.getElementById("modal-meter-dinero"));
+});
+
+document.getElementById("boton-retirar-dinero").addEventListener("click", function () {
+    mostrarModal(document.getElementById("modal-retirar-dinero"));
+});
+
+document.getElementById("boton-convertir-a-fichas").addEventListener("click", function () {
+    mostrarModal(document.getElementById("modal-conversion-fichas"));
+});
+
+document.getElementById("boton-convertir-a-dinero").addEventListener("click", function () {
+    mostrarModal(document.getElementById("modal-conversion-saldo"));
+});
+
+// Cerrar los modales
+document.getElementById("boton-cerrar-meter-dinero-modal").addEventListener("click", function () {
+    cerrarModal(document.getElementById("modal-meter-dinero"));
+});
+
+document.getElementById("boton-cerrar-retirar-dinero-modal").addEventListener("click", function () {
+    cerrarModal(document.getElementById("modal-retirar-dinero"));
+});
+
+document.getElementById("boton-cerrar-conversion-fichas").addEventListener("click", function () {
+    cerrarModal(document.getElementById("modal-conversion-fichas"));
+});
+
+document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click", function () {
+    cerrarModal(document.getElementById("modal-conversion-saldo"));
+});
+
+// Ingresar dinero
 document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
-  const tipoTransaccion = document.getElementById("modal-dinero").getAttribute("data-tipo");
-  const cantidad = parseFloat(document.getElementById("introducirDinero").value);
-
-  if (!isNaN(cantidad) && cantidad > 0) {
-    if (tipoTransaccion === "Meter dinero") {
-      saldo += cantidad;
-    } else if (tipoTransaccion === "Sacar dinero") {
-      if (saldo >= cantidad) {
-        saldo -= cantidad;
-      } else {
-        alert("No tienes suficiente saldo.");
-        return;
-      }
+    const cantidadDinero = parseFloat(document.getElementById("input-introducir-dinero").value);
+    if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
+        document.getElementById("comprobacion-meter-dinero").textContent = "Por favor, ingresa una cantidad válida.";
+        document.getElementById("comprobacion-meter-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-meter-dinero").textContent = "";
+        }, 1500);
+    } else {
+        saldo += cantidadDinero;
+        actualizarSaldo();
+        cerrarModal(document.getElementById("modal-meter-dinero"));
     }
-    actualizarSaldo();
-    cerrarModal();
-  } else {
-    alert("Por favor, ingresa una cantidad válida.");
-  }
 });
 
-// Función para cerrar el modal de dinero
-document.getElementById("boton-cerrar-modal").addEventListener("click", cerrarModal);
-function cerrarModal() {
-  document.getElementById("modal-dinero").style.display = "none";
-  document.getElementById("introducirDinero").value = ''; // Limpiar el campo de entrada
-}
-
-// Función para abrir el modal de conversión a fichas
-function abrirModalConversionFichas() {
-  document.getElementById("modal-conversion-fichas").style.display = "flex";
-}
-
-// Función para abrir el modal de conversión a saldo
-function abrirModalConversionSaldo() {
-  document.getElementById("modal-conversion-saldo").style.display = "flex";
-}
-
-// Evento para "Convertir a fichas"
-document.getElementById("convertirFichas").addEventListener("click", function () {
-  abrirModalConversionFichas();
+// Retirar dinero
+document.getElementById("boton-retirar-dinero-modal").addEventListener("click", function () {
+    const cantidadDinero = parseFloat(document.getElementById("input-retirar-dinero").value);
+    if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
+        document.getElementById("comprobacion-retirar-dinero").textContent = "Por favor, ingresa una cantidad válida.";
+        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-retirar-dinero").textContent = "";
+        }, 1500);
+    } else if (cantidadDinero > saldo) {
+        document.getElementById("comprobacion-retirar-dinero").textContent = "No tienes suficiente saldo.";
+        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-retirar-dinero").textContent = "";
+        }, 1500);
+    } else {
+        saldo -= cantidadDinero;
+        actualizarSaldo();
+        cerrarModal(document.getElementById("modal-retirar-dinero"));
+    }
 });
 
-// Evento para "Convertir a dinero"
-document.getElementById("convertirDinero").addEventListener("click", function () {
-  abrirModalConversionSaldo();
-});
-
-// Evento para aceptar la conversión a fichas en el modal
+// Convertir saldo a fichas
 document.getElementById("boton-convertir-fichas").addEventListener("click", function () {
-  const cantidad = parseFloat(document.getElementById("cantidadConversionFichas").value);
-
-  if (!isNaN(cantidad) && cantidad > 0) {
-    if (saldo >= cantidad) {
-      const fichasObtenidas = cantidad * 100; // 1€ = 100 fichas
-      saldo -= cantidad;
-      fichas += fichasObtenidas;
-      actualizarSaldo();
-      alert(`Has convertido ${cantidad}€ en ${fichasObtenidas} fichas.`);
+    const cantidadEuros = parseFloat(document.getElementById("input-cantidad-conversion-fichas").value);
+    
+    if (cantidadEuros <= 0 || isNaN(cantidadEuros)) {
+        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Por favor, ingresa una cantidad válida.";
+        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
+        }, 1500);
+    } else if (cantidadEuros > saldo) {
+        document.getElementById("comprobacion-convertir-a-fichas").textContent = "No tienes suficiente saldo.";
+        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
+        }, 1500);
     } else {
-      alert("No tienes suficiente dinero para convertir.");
+        const cantidadFichas = cantidadEuros * 100;
+        saldo -= cantidadEuros;
+        fichas += cantidadFichas;
+        actualizarSaldo();
+        cerrarModal(document.getElementById("modal-conversion-fichas"));
     }
-    cerrarModalConversionFichas();
-  } else {
-    alert("Por favor, ingresa una cantidad válida.");
-  }
 });
 
-// Evento para aceptar la conversión a saldo en el modal
+// Convertir fichas a saldo
 document.getElementById("boton-convertir-saldo").addEventListener("click", function () {
-  const cantidadFichas = parseInt(document.getElementById("cantidadConversionSaldo").value);
-
-  if (!isNaN(cantidadFichas) && cantidadFichas > 0) {
-    if (fichas >= cantidadFichas) {
-      const eurosObtenidos = cantidadFichas / 50; // 50 fichas = 1€
-      fichas -= cantidadFichas;
-      saldo += eurosObtenidos;
-      actualizarSaldo();
-      alert(`Has convertido ${cantidadFichas} fichas en ${eurosObtenidos.toFixed(2)}€.`);
+    const cantidadFichas = parseInt(document.getElementById("input-cantidad-conversion-saldo").value);
+    
+    if (cantidadFichas <= 0 || isNaN(cantidadFichas)) {
+        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Por favor, ingresa una cantidad válida.";
+        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
+        }, 1500);
+    } else if (cantidadFichas > fichas) {
+        document.getElementById("comprobacion-convertir-a-dinero").textContent = "No tienes suficientes fichas.";
+        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
+        }, 1500);
     } else {
-      alert("No tienes suficientes fichas para convertir.");
+        const cantidadEuros = cantidadFichas / 100;
+        fichas -= cantidadFichas;
+        saldo += cantidadEuros;
+        actualizarSaldo();
+        cerrarModal(document.getElementById("modal-conversion-saldo"));
     }
-    cerrarModalConversionSaldo();
-  } else {
-    alert("Por favor, ingresa una cantidad válida.");
-  }
 });
 
-// Función para cerrar el modal de conversión a fichas
-document.getElementById("boton-cerrar-conversion-fichas").addEventListener("click", cerrarModalConversionFichas);
-function cerrarModalConversionFichas() {
-  document.getElementById("modal-conversion-fichas").style.display = "none";
-  document.getElementById("cantidadConversionFichas").value = ''; // Limpiar el campo de entrada
+// Actualizar el saldo y las fichas
+function actualizarSaldo() {
+    document.getElementById("dinero-actual").textContent = "DINERO: " + saldo + "€";
+    document.getElementById("fichas-actuales").textContent = "FICHAS: " + fichas + "🎫";
 }
 
-// Función para cerrar el modal de conversión a saldo
-document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click", cerrarModalConversionSaldo);
-function cerrarModalConversionSaldo() {
-  document.getElementById("modal-conversion-saldo").style.display = "none";
-  document.getElementById("cantidadConversionSaldo").value = ''; // Limpiar el campo de entrada
-}
 
-/* TRAGAPERRAS FUNCIONALIDAD */
 
-/* SIMBOLOS TRAGAPERRAS */
-const simbolos = [
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/cavernicola.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/fuego.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/pollo.png",
-  "./assets/tragaperras/mamut.png",
-  "./assets/tragaperras/mamut.png",
-  "./assets/tragaperras/grupoCavernicolas.png",
-];
 
-/* PREMIOS TRAGAPERRAS */
-const premios = {
-  "./assets/tragaperras/cavernicola.png": 100,
-  "./assets/tragaperras/fuego.png": 200,
-  "./assets/tragaperras/pollo.png": 300,
-  "./assets/tragaperras/mamut.png": 500,
-  "./assets/tragaperras/grupoCavernicolas.png": 1000,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Funcionalidad tragaperras
+var cavernicola = "./assets/tragaperras/cavernicola.png";
+var fuego = "./assets/tragaperras/fuego.png";
+var pollo = "./assets/tragaperras/pollo.png";
+var mamut = "./assets/tragaperras/mamut.png";
+var grupoCavernicolas = "./assets/tragaperras/grupoCavernicolas.png";
+
+var premios = {
+  cavernicola: 100,
+  fuego: 200,
+  pollo: 300,
+  mamut: 500,
+  grupoCavernicolas: 1000
 };
 
-/* SIMBOLOS CARRILES */
-var simboloCarril1 = null;
-var simboloCarril2 = null;
-var simboloCarril3 = null;
+var simbolos = [cavernicola, fuego, pollo, mamut, grupoCavernicolas];
 
-/* SONIDO DE PALANCA */
-function sonidoPalanca() {
-  const sonidoPalanca = document.getElementById("sonidoPalanca");
-  const controlVolumenPalanca = document.getElementById("control-volumen-palanca");
-  sonidoPalanca.volume = parseFloat(controlVolumenPalanca.value);
-  sonidoPalanca.play();
-}
-
-/* COMPROBACION DE FICHAS EN LAS TIRADAS */
-function puedeTirar() {
-  if (fichas >= 25) {
+// Evento para el clic en la palanca
+document.getElementById("palanca").addEventListener("click", () => {
+  if (fichas >= 25 && !estaGirando()) { 
+    cambiarPalanca();
+    girar();
     fichas -= 25;
     actualizarSaldo();
-    return true;
-  } else {
-    if(estaEnIngles()){
-      document.getElementById("mensajePremio").textContent = "NO MONEY";
-    setTimeout(() => {
-      document.getElementById("mensajePremio").textContent = "";
-    }, 1000);
-    } else{
-      document.getElementById("mensajePremio").textContent = "FICHAS INSUFICIENTE";
-    setTimeout(() => {
-      document.getElementById("mensajePremio").textContent = "";
-    }, 1000);
+  } else if (fichas < 25) {
+    mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
+  }
+});
+
+// Evento para el clic en la tecla espacio
+document.addEventListener("keydown", (event) => {
+  if (event.code === "Space") {
+    event.preventDefault(); // Prevenir que otras acciones por defecto se disparen (como scroll, etc.)
+
+    if (fichas >= 25 && !estaGirando()) {
+      cambiarPalanca();
+      girar();
+      fichas -= 25;  
+      actualizarSaldo();
+    } else if (fichas < 25) {
+      mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
     }
-    return false;
-  }
-}
-
-// Agregar evento para la palanca y para la tecla "espacio"
-document.addEventListener("keydown", function (event) {
-  if (event.code === "Space" && !enGiro && puedeTirar()) {
-    sonidoPalanca();
-    cambiarPalanca();
-    iniciarGiro();
   }
 });
 
-document.getElementById("palanca").addEventListener("click", function () {
-  if (!enGiro && puedeTirar()) {
-    sonidoPalanca();
-    cambiarPalanca();
-    iniciarGiro();
-  }
-});
-
-// Cambiar la imagen de la palanca
-function cambiarPalanca() {
-  const palanca = document.getElementById("palanca");
-  palanca.src = "./assets/tragaperras/palanca_abajo.png";
-
+// Función para cambiar la imagen de la palanca
+function cambiarPalanca(){
+  document.getElementById("palanca").src = "./assets/tragaperras/palanca_abajo.png";
   setTimeout(() => {
-    palanca.src = "./assets/tragaperras/palanca_arriba.png";
+    document.getElementById("palanca").src = "./assets/tragaperras/palanca_arriba.png";
   }, 200);
 }
 
-// Estado para verificar si la máquina está girando
-let enGiro = false;
-
-// Iniciar los giros
-function iniciarGiro() {
-  if (enGiro) return;
-
-  enGiro = true;
-  simboloCarril1 = simboloCarril2 = simboloCarril3 = null;
-
-  // Inicia los giros de cada carril con duraciones diferentes
-  giroCarriles("carril1", 2000, (simbolos) => simboloCarril1 = simbolos);
-  giroCarriles("carril2", 3000, (simbolos) => simboloCarril2 = simbolos);
-  giroCarriles("carril3", 4000, (simbolos) => {
-    simboloCarril3 = simbolos;
-    verificarPremio();
-    enGiro = false;
-  });
+// Función para obtener una imagen aleatoria de los símbolos
+function obtenerImagenAleatoria() {
+  var simboloAleatorio = Math.floor(Math.random() * simbolos.length);
+  return simbolos[simboloAleatorio];
 }
 
-// Animar el giro de cada carril
-function giroCarriles(carrilId, duracion, callback) {
-  const carril = document.getElementById(carrilId);
-  let tiempoInicio = null;
+// Función para simular el giro
+function girar() {
+  var carril1 = document.getElementById("carril1");
+  var carril2 = document.getElementById("carril2");
+  var carril3 = document.getElementById("carril3");
 
-  // Crear un array para las tres imágenes
-  let imagenes = [
-    "<img src='' class='simbolo_Imagen'>",
-    "<img src='' class='simbolo_Imagen'>",
-    "<img src='' class='simbolo_Imagen'>"
-  ];
+  // Bloquear la interacción mientras gira
+  bloquearInteraccion(true);
 
-  // Función para animar el carril
-  function animarGiro(timestamp) {
-    if (!tiempoInicio) tiempoInicio = timestamp;
-    const progreso = timestamp - tiempoInicio;
-
-    // Actualizar las imágenes con símbolos aleatorios
-    for (let i = 0; i < imagenes.length; i++) {
-      const simboloAleatorio = simbolos[Math.floor(Math.random() * simbolos.length)];
-      imagenes[i] = `<img src="${simboloAleatorio}" class="simbolo_Imagen">`;
-    }
-
-    // Reemplazar las imágenes en el carril
-    carril.innerHTML = imagenes.join(''); // Unir las imágenes en el carril
-
-    // Continuar la animación hasta que pase el tiempo
-    if (progreso < duracion) {
-      requestAnimationFrame(animarGiro);
-    } else {
-      callback(imagenes);  // Llamar al callback con las tres imágenes
-    }
-  }
-
-  requestAnimationFrame(animarGiro); // Iniciar la animación
-}
-
-// Función para sonar el premio
-function sonidoPremio() {
-  const sonidoPremio = document.getElementById("sonidoPremio");
-  const controlVolumenPremio = document.getElementById("control-volumen-premio");
-  sonidoPremio.volume = parseFloat(controlVolumenPremio.value);
-  sonidoPremio.play();
-}
-
-// Función para verificar el premio
-function verificarPremio() {
-  setTimeout(() => {
-    // Verificar si los símbolos del medio (índice 1) de los tres carriles son iguales
-    if (simboloCarril1[1] === simboloCarril2[1] && simboloCarril2[1] === simboloCarril3[1]) {
-      // Si los tres símbolos del medio son iguales
-      const premio = premios[simboloCarril1[1]] || 0;  // Obtener el premio según el símbolo del medio
-      fichas += premio;
-      actualizarSaldo();
-      sonidoPremio();
-      if(estaEnIngles()){
-        document.getElementById("mensajePremio").textContent = "WINNER";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      } else{
-        document.getElementById("mensajePremio").textContent = "PREMIO";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      }
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-    } else {
-      if(estaEnIngles()){
-        document.getElementById("mensajePremio").textContent = "CONTINUE PLAYING";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      } else{
-        document.getElementById("mensajePremio").textContent = "SIGUE TIRANDO";
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-      }
-      setTimeout(() => {
-        document.getElementById("mensajePremio").textContent = "";
-      }, 1000);
-    }
-  }, 500);
-}
-
-// Función para actualizar el saldo en la interfaz
-function actualizarSaldo() {
-  if(estaEnIngles()){
-    document.getElementById("dinero-actual").textContent = "CURRENT MONEY: " + saldo + "€";
-    document.getElementById("fichas").textContent = "CURRENT CHIPS: " + fichas + "🎫";
-  setTimeout(() => {
-    document.getElementById("mensajePremio").textContent = "";
-  }, 1000);
-  } else{
-    document.getElementById("dinero-actual").textContent = "DINERO ACTUAL: " + saldo + "€";
-    document.getElementById("fichas").textContent = "FICHAS ACTUALES: " + fichas + "🎫";
-  setTimeout(() => {
-    document.getElementById("mensajePremio").textContent = "";
-  }, 1000);
-  }
-}
-
-/* TRADUCIR A INGLES */
-i18next.init({
-  lng: 'es',  // Idioma por defecto
-  resources: {
-    es: {
-      translation: {
-        titulo: "Tragaperras Prehistóricas",
-        meterDinero: "Meter dinero",
-        sacarDinero: "Sacar dinero",
-        convertirDinero: "Convertir a dinero",
-        convertirFichas: "Convertir a fichas",
-        dineroActual: "DINERO ACTUAL: 0€",
-        premios: "Premios",
-        premio1: "1000 puntos",
-        premio2: "500 puntos",
-        premio3: "300 puntos",
-        premio4: "200 puntos",
-        premio5: "100 puntos",
-        fichas: "FICHAS: ",
-        mensajePremio: "",
-        idioma: "Idioma",
-        volumenPrincipal: "Volumen principal",
-        volumenPalanca: "Volumen de la palanca",
-        volumenPremio: "Volumen del premio",
-        blancoYNegro: "Blanco y negro",
-        cerrar: "Cerrar",
-        introducirDineroLabel: "Introduce dinero",
-        aceptar: "Aceptar",
-        cerrarModal: "Cerrar",
-      }
-    },
-    en: {
-      translation: {
-        titulo: "Prehistoric Slots",
-        meterDinero: "Deposit money",
-        sacarDinero: "Withdraw money",
-        convertirFichas: "Convert to chips",
-        convertirDinero: "Convert to money",
-        dineroActual: "CURRENT MONEY: 0€",
-        premios: "Prizes",
-        premio1: "1000 points",
-        premio2: "500 points",
-        premio3: "300 points",
-        premio4: "200 points",
-        premio5: "100 points",
-        fichas: "CHIPS: ",
-        mensajePremio: "",
-        idioma: "Language",
-        volumenPrincipal: "Main volume",
-        volumenPalanca: "Lever volume",
-        volumenPremio: "Prize volume",
-        blancoYNegro: "Black and white",
-        cerrar: "Close",
-        introducirDineroLabel: "Enter money",
-        aceptar: "Accept",
-        cerrarModal: "Close",
-      }
-    }
-  }
-},
-function(err, t) {
-  // Actualizamos los elementos con las traducciones
-  document.querySelectorAll('[data-i18n]').forEach((el) => {
-    const key = el.getAttribute('data-i18n');
-    el.innerHTML = t(key);
-    if (el.tagName.toLowerCase() === 'input') {
-      el.value = t(key);
-    }
-  });
-});
-
-// Función que devuelve true si está en inglés, false si está en español
-function estaEnIngles() {
-  return i18next.language === 'en';
-}
-
-function traducir() {
-  const nuevoIdioma = i18next.language === 'es' ? 'en' : 'es';
-  
-  i18next.changeLanguage(nuevoIdioma, function(err, t) {
-    // Actualizamos los elementos con las traducciones después de cambiar el idioma
-    document.querySelectorAll('[data-i18n]').forEach((el) => {
-      const key = el.getAttribute('data-i18n');
-      el.innerHTML = t(key);
-      if (el.tagName.toLowerCase() === 'input') {
-        el.value = t(key);
-      }
+  function actualizarCarril(carril) {
+    const imagenes = carril.querySelectorAll('img');
+    imagenes.forEach(img => {
+      img.src = obtenerImagenAleatoria();
     });
+  }
 
-    // Cambiar el icono dependiendo del idioma
-    if (estaEnIngles()) {
-      document.getElementById('icono-idioma').src = './assets/ajustes/ingles.png';
-    } else {
-      document.getElementById('icono-idioma').src = './assets/ajustes/español.png';
-    }
-  });
+  function girarCarril(carril, duracion) {
+    var intervalo = setInterval(() => {
+      actualizarCarril(carril);
+    }, 50); // Cambiar imagen cada 50ms
+
+    // Detener el giro
+    setTimeout(() => {
+      clearInterval(intervalo);
+      actualizarCarril(carril);
+    }, duracion); // Detener después de la duración específica
+  }
+
+  girarCarril(carril1, 2000);
+  girarCarril(carril2, 3000);
+  girarCarril(carril3, 4000);
+
+  // Esperar a que termine el giro para comprobar el premio
+  setTimeout(() => {
+    comprobarPremio();
+    bloquearInteraccion(false);
+  }, 4500); // Después de 4 segundos, que es el tiempo del giro más largo
 }
 
-// Función que devuelve true si está en inglés, false si está en español
-function estaEnIngles() {
-  return i18next.language === 'en';
+// Función para comprobar el premio
+function comprobarPremio() {
+  // Obtener las imágenes de cada carril
+  var carril1 = document.getElementById("carril1");
+  var carril2 = document.getElementById("carril2");
+  var carril3 = document.getElementById("carril3");
+
+  var imagenCarril1 = Array.from(carril1.querySelectorAll('img')).map(img => img.src);
+  var imagenCarril2 = Array.from(carril2.querySelectorAll('img')).map(img => img.src);
+  var imagenCarril3 = Array.from(carril3.querySelectorAll('img')).map(img => img.src);
+
+  // Comprobación de todas las imágenes iguales (premio x5)
+  if (imagenCarril1.every(src => src === imagenCarril1[0]) &&
+      imagenCarril2.every(src => src === imagenCarril2[0]) &&
+      imagenCarril3.every(src => src === imagenCarril3[0])) {
+    var simbolo = imagenCarril1[0].split("/").pop().split(".")[0];
+    var premio = premios[simbolo] * 5;
+
+    fichas += premio;
+    actualizarSaldo();
+
+    // Aplicar efecto a todas las imágenes
+    const imagenesPremiadas = [
+      ...carril1.querySelectorAll('img'),
+      ...carril2.querySelectorAll('img'),
+      ...carril3.querySelectorAll('img')
+    ];
+    imagenesPremiadas.forEach(img => img.classList.add("recuadro-premio"));
+    setTimeout(() => {
+      imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
+    }, 3000);
+
+    mostrarMensajePremio(`PREMIO JACKPOT ¡Has ganado ${premio}€ y ${premio} fichas! Premio por todas las imágenes iguales.`);
+    return;
+  }
+
+  // Comprobación de premio medio del carril 1 y 3, y superior/inferior del carril del medio (premio x2)
+  if (imagenCarril2[0] === imagenCarril2[2] &&
+      imagenCarril1[1] === imagenCarril2[0] &&
+      imagenCarril3[1] === imagenCarril2[0]) {
+    var simbolo = imagenCarril2[0].split("/").pop().split(".")[0];
+    var premio = premios[simbolo] * 2;
+
+    fichas += premio;
+    actualizarSaldo();
+
+    // Aplicar efecto de parpadeo a las imágenes premiadas
+    const imagenesPremiadas = [
+      carril2.children[0],
+      carril2.children[2],
+      carril1.children[1],
+      carril3.children[1],
+    ];
+    imagenesPremiadas.forEach(img => img.classList.add("recuadro-premio"));
+    setTimeout(() => {
+      imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
+    }, 3000);
+
+    mostrarMensajePremio(`¡Has ganado ${premio} fichas!`);
+    return;
+  }
+
+  // Comprobación de imágenes específicas en posiciones de los carriles (premio x3)
+  if (imagenCarril1[1] === imagenCarril2[0] &&
+      imagenCarril1[1] === imagenCarril2[2] &&
+      imagenCarril3[1] === imagenCarril2[0] &&
+      imagenCarril3[1] === imagenCarril2[2]) {
+    var simbolo = imagenCarril2[0].split("/").pop().split(".")[0];
+    var premio = premios[simbolo] * 3;
+
+    fichas += premio;
+    actualizarSaldo();
+
+    // Aplicar efecto de parpadeo a las imágenes premiadas
+    const imagenesPremiadas = [
+      carril1.children[1],
+      carril3.children[1],
+      carril2.children[0],
+      carril2.children[2],
+    ];
+    imagenesPremiadas.forEach(img => img.classList.add("recuadro-premio"));
+    setTimeout(() => {
+      imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
+    }, 3000);
+
+    mostrarMensajePremio(`PREMIO ESQUINAS ¡Has ganado ${premio} fichas! Premio por coincidencias en posiciones específicas.`);
+    return;
+  }
+
+  // Comprobación de si las imágenes del centro son iguales (premio normal)
+  var imagenCentroCarril1 = carril1.children[1].src;
+  var imagenCentroCarril2 = carril2.children[1].src;
+  var imagenCentroCarril3 = carril3.children[1].src;
+
+  if (imagenCentroCarril1 === imagenCentroCarril2 && imagenCentroCarril1 === imagenCentroCarril3) {
+    var simbolo = imagenCentroCarril1.split("/").pop().split(".")[0];
+    var premio = premios[simbolo];
+
+    fichas += premio;
+    actualizarSaldo();
+
+    // Aplicar efecto de parpadeo a las imágenes premiadas
+    const imagenesPremiadas = [
+      carril1.children[1],
+      carril2.children[1],
+      carril3.children[1],
+    ];
+    imagenesPremiadas.forEach(img => img.classList.add("recuadro-premio"));
+    setTimeout(() => {
+      imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
+    }, 3000);
+
+    mostrarMensajePremio(`¡PREMIO NORMAL Has ganado ${premio} fichas!`);
+    return;
+  }
+
+  mostrarMensajePremio("¡Intenta de nuevo!");
+}
+
+// Función para mostrar el mensaje de premio
+function mostrarMensajePremio(mensaje) {
+  var mensajeElemento = document.getElementById("mensajePremio");
+  mensajeElemento.textContent = mensaje;
+
+  setTimeout(() => {
+    mensajeElemento.textContent = "";
+  }, 3000); 
+}
+
+// Función para bloquear o desbloquear la interacción (palanca o tecla espacio)
+function bloquearInteraccion(bloquear) {
+  const palanca = document.getElementById("palanca");
+
+  if (bloquear) {
+    palanca.disabled = true;
+  } else {
+    palanca.disabled = false;
+  }
+}
+
+function estaGirando() {
+  const palanca = document.getElementById("palanca");
+  return palanca.disabled;
 }

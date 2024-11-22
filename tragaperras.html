@@ -2,14 +2,12 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tragaperras Peleolitica</title>
-    <!-- Link css -->
-    <link rel="stylesheet" href="./tragaperras.css" />
-    <!-- Link tipo de letra -->
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-    <!-- I18next -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tragaperras</title>
+    <!-- Fuentes de Google y enlaces a CSS/JS -->
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./tragaperras.css">
     <script src="https://unpkg.com/i18next@latest/i18next.min.js"></script>
 </head>
 
@@ -17,175 +15,155 @@
     <!-- Header -->
     <div class="contenido-header">
         <div class="header">
-            <!-- Logo y título -->
+            <!-- Logo y Título -->
             <div class="logo-titulo">
                 <a href="./../Prehistoric_Jackpot/index.html">
-                    <img src="./assets/logo.webp" alt="Logo del Casino" />
+                    <img src="./assets/logo.webp" alt="Logo">
                 </a>
-                <h1 data-i18n="titulo">PREHISTORIC SLOT</h1>
+                <h1>PREHISTORIC SLOT</h1>
             </div>
-            <div class="barraSeparadora"></div>
 
-            <!-- Gestión de dinero -->
-            <div class="gestion-dinero">
-                <div class="botones-dinero">
-                    <input type="submit" value="Meter dinero" id="meter-dinero" data-i18n="meterDinero" />
-                    <input type="submit" value="Sacar dinero" id="sacar-dinero" data-i18n="sacarDinero" />
-                    <input type="submit" value="Convertir a fichas" id="convertirFichas" data-i18n="convertirFichas" />
-                    <input type="submit" value="Convertir a dinero" id="convertirDinero" data-i18n="convertirDinero" />
-                    <p id="dinero-actual" class="dinero-actual" data-i18n="dineroActual">DINERO ACTUAL: 0€</p>
+            <div class="barra-separar"></div>
+
+            <!-- Gestión de saldo -->
+            <div class="gestion-saldo">
+                <div class="botones-saldo">
+                    <!-- Botones para gestionar saldo -->
+                    <input type="button" name="boton-ingresar-dinero" id="boton-ingresar-dinero" value="Meter dinero">
+                    <input type="button" name="boton-retirar-dinero" id="boton-retirar-dinero" value="Sacar dinero">
+                    <input type="button" name="boton-convertir-a-fichas" id="boton-convertir-a-fichas" value="Convertir a fichas">
+                    <input type="button" name="boton-convertir-a-dinero" id="boton-convertir-a-dinero" value="Convertir a dinero">
+                </div>
+
+                <div class="mensajes-saldo">
+                    <!-- Mensajes de saldo actual -->
+                    <p id="dinero-actual" class="dinero-actual">DINERO: 0€</p>
+                    <p id="fichas-actuales" class="fichas-actuales">FICHAS: 0🎫</p>
                 </div>
             </div>
 
-            <div class="barraSeparadora"></div>
+            <div class="barra-separar"></div>
 
-            <!-- Ajustes -->
-            <div class="ajustes">
-                <!-- Contenedor reloj -->
+            <!-- Reloj y Ajustes -->
+            <div class="reloj-ajustes">
                 <div class="reloj-container">
                     <div id="reloj"></div>
                 </div>
-                <!-- Icono ajustes -->
+                <!-- Icono de ajustes -->
                 <span class="icono-ajustes" onclick="modalAjustes()">⚙</span>
             </div>
         </div>
     </div>
 
+    <!-- Contenedor Principal -->
     <div class="contenedor">
         <!-- Contenedor de premios -->
         <div class="premios" id="lista-premios">
-            <h2 data-i18n="premios">Premios</h2>
-            <div class="premio">
-                <img src="./assets/tragaperras/grupoCavernicolas.png" alt="Grupo de Cavernícolas" />
-                <span data-i18n="premio1">1000 puntos</span>
-            </div>
-            <div class="premio">
-                <img src="./assets/tragaperras/mamut.png" alt="Mamut" />
-                <span data-i18n="premio2">500 puntos</span>
-            </div>
-            <div class="premio">
-                <img src="./assets/tragaperras/pollo.png" alt="Pollo" />
-                <span data-i18n="premio3">300 puntos</span>
-            </div>
-            <div class="premio">
-                <img src="./assets/tragaperras/fuego.png" alt="Fuego" />
-                <span data-i18n="premio4">200 puntos</span>
-            </div>
-            <div class="premio">
-                <img src="./assets/tragaperras/cavernicola.png" alt="Cavernícola" />
-                <span data-i18n="premio5">100 puntos</span>
-            </div>
+            <img src="./assets/premios/cartel-premios-español.png" alt="Premios">
         </div>
 
         <!-- Contenedor de la tragaperras -->
         <div class="tragaperras">
-            <!-- Fichas actuales -->
-            <p id="fichas" data-i18n="fichas">FICHAS: </p>
-            <!-- Contenedor para la pantalla y la palanca -->
+            <!-- Pantalla y palanca -->
             <div class="pantalla-palanca">
-                <!-- Pantalla de la tragaperras -->
                 <div class="pantalla">
                     <div class="carril" id="carril1">
-                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 1" />
-                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 1" />
-                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 1" />
+                        <img src="./assets/tragaperras/cavernicola.png" />
+                        <img src="./assets/tragaperras/fuego.png" />
+                        <img src="./assets/tragaperras/pollo.png" />
                     </div>
                     <div class="carril" id="carril2">
-                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 2" />
-                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 2" />
-                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 2" />
+                        <img src="./assets/tragaperras/cavernicola.png" />
+                        <img src="./assets/tragaperras/fuego.png" />
+                        <img src="./assets/tragaperras/pollo.png" />
                     </div>
                     <div class="carril" id="carril3">
-                        <img src="./assets/tragaperras/pollo.png" alt="Icono Carril 3" />
-                        <img src="./assets/tragaperras/cavernicola.png" alt="Icono Carril 3" />
-                        <img src="./assets/tragaperras/fuego.png" alt="Icono Carril 3" />
+                        <img src="./assets/tragaperras/cavernicola.png" />
+                        <img src="./assets/tragaperras/fuego.png" />
+                        <img src="./assets/tragaperras/pollo.png" />
                     </div>
                 </div>
                 <!-- Palanca -->
                 <div class="palanca">
-                    <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="palanca" />
+                    <img id="palanca" src="./assets/tragaperras/palanca_arriba.png" alt="Palanca">
                 </div>
             </div>
 
-            <!-- Mensaje variable del premio -->
-            <p id="mensajePremio" data-i18n="mensajePremio">Hola</p>
+            <!-- Mensaje de premio -->
+            <p id="mensajePremio" class="mensajePremio" data-i18n="mensajePremio"></p>
         </div>
-
     </div>
 
-    <!-- Modal para ajustes -->
+    <!-- Filtro Blanco y Negro -->
+    <div id="blancoYnegro" class="filtro-blanco-negro"></div>
+
+    <!-- Modal de ajustes -->
     <div class="modal-ajustes" id="modal-ajustes">
         <div class="contenido-modal-ajustes">
-            <!-- Idiomas -->
+            <!-- Idioma -->
             <p data-i18n="idioma">Idioma</p>
             <div class="contenedor-imagenes">
-                <img id="icono-idioma" src="./assets/ajustes/español.png" onclick="traducir()" alt="Idioma" />
+                <img id="icono-idioma" src="./assets/ajustes/español.png" />
             </div>
-            <!-- Volumen principal -->
-            <p data-i18n="volumenPrincipal">Volumen principal</p>
-            <audio id="musicaFondo" src="./audios/audio-principal.mp3" type="audio/mp3" loop></audio>
-            <input type="range" id="control-volumen" min="0" max="1" step="0.1" value="0" />
-            
-            <!-- Volumen palanca -->
-            <p data-i18n="volumenPalanca">Volumen de la palanca</p>
-            <audio id="sonidoPalanca" src="./audios/sonido-palanca.mp3" type="audio/mp3"></audio>
-            <input type="range" id="control-volumen-palanca" min="0" max="1" step="0.1" value="0.5" />
-            
-            <!-- Volumen premios -->
-            <p data-i18n="volumenPremio">Volumen del premio</p>
-            <audio id="sonidoPremio" src="./audios/sonido-premio.mp3" type="audio/mp3"></audio>
-            <input type="range" id="control-volumen-premio" min="0" max="1" step="0.1" value="0.5" />
-            
+
+            <!-- Volumen -->
+            <p>Volumen principal</p>
+            <div class="musica">
+                <img src="./assets/ajustes/volumen.png">
+            </div>
+
             <!-- Modo blanco y negro -->
-            <p data-i18n="blancoYNegro">Blanco y negro</p>
-            <div class="contenedor-imagenes">
-                <img src="./assets/ajustes/blanco-negro.png" id="blanco-negro" alt="Blanco y negro" />
-                <img src="./assets/ajustes/color.png" id="color" alt="Color" />
-            </div>
-
-            <!-- Boton cerrar -->
-            <input type="submit" value="Cerrar" name="boton-cerrar" id="boton-cerrar" data-i18n="cerrar">
+            <p>Modo de color</p>
+            <label for="switch" class="switch">
+                <input id="switch" type="checkbox" checked />
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 
-    <!-- Modal para el dinero -->
-    <div class="modal-dinero" id="modal-dinero">
-        <div class="contenido-modal-dinero">
-            <!-- Campo para meter dinero -->
-            <label for="introducirDinero" data-i18n="introducirDineroLabel">Introduce dinero</label>
-            <input type="number" id="introducirDinero" name="introducirDinero" />
-            <!-- Botón de aceptar -->
-            <input type="button" id="boton-meter-dinero-modal" value="Aceptar" data-i18n="aceptar" />
-            <!-- Botón de cerrar -->
-            <input type="button" id="boton-cerrar-modal" value="Cerrar" data-i18n="cerrarModal" />
+    <!-- Modal para meter dinero -->
+    <div class="modal-meter-dinero" id="modal-meter-dinero">
+        <div class="contenido-modal">
+            <p id="parrafo-introducir-dinero">Introduce dinero que quieres ingresar</p>
+            <div id="comprobacion-meter-dinero" class="comprobacion-meter-dinero"></div>
+            <input type="number" id="input-introducir-dinero" name="input-introducir-dinero">
+            <input type="button" id="boton-meter-dinero-modal" value="Aceptar">
+            <input type="button" id="boton-cerrar-meter-dinero-modal" value="Cerrar">
         </div>
     </div>
 
-    <!-- Modal para la conversión a fichas -->
+    <!-- Modal para retirar dinero -->
+    <div class="modal-retirar-dinero" id="modal-retirar-dinero">
+        <div class="contenido-modal">
+            <p id="parrafo-retirar-dinero">Introduce dinero que quieres retirar</p>
+            <div id="comprobacion-retirar-dinero" class="comprobacion-retirar-dinero"></div>
+            <input type="number" id="input-retirar-dinero" name="input-retirar-dinero">
+            <input type="button" id="boton-retirar-dinero-modal" value="Aceptar">
+            <input type="button" id="boton-cerrar-retirar-dinero-modal" value="Cerrar">
+        </div>
+    </div>
+
+    <!-- Modal para conversión a fichas -->
     <div class="modal-conversion-fichas" id="modal-conversion-fichas">
-        <div class="contenido-modal-conversion-fichas">
-            <h3>Convertir a fichas</h3>
-            <label for="cantidadConversionFichas">Cantidad en €:</label>
-            <input type="number" id="cantidadConversionFichas" name="cantidadConversionFichas" />
-            <input type="button" id="boton-convertir-fichas" value="Aceptar" />
-            <input type="button" id="boton-cerrar-conversion-fichas" value="Cerrar" />
+        <div class="contenido-modal">
+            <p>Convertir dinero a fichas</p>
+            <div id="comprobacion-convertir-a-fichas" class="comprobacion-convertir-a-fichas"></div>
+            <input type="number" id="input-cantidad-conversion-fichas" name="cantidadConversionFichas">
+            <input type="button" id="boton-convertir-fichas" value="Aceptar">
+            <input type="button" id="boton-cerrar-conversion-fichas" value="Cerrar">
         </div>
     </div>
 
-
-    <!-- Modal para la conversión a saldo -->
+    <!-- Modal para conversión a saldo -->
     <div class="modal-conversion-saldo" id="modal-conversion-saldo">
-        <div class="contenido-modal-conversion-saldo">
-            <h3>Convertir a saldo</h3>
-            <label for="cantidadConversionSaldo">Cantidad de fichas:</label>
-            <input type="number" id="cantidadConversionSaldo" name="cantidadConversionSaldo" />
-            <input type="button" id="boton-convertir-saldo" value="Aceptar" />
-            <input type="button" id="boton-cerrar-conversion-saldo" value="Cerrar" />
+        <div class="contenido-modal">
+            <p>Convertir fichas en dinero</p>
+            <div id="comprobacion-convertir-a-dinero" class="comprobacion-convertir-a-dinero"></div>
+            <input type="number" id="input-cantidad-conversion-saldo" name="cantidadConversionSaldo">
+            <input type="button" id="boton-convertir-saldo" value="Aceptar">
+            <input type="button" id="boton-cerrar-conversion-saldo" value="Cerrar">
         </div>
     </div>
-
-
-    <!-- Script -->
     <script src="./tragaperras.js"></script>
 </body>
 
