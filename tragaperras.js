@@ -90,6 +90,13 @@ function iniciarMusicaAlInteraccion() {
 // Llamar a la función para habilitar las interacciones iniciales
 iniciarMusicaAlInteraccion();
 
+// Función para reproducir el sonido de la palanca
+function sonidoPalanca() {
+  const audioPalanca = new Audio("./audios/sonido-palanca.mp3");
+  audioPalanca.volume = 0.7; // Ajustar el volumen, 70% en este caso
+  audioPalanca.play().catch(err => console.error("Error al reproducir el sonido de la palanca:", err));
+}
+
 /* GESTIÓN DEL SALDO */
 var saldo = 0;
 var fichas = 0;
@@ -252,6 +259,7 @@ var simbolos = [cavernicola, fuego, pollo, mamut, grupoCavernicolas];
 // Evento para el clic en la palanca
 document.getElementById("palanca").addEventListener("click", () => {
   if (fichas >= 25 && !estaGirando()) { 
+    sonidoPalanca();
     cambiarPalanca();
     girar();
     fichas -= 25;
@@ -267,6 +275,7 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault(); // Prevenir que otras acciones por defecto se disparen (como scroll, etc.)
 
     if (fichas >= 25 && !estaGirando()) {
+      sonidoPalanca();
       cambiarPalanca();
       girar();
       fichas -= 25;  
