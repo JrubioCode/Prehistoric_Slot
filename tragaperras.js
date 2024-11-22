@@ -185,40 +185,6 @@ function actualizarSaldo() {
     document.getElementById("fichas-actuales").textContent = "FICHAS: " + fichas + "🎫";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Funcionalidad tragaperras
 var cavernicola = "./assets/tragaperras/cavernicola.png";
 var fuego = "./assets/tragaperras/fuego.png";
@@ -349,7 +315,7 @@ function comprobarPremio() {
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
 
-    mostrarMensajePremio(`PREMIO JACKPOT ¡Has ganado ${premio}€ y ${premio} fichas! Premio por todas las imágenes iguales.`);
+    mostrarMensajePremio(`PREMIO JACKPOT ¡Has ganado ${premio}€ y ${premio} fichas!`);
     return;
   }
 
@@ -402,7 +368,7 @@ function comprobarPremio() {
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
 
-    mostrarMensajePremio(`PREMIO ESQUINAS ¡Has ganado ${premio} fichas! Premio por coincidencias en posiciones específicas.`);
+    mostrarMensajePremio(`PREMIO ESQUINAS ¡Has ganado ${premio} fichas!`);
     return;
   }
 
