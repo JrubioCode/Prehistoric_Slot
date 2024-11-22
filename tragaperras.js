@@ -58,7 +58,7 @@ let musicaMuteada = false;
 // Función para reproducir música
 function reproducirMusica() {
     if (musicaFondo.paused) {
-        musicaFondo.play().catch(err => console.error("Error al reproducir la música:", err));
+        musicaFondo.play();
     }
 }
 
@@ -94,7 +94,13 @@ iniciarMusicaAlInteraccion();
 function sonidoPalanca() {
   const audioPalanca = new Audio("./audios/sonido-palanca.mp3");
   audioPalanca.volume = 0.7; // Ajustar el volumen, 70% en este caso
-  audioPalanca.play().catch(err => console.error("Error al reproducir el sonido de la palanca:", err));
+  audioPalanca.play();
+}
+
+function sonidoPremio(){
+  const audioPalanca = new Audio("./audios/sonido-premio.mp3");
+  audioPalanca.volume = 0.7; // Ajustar el volumen, 70% en este caso
+  audioPalanca.play();
 }
 
 /* GESTIÓN DEL SALDO */
@@ -372,6 +378,7 @@ function comprobarPremio() {
     }, 3000);
 
     mostrarMensajePremio(`PREMIO JACKPOT ¡Has ganado ${premio}€ y ${premio} fichas!`);
+    sonidoPremio();
     return;
   }
 
@@ -398,6 +405,7 @@ function comprobarPremio() {
     }, 3000);
 
     mostrarMensajePremio(`¡Has ganado ${premio} fichas!`);
+    sonidoPremio();
     return;
   }
 
@@ -425,6 +433,7 @@ function comprobarPremio() {
     }, 3000);
 
     mostrarMensajePremio(`PREMIO ESQUINAS ¡Has ganado ${premio} fichas!`);
+    sonidoPremio();
     return;
   }
 
@@ -452,6 +461,7 @@ function comprobarPremio() {
     }, 3000);
 
     mostrarMensajePremio(`¡PREMIO NORMAL Has ganado ${premio} fichas!`);
+    sonidoPremio();
     return;
   }
 
