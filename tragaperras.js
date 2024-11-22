@@ -493,3 +493,89 @@ function estaGirando() {
   const palanca = document.getElementById("palanca");
   return palanca.disabled;
 }
+
+// Traduccion
+// Traducción
+i18next.init({
+  lng: 'es', // Idioma inicial
+  resources: {
+      es: {
+          translation: {
+              "idioma": "Idioma",
+              "mensajePremio": "¡Enhorabuena, has ganado!",
+              "parrafo-introducir-dinero": "Introduce dinero que quieres ingresar",
+              "parrafo-retirar-dinero": "Introduce dinero que quieres retirar",
+              "dinero-actual": "DINERO: 0€",
+              "fichas-actuales": "FICHAS: 0🎫",
+              "modo-color": "Modo de color",
+              "volumen-principal": "Volumen principal"
+          }
+      },
+      en: {
+          translation: {
+              "idioma": "Language",
+              "mensajePremio": "Congratulations, you won!",
+              "parrafo-introducir-dinero": "Enter the amount of money you want to deposit",
+              "parrafo-retirar-dinero": "Enter the amount of money you want to withdraw",
+              "dinero-actual": "MONEY: €0",
+              "fichas-actuales": "TOKENS: 0🎫",
+              "modo-color": "Color mode",
+              "volumen-principal": "Main Volume"
+          }
+      }
+  }
+}, (err, t) => {
+  if (err) return console.error(err);
+  updateContent();
+});
+
+// Función para actualizar el contenido traducido
+function updateContent() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = i18next.t(key);
+  });
+}
+
+// Función para cambiar el idioma
+function traducir() {
+  // Obtener el idioma actual
+  const idiomaActual = i18next.language;
+
+  // Cambiar el idioma
+  const nuevoIdioma = idiomaActual === 'es' ? 'en' : 'es';
+  i18next.changeLanguage(nuevoIdioma, (err) => {
+      if (err) return console.error("Error al cambiar idioma:", err);
+      updateContent(); // Actualizar el contenido traducido
+
+      // Cambiar el icono del idioma
+      const iconoIdioma = document.getElementById("icono-idioma");
+      if (nuevoIdioma === 'es') {
+          iconoIdioma.src = "./assets/ajustes/español.png";
+      } else {
+          iconoIdioma.src = "./assets/ajustes/ingles.png";
+      }
+
+      // Verificar el idioma después de cambiarlo
+      comprobarIdioma();
+  });
+}
+
+// Función para comprobar el idioma actual
+function comprobarIdioma() {
+  // Verifica el idioma actual utilizando i18next
+  const idiomaActual = i18next.language;
+
+  // Muestra el idioma en consola
+  console.log("El idioma actual es:", idiomaActual);
+  
+  // Actualiza la imagen del cartel de premios dependiendo del idioma
+  if (idiomaActual === "es") {
+    document.getElementById("cartel-premios").src = "./assets/premios/cartel-premios-español.png";
+  } else {
+    document.getElementById("cartel-premios").src = "./assets/premios/cartel-premios-ingles.png";
+  }
+}
+
+// Llamada inicial para comprobar el idioma cuando la página se carga
+comprobarIdioma();
