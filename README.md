@@ -137,7 +137,7 @@ Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondi
 
 ---
 
-## 🌟 Funcionalidades avanzadas
+## 🌟 Más funcionalidades
 
 1. **Modo Blanco y Negro**:
    - Cambia el filtro de color con un interruptor en el menú de ajustes.
