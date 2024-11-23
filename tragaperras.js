@@ -105,7 +105,7 @@ function sonidoPremio(){
 
 /* GESTIÓN DEL SALDO */
 var saldo = 0;
-var fichas = 12500;
+var fichas = 0;
 
 // Función para mostrar un modal
 function mostrarModal(modal) {
@@ -321,7 +321,11 @@ document.getElementById("palanca").addEventListener("click", () => {
     fichas -= 25;
     actualizarSaldo();
   } else if (fichas < 25) {
-    mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
+    if (estaEnIngles()) {
+      mostrarMensajePremio("¡Not enough tokens to play!");
+    } else {
+      mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
+    }
   }
 });
 
@@ -337,7 +341,11 @@ document.addEventListener("keydown", (event) => {
       fichas -= 25;  
       actualizarSaldo();
     } else if (fichas < 25) {
-      mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
+      if (estaEnIngles()) {
+        mostrarMensajePremio("¡Not enough tokens to play!");
+      } else {
+        mostrarMensajePremio("¡No tienes suficientes fichas para jugar!");
+      }
     }
   }
 });
@@ -430,7 +438,11 @@ function comprobarPremio() {
           imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
       }, 3000);
 
-      mostrarMensajePremio(`¡JACKPOT! PREMIO x5 Has ganado ${premioJackpot} fichas!`);
+      if (estaEnIngles()) {
+        mostrarMensajePremio(`¡JACKPOT! PRIZE x5 You win ${premioJackpot} tokens!`);
+      } else {
+        mostrarMensajePremio(`¡JACKPOT! PREMIO x5 Has ganado ${premioJackpot} fichas!`);
+      }
       sonidoPremio();
       return;  // Terminamos la ejecución si se detecta el Jackpot
   }
@@ -455,7 +467,11 @@ function comprobarPremio() {
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
 
-    mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    if (estaEnIngles()) {
+      mostrarMensajePremio(`3 IMAGES PRIZE! You win ${premio} fichas!`);
+    } else {
+      mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    }
     sonidoPremio();
     return;  // Terminamos la ejecución si se detecta el premio
   }
@@ -480,7 +496,11 @@ if (imagenCarril1[1] === imagenCarril2[1] && imagenCarril1[1] === imagenCarril3[
     imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
   }, 3000);
 
-  mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+  if (estaEnIngles()) {
+    mostrarMensajePremio(`3 IMAGES PRIZE! You win ${premio} fichas!`);
+  } else {
+    mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+  }
   sonidoPremio();
   return;  // Terminamos la ejecución si se detecta el premio
 }
@@ -523,7 +543,11 @@ if (imagenCarril1[1] === imagenCarril2[1] && imagenCarril1[1] === imagenCarril3[
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
   
-    mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    if (estaEnIngles()) {
+      mostrarMensajePremio(`3 IMAGES PRIZE! You win ${premio} fichas!`);
+    } else {
+      mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    }
     sonidoPremio();
     return;  // Terminamos la ejecución si se detecta el premio
   }
@@ -548,7 +572,11 @@ if (imagenCarril1[1] === imagenCarril2[1] && imagenCarril1[1] === imagenCarril3[
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
 
-    mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    if (estaEnIngles()) {
+      mostrarMensajePremio(`3 IMAGES PRIZE! You win ${premio} tokens!`);
+    } else {
+      mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    }
     sonidoPremio();
     return;  // Terminamos la ejecución si se detecta el premio
   }
@@ -573,13 +601,21 @@ if (imagenCarril1[1] === imagenCarril2[1] && imagenCarril1[1] === imagenCarril3[
       imagenesPremiadas.forEach(img => img.classList.remove("recuadro-premio"));
     }, 3000);
 
-    mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    if (estaEnIngles()) {
+      mostrarMensajePremio(`3 IMAGES PRIZE! You win ${premio} tokens!`);
+    } else {
+      mostrarMensajePremio(`¡PREMIO DE 3 IMÁGENES! Has ganado ${premio} fichas!`);
+    }
     sonidoPremio();
     return;  // Terminamos la ejecución si se detecta el premio
   }
 
   // Si no hay premio, mostramos el mensaje de "Intenta de nuevo"
-  mostrarMensajePremio("¡Intenta de nuevo!");
+  if (estaEnIngles()) {
+    mostrarMensajePremio("¡Try again!");
+  } else {
+    mostrarMensajePremio("¡Intenta de nuevo!");
+  }
 }
 
 // Función para mostrar el mensaje de premio
@@ -634,8 +670,6 @@ i18next.init({
         mensajePremio: "",
         idioma: "Idioma",
         volumenPrincipal: "Volumen principal",
-        volumenPalanca: "Volumen de la palanca",
-        volumenPremio: "Volumen del premio",
         blancoYNegro: "Blanco y negro",
         cerrar: "Cerrar",
         introducirDineroLabel: "Introduce dinero",
@@ -654,8 +688,6 @@ i18next.init({
         mensajePremio: "",
         idioma: "Language",
         volumenPrincipal: "Main volume",
-        volumenPalanca: "Lever volume",
-        volumenPremio: "Prize volume",
         blancoYNegro: "Black and white",
         cerrar: "Close",
         introducirDineroLabel: "Enter money",
