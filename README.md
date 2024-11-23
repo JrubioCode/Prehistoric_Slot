@@ -159,4 +159,4 @@ Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondi
 
 ---
 
-¡Gracias por jugar a **Prehistoric Slot Machine**! Si tienes sugerencias o encuentras errores, no dudes en reportarlos.
+¡Gracias por jugar a **Prehistoric Slot Machine**!
