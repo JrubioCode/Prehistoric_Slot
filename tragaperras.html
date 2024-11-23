@@ -90,7 +90,7 @@
             </div>
 
             <!-- Mensaje de premio -->
-            <p id="mensajePremio" class="mensajePremio" data-i18n="mensajePremio"></p>
+            <p id="mensajePremio" class="mensajePremio"></p>
         </div>
     </div>
 
@@ -101,9 +101,9 @@
     <div class="modal-ajustes" id="modal-ajustes">
         <div class="contenido-modal-ajustes">
             <!-- Idioma -->
-            <p data-i18n="idioma">Idioma</p>
+            <p>Idioma</p>
             <div class="contenedor-imagenes">
-                <img id="icono-idioma" src="./assets/ajustes/español.png" onclick="traducir()" />
+                <img id="icono-idioma" src="./assets/ajustes/español.png" onclick="cambiarIdioma()" />
             </div>
 
             <!-- Volumen -->
@@ -164,6 +164,7 @@
             <input type="button" id="boton-cerrar-conversion-saldo" value="Cerrar">
         </div>
     </div>
+
     <script src="./tragaperras.js"></script>
 </body>
 
