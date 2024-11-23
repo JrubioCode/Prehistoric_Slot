@@ -137,7 +137,7 @@ Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondi
 
 ---
 
-## 🌟 Funcionalidades avanzadas
+## 🌟 Más funcionalidades
 
 1. **Modo Blanco y Negro**:
    - Cambia el filtro de color con un interruptor en el menú de ajustes.
@@ -159,4 +159,4 @@ Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondi
 
 ---
 
-¡Gracias por jugar a **Prehistoric Slot Machine**! Si tienes sugerencias o encuentras errores, no dudes en reportarlos.
+¡Gracias por jugar a **Prehistoric Slot Machine**!
