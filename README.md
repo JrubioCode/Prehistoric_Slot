@@ -6,7 +6,7 @@ Bienvenido a **Prehistoric Slot Machine**, un emocionante proyecto de una máqui
 ## 🌐 Acceso a la web
 
 Puedes jugar a **Prehistoric Slot Machine** directamente desde este enlace:  
-[Prehistoric Slot Machine en Vercel](https://proyecto-casino-mu.vercel.app/)
+[Prehistoric Slot Machine en Vercel](https://prehistoric-slot.vercel.app/)
 
 ---
 
