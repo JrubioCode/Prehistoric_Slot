@@ -696,7 +696,7 @@ function actualizarSaldo() {
 
 /* TRADUCIR A INGLES */
 i18next.init({
-  lng: 'es',
+  lng: 'es',  // Idioma por defecto
   resources: {
     es: {
       translation: {
