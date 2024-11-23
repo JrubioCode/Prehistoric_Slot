@@ -25,13 +25,12 @@ infoBtn.addEventListener('click', () => {
   infoModal.style.display = 'flex';
 });
 
-// Cerrar el modal al hacer clic fuera del contenido
+// Cerrar el modal
 window.addEventListener('click', (event) => {
   if (event.target === infoModal) {
     infoModal.style.display = 'none';
   }
 });
-
 
 /* EVENTO PARA CAMBIAR EL TIPO DE COLOR */
 window.addEventListener("DOMContentLoaded", () => {
@@ -82,22 +81,18 @@ function reproducirMusica() {
 // Función para alternar entre silenciar y activar música
 function alternarSonido() {
     if (musicaMuteada) {
-        // Activar el sonido
         musicaFondo.muted = false;
         musicaMuteada = false;
-        iconoVolumen.src = './assets/ajustes/volumen.png'; // Cambiar al icono de volumen activo
+        iconoVolumen.src = './assets/ajustes/volumen.png';
     } else {
-        // Silenciar el sonido
         musicaFondo.muted = true;
         musicaMuteada = true;
-        iconoVolumen.src = './assets/ajustes/mute.png'; // Cambiar al icono de silencio
+        iconoVolumen.src = './assets/ajustes/mute.png';
     }
 }
 
-// Detectar clic en el control de volumen
 controlVolumen.addEventListener('click', alternarSonido);
 
-// Detectar interacción inicial del usuario para iniciar la música
 function iniciarMusicaAlInteraccion() {
     document.addEventListener('click', reproducirMusica, { once: true });
     document.addEventListener('scroll', reproducirMusica, { once: true });
@@ -114,9 +109,10 @@ function sonidoPalanca() {
   audioPalanca.play();
 }
 
+// Función para reproducir el sonido del premio
 function sonidoPremio(){
   const audioPalanca = new Audio("./audios/sonido-premio.mp3");
-  audioPalanca.volume = 0.7; // Ajustar el volumen, 70% en este caso
+  audioPalanca.volume = 0.7;
   audioPalanca.play();
 }
 
@@ -170,146 +166,116 @@ document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click
 
 // Ingresar dinero
 document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
-    const cantidadDinero = parseFloat(document.getElementById("input-introducir-dinero").value);
-    if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
-        if (estaEnIngles()) {
-          document.getElementById("comprobacion-meter-dinero").textContent = "Please introduce a correct quantity";
-          document.getElementById("comprobacion-meter-dinero").style.color = "red";
-          setTimeout(() => {
-            document.getElementById("comprobacion-meter-dinero").textContent = "";
-          }, 1500);
-        } else {
-          document.getElementById("comprobacion-meter-dinero").textContent = "Por favor, ingresa una cantidad válida.";
-          document.getElementById("comprobacion-meter-dinero").style.color = "red";
-          setTimeout(() => {
-            document.getElementById("comprobacion-meter-dinero").textContent = "";
-          }, 1500);
-        }
-    } else {
-        saldo += cantidadDinero;
-        actualizarSaldo();
-        cerrarModal(document.getElementById("modal-meter-dinero"));
-    }
+  const cantidadDinero = parseFloat(document.getElementById("input-introducir-dinero").value);
+  const comprobacion = document.getElementById("comprobacion-meter-dinero");
+
+  if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
+    comprobacion.textContent = estaEnIngles() ? "Please introduce a correct quantity" : "Por favor, ingresa una cantidad válida.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else {
+    saldo += cantidadDinero;
+    actualizarSaldo();
+    cerrarModal(document.getElementById("modal-meter-dinero"));
+  }
+
+  document.getElementById("input-introducir-dinero").value = '';
+});
+
+document.getElementById("boton-cerrar-meter-dinero-modal").addEventListener("click", function () {
+  document.getElementById("input-introducir-dinero").value = '';
+  cerrarModal(document.getElementById("modal-meter-dinero"));
 });
 
 // Retirar dinero
 document.getElementById("boton-retirar-dinero-modal").addEventListener("click", function () {
-    const cantidadDinero = parseFloat(document.getElementById("input-retirar-dinero").value);
-    if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-retirar-dinero").textContent = "Please introduce a correct quantity";
-        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
-        setTimeout(() => {
-          document.getElementById("comprobacion-retirar-dinero").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-retirar-dinero").textContent = "Por favor, ingresa una cantidad válida.";
-        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-retirar-dinero").textContent = "";
-        }, 1500);
-      }
-    } else if (cantidadDinero > saldo) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-retirar-dinero").textContent = "Not enough money.";
-        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-retirar-dinero").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-retirar-dinero").textContent = "No tienes suficiente saldo.";
-        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-retirar-dinero").textContent = "";
-        }, 1500);
-      }
-    } else {
-        saldo -= cantidadDinero;
-        actualizarSaldo();
-        cerrarModal(document.getElementById("modal-retirar-dinero"));
-    }
+  const cantidadDinero = parseFloat(document.getElementById("input-retirar-dinero").value);
+  const comprobacion = document.getElementById("comprobacion-retirar-dinero");
+
+  if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
+    comprobacion.textContent = estaEnIngles() ? "Please introduce a correct quantity" : "Por favor, ingresa una cantidad válida.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else if (cantidadDinero > saldo) {
+    comprobacion.textContent = estaEnIngles() ? "Not enough money" : "No tienes suficiente saldo.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else {
+    saldo -= cantidadDinero;
+    actualizarSaldo();
+    cerrarModal(document.getElementById("modal-retirar-dinero"));
+  }
+
+  document.getElementById("input-retirar-dinero").value = '';
+});
+
+document.getElementById("boton-cerrar-retirar-dinero-modal").addEventListener("click", function () {
+  document.getElementById("input-retirar-dinero").value = '';
+  cerrarModal(document.getElementById("modal-retirar-dinero"));
 });
 
 // Convertir saldo a fichas
 document.getElementById("boton-convertir-fichas").addEventListener("click", function () {
-    const cantidadEuros = parseFloat(document.getElementById("input-cantidad-conversion-fichas").value);
-    
-    if (cantidadEuros <= 0 || isNaN(cantidadEuros)) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Please introduce a correct quantity.";
-        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Por favor, ingresa una cantidad válida.";
-        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
-        }, 1500);
-      }
-    } else if (cantidadEuros > saldo) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Not enough money.";
-        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-convertir-a-fichas").textContent = "No tienes suficiente saldo.";
-        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
-        }, 1500);
-      }
-    } else {
-        const cantidadFichas = cantidadEuros * 100;
-        saldo -= cantidadEuros;
-        fichas += cantidadFichas;
-        actualizarSaldo();
-        cerrarModal(document.getElementById("modal-conversion-fichas"));
-    }
+  const cantidadEuros = parseFloat(document.getElementById("input-cantidad-conversion-fichas").value);
+  const comprobacion = document.getElementById("comprobacion-convertir-a-fichas");
+
+  if (cantidadEuros <= 0 || isNaN(cantidadEuros)) {
+    comprobacion.textContent = estaEnIngles() ? "Please introduce a correct quantity" : "Por favor, ingresa una cantidad válida.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else if (cantidadEuros > saldo) {
+    comprobacion.textContent = estaEnIngles() ? "Not enough money" : "No tienes suficiente saldo.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else {
+    const cantidadFichas = cantidadEuros * 100;
+    saldo -= cantidadEuros;
+    fichas += cantidadFichas;
+    actualizarSaldo();
+    cerrarModal(document.getElementById("modal-conversion-fichas"));
+  }
+
+  // Limpiar el campo de entrada después de procesar
+  document.getElementById("input-cantidad-conversion-fichas").value = '';
 });
 
 // Convertir fichas a saldo
 document.getElementById("boton-convertir-saldo").addEventListener("click", function () {
-    const cantidadFichas = parseInt(document.getElementById("input-cantidad-conversion-saldo").value);
-    
-    if (cantidadFichas <= 0 || isNaN(cantidadFichas)) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Please introduce a correct quantity.";
-        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Por favor, ingresa una cantidad válida.";
-        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
-        }, 1500);
-      }
-    } else if (cantidadFichas > fichas) {
-      if (estaEnIngles()) {
-        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Not enough tokens.";
-        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
-        }, 1500);
-      } else {
-        document.getElementById("comprobacion-convertir-a-dinero").textContent = "No tienes suficientes fichas.";
-        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
-        setTimeout(() => {
-            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
-        }, 1500);
-      }
-    } else {
-        const cantidadEuros = cantidadFichas / 100;
-        fichas -= cantidadFichas;
-        saldo += cantidadEuros;
-        actualizarSaldo();
-        cerrarModal(document.getElementById("modal-conversion-saldo"));
-    }
+  const cantidadFichas = parseInt(document.getElementById("input-cantidad-conversion-saldo").value);
+  const comprobacion = document.getElementById("comprobacion-convertir-a-dinero");
+
+  if (cantidadFichas <= 0 || isNaN(cantidadFichas)) {
+    comprobacion.textContent = estaEnIngles() ? "Please introduce a correct quantity" : "Por favor, ingresa una cantidad válida.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else if (cantidadFichas > fichas) {
+    comprobacion.textContent = estaEnIngles() ? "Not enough tokens" : "No tienes suficientes fichas.";
+    comprobacion.style.color = "red";
+    setTimeout(() => {
+      comprobacion.textContent = "";
+    }, 1500);
+  } else {
+    const cantidadDinero = cantidadFichas / 100;
+    fichas -= cantidadFichas;
+    saldo += cantidadDinero;
+    actualizarSaldo();
+    cerrarModal(document.getElementById("modal-conversion-saldo"));
+  }
+
+  // Limpiar el campo de entrada después de procesar
+  document.getElementById("input-cantidad-conversion-saldo").value = '';
 });
 
 // Funcionalidad tragaperras
@@ -438,10 +404,10 @@ function comprobarPremio() {
       imagenCarril1[2] === imagenCarril2[2] && imagenCarril1[2] === imagenCarril3[2]) {
 
       var simbolo = imagenCarril1[0].split("/").pop().split(".")[0];  // Extraemos el nombre del símbolo
-      var premioJackpot = premios[simbolo] * 5;  // Supongamos que el Jackpot es 10 veces el premio normal
+      var premioJackpot = premios[simbolo] * 5; 
       
-      fichas += premioJackpot;  // Sumamos el premio del Jackpot al saldo
-      actualizarSaldo();  // Actualizamos el saldo visualmente
+      fichas += premioJackpot;
+      actualizarSaldo();
 
       // Aplicar efecto a todas las imágenes premiadas
       const imagenesPremiadas = [
@@ -630,8 +596,8 @@ function comprobarPremio() {
     var simbolo = imagenCarril1[0].split("/").pop().split(".")[0];  // Extraemos el nombre del símbolo
     var premio = premios[simbolo];  // Calculamos el premio
 
-    fichas += premio;  // Sumamos el premio al saldo
-    actualizarSaldo();  // Actualizamos el saldo visualmente
+    fichas += premio;
+    actualizarSaldo();
 
     // Aplicar efecto a las imágenes premiadas
     const imagenesPremiadas = [
@@ -659,8 +625,8 @@ function comprobarPremio() {
     var simbolo = imagenCarril1[2].split("/").pop().split(".")[0];  // Extraemos el nombre del símbolo
     var premio = premios[simbolo];  // Calculamos el premio
 
-    fichas += premio;  // Sumamos el premio al saldo
-    actualizarSaldo();  // Actualizamos el saldo visualmente
+    fichas += premio;
+    actualizarSaldo();
 
     // Aplicar efecto a las imágenes premiadas
     const imagenesPremiadas = [
@@ -730,7 +696,7 @@ function actualizarSaldo() {
 
 /* TRADUCIR A INGLES */
 i18next.init({
-  lng: 'es',  // Idioma por defecto
+  lng: 'es',
   resources: {
     es: {
       translation: {
@@ -748,6 +714,17 @@ i18next.init({
         introducirDineroLabel: "Introduce dinero",
         aceptar: "Aceptar",
         cerrarModal: "Cerrar",
+        h2Manual: "Manual de la Tragaperras",
+        pManual: "¡Bienvenido! Aquí están las combinaciones ganadoras y cómo lograrlas:",
+        jackpotTitle: "1. Jackpot",
+        jackpotDescription: "Cuando todos los símbolos en los tres carriles sean iguales, ¡obtienes el JACKPOT!",
+        horizontalLineTitle: "2. Línea Horizontal",
+        horizontalLineDescription: "Una fila horizontal con los mismos símbolos en los tres carriles es ganadora.",
+        diagonalLineTitle: "3. Línea Diagonal",
+        diagonalLineDescription: "Una línea diagonal con los mismos símbolos es una combinación ganadora.",
+        tryAgainTitle: "4. Intenta de nuevo",
+        tryAgainDescription: "Si no logras ninguna combinación ganadora, ¡sigue intentándolo!"
+
       }
     },
     en: {
@@ -766,6 +743,16 @@ i18next.init({
         introducirDineroLabel: "Enter money",
         aceptar: "Accept",
         cerrarModal: "Close",
+        h2Manual: "Slot Machine Manual",
+        pManual: "Welcome! Here are the winning combinations and how to achieve them:",
+        jackpotTitle: "1. Jackpot",
+        jackpotDescription: "When all symbols on the three reels are the same, you get the JACKPOT!",
+        horizontalLineTitle: "2. Horizontal Line",
+        horizontalLineDescription: "A horizontal line with the same symbols on the three reels is a winner.",
+        diagonalLineTitle: "3. Diagonal Line",
+        diagonalLineDescription: "A diagonal line with the same symbols is a winning combination.",
+        tryAgainTitle: "4. Try Again",
+        tryAgainDescription: "If you don't get a winning combination, keep trying!"
       }
     }
   }

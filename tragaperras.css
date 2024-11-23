@@ -68,7 +68,7 @@ body::before {
   background-color: white;
   width: 5px;
   height: auto;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 .gestion-saldo {
@@ -266,7 +266,7 @@ body::before {
 
 /* Modo de color */
 .switch {
-  font-size: 17px;
+  font-size: 14px;
   position: relative;
   display: inline-block;
   width: 3.9em;
@@ -327,9 +327,9 @@ input:checked + .slider:before {
 
 /* Modal información */
 .modal {
-  display: flex; /* Usar flexbox */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
+  display: none;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -345,13 +345,12 @@ input:checked + .slider:before {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  width: 80%; /* Ajusta el ancho según lo necesites */
-  max-width: 1000px; /* Máximo ancho para pantallas grandes */
+  width: 80%;
+  max-width: 1000px;
   text-align: center;
   max-height: 90%;
   overflow-y: auto; /* Permite scroll si es necesario */
 }
-
 
 /* Estilo de las combinaciones */
 .combinacion {
@@ -386,7 +385,6 @@ input:checked + .slider:before {
   transition: transform 0.2s ease;
 }
 
-/* Efecto hover en los símbolos */
 .carril-modal img:hover {
   transform: scale(1.1);
 }
@@ -428,7 +426,7 @@ p {
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), inset 0 5px 10px rgba(0, 0, 0, 0.8);
   position: relative;
-  border: 4px solid #404040; /* Borde gris oscuro */
+  border: 4px solid #404040;
 }
 
 /* Pantalla de la tragamonedas */
@@ -448,18 +446,18 @@ p {
   padding: 30px;
   border-radius: 12px;
   box-shadow: inset 0 6px 10px rgba(0, 0, 0, 0.9), 0 3px 6px rgba(0, 0, 0, 0.7);
-  border: 3px solid #555555; /* Borde gris medio */
+  border: 3px solid #555555;
 }
 
 /* Carriles */
 .carril {
   width: 120px;
-  height: 300px; /* Altura fija para tres íconos */
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px; /* Espacio entre las imágenes */
+  gap: 12px;
 }
 
 /* Imágenes de los carriles */
@@ -467,11 +465,11 @@ p {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 2px solid #b59d7d; /* Bordes que parecen tallados en piedra */
-  border-radius: 12px; /* Bordes redondeados */
+  border: 2px solid #b59d7d;
+  border-radius: 12px;
   background: radial-gradient(circle, rgba(230, 204, 172, 0.95) 20%, rgba(170, 134, 104, 0.75) 85%);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5), inset 0 -3px 5px rgba(0, 0, 0, 0.4); /* Efecto de desgaste */
-  transition: transform 0.3s ease, background 0.3s ease; /* Efecto de transformación suave */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5), inset 0 -3px 5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 /* Efecto de desgaste para imágenes */
@@ -490,10 +488,10 @@ p {
 .mensajePremio {
   font-size: 24px;
   font-weight: bold;
-  color: #000000; /* Color del texto */
+  color: #000000;
   margin-top: 5px;
   text-align: center;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* Sombra para darle más profundidad */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
   padding-bottom: 30px;
   height: 5px;
 }
@@ -501,11 +499,11 @@ p {
 /* Animación de parpadeo */
 @keyframes parpadeo {
   0%, 100% {
-    border-color: #4caf50; /* Verde brillante */
+    border-color: #4caf50;
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.8), inset 0 0 8px rgba(76, 175, 80, 0.8);
   }
   50% {
-    border-color: #8bc34a; /* Verde más claro */
+    border-color: #8bc34a;
     box-shadow: 0 0 20px rgba(139, 195, 74, 0.9), inset 0 0 10px rgba(139, 195, 74, 0.9);
   }
 }
