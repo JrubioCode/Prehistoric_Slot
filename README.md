@@ -3,6 +3,11 @@
 
 Bienvenido a **Prehistoric Slot Machine**, un emocionante proyecto de una máquina tragaperras ambientada en el Paleolítico. Este juego te transportará a una época primitiva, donde podrás gestionar tu saldo, girar los carriles y ganar premios con combinaciones únicas.
 
+## 🌐 Acceso a la web
+
+Puedes jugar a **Prehistoric Slot Machine** directamente desde este enlace:  
+[Prehistoric Slot Machine en Vercel](https://prehistoric-slot.vercel.app/)
+
 ---
 
 ## 🎮 Descripción
