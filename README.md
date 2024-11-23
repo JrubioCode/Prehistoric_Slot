@@ -3,6 +3,8 @@
 
 Bienvenido a **Prehistoric Slot Machine**, un emocionante proyecto de una máquina tragaperras ambientada en el Paleolítico. Este juego te transportará a una época primitiva, donde podrás gestionar tu saldo, girar los carriles y ganar premios con combinaciones únicas.
 
+---
+
 ## 🎮 Descripción
 
 En este juego, diseñado para combinar diversión e interactividad, los jugadores pueden:
@@ -44,12 +46,11 @@ El proyecto ha sido desarrollado con las siguientes herramientas:
   - **Línea Diagonal**: Tres símbolos iguales en diagonal.
 
 ### 3. **Soporte multilingüe**
-- Implementado con **i18next**, permite cambiar dinámicamente entre idiomas (español e inglés por defecto).
-- Extensible para agregar más idiomas mediante archivos JSON.
+- Implementado con **i18next**, permite cambiar dinámicamente entre idiomas (español e inglés).
 
 ### 4. **Personalización y ajustes**
 - **Control de volumen**: Ajusta el volumen principal desde el menú de configuración.
-- **Modo blanco y negro**: Cambia la paleta de colores de la interfaz mediante un interruptor.
+- **Modo gris**: Cambia la paleta de colores de la interfaz mediante un interruptor.
 - **Reloj dinámico**: Muestra la hora actual en la esquina superior derecha.
 
 ---
@@ -59,17 +60,22 @@ El proyecto ha sido desarrollado con las siguientes herramientas:
 ```
 Prehistoric_Slot_Machine/
 │
-├── assets/                     # Recursos gráficos (imágenes, iconos)
+├── assets/                     # Recursos gráficos
 │   ├── tragaperras/            # Imágenes de los símbolos y la palanca
 │   ├── premios/                # Imágenes de premios
-│   └── ajustes/                # Iconos de configuración
+│   ├── ajustes/                # Iconos de configuración
+│   ├── fondo.png               # Imagen de fondo principal
+│   ├── fondo-blanco-negro.png  # Imagen de fondo en blanco y negro
+│   └── logo.webp               # Logo del proyecto
+│
+├── audios/                     # Recursos de audio
+│   ├── audio-principal.mp3     # Música de fondo
+│   ├── sonido-palanca.mp3      # Sonido de la palanca
+│   └── sonido-premio.mp3       # Sonido al ganar
 │
 ├── index.html                  # Página principal
 ├── tragaperras.css             # Estilos del juego
 ├── tragaperras.js              # Lógica e interacción del juego
-├── locales/                    # Archivos de traducción
-│   ├── es.json                 # Traducciones en español
-│   └── en.json                 # Traducciones en inglés
 └── README.md                   # Documentación del proyecto
 ```
 
@@ -90,27 +96,44 @@ Prehistoric_Slot_Machine/
 
 ## 🌐 Configuración de idioma
 
-La traducción es gestionada por **i18next**, que permite cambiar el idioma dinámamente. Por defecto, el idioma es español.
+La traducción es gestionada por **i18next**, que permite cambiar el idioma dinámicamente. Por defecto, el idioma es español.
 
-Para cambiar de idioma:
-1. Abre el menú de ajustes (⚙).
-2. Haz clic en el icono de idioma. El texto de toda la interfaz cambiará automáticamente.
+El código para gestionar las traducciones se encuentra directamente en el archivo `tragaperras.js`. A continuación, se muestra un fragmento clave:
 
-### Agregar nuevos idiomas
-1. Crea un archivo JSON en la carpeta `locales/` con las traducciones para el nuevo idioma.
-2. Ejemplo de archivo `locales/fr.json` para francés:
-   ```json
-   {
-     "meterDinero": "Insérer de l'argent",
-     "sacarDinero": "Retirer de l'argent",
-     "convertirFichas": "Convertir en jetons",
-     "convertirDinero": "Convertir en argent",
-     "dineroActual": "ARGENT: 0€",
-     "fichasActuales": "JETONS: 0🎫"
-   }
-   ```
+```javascript
+i18next.init({
+  lng: 'es',  // Idioma por defecto
+  resources: {
+    es: {
+      translation: {
+        meterDinero: "Meter dinero",
+        sacarDinero: "Sacar dinero",
+        convertirDinero: "Convertir a dinero",
+        convertirFichas: "Convertir a fichas",
+        dineroActual: "DINERO: 0€",
+        fichasActuales: "FICHAS: 0🎫"
+      }
+    },
+    en: {
+      translation: {
+        meterDinero: "Deposit money",
+        sacarDinero: "Withdraw money",
+        convertirFichas: "Convert to chips",
+        convertirDinero: "Convert to money",
+        dineroActual: "MONEY: 0€",
+        fichasActuales: "CHIPS: 0🎫"
+      }
+    }
+  }
+}, function(err, t) {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    el.innerHTML = t(key);
+  });
+});
+```
 
-3. Configura la opción en el código para permitir seleccionar ese idioma.
+Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondiente del menú de ajustes.
 
 ---
 
@@ -133,22 +156,6 @@ Para cambiar de idioma:
 - Agregar efectos de sonido para eventos clave (por ejemplo, girar la máquina o ganar premios).
 - Implementar un sistema de puntuación global o local para registrar los mejores resultados.
 - Expandir el soporte multilingüe a más idiomas.
-
----
-
-## 📖 Créditos
-
-- **Desarrollador**: [Tu Nombre]
-- **Iconos y Recursos Gráficos**: Imágenes propias o creadas para el proyecto.
-- **Librerías**:
-  - [i18next](https://www.i18next.com/) para la traducción.
-  - [Google Fonts](https://fonts.google.com/) para la tipografía.
-
----
-
-## 📜 Licencia
-
-Este proyecto está bajo la licencia MIT. Puedes usarlo, modificarlo y distribuirlo libremente.
 
 ---
 
