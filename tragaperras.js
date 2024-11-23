@@ -505,15 +505,6 @@ if (imagenCarril1[1] === imagenCarril2[1] && imagenCarril1[1] === imagenCarril3[
   return;  // Terminamos la ejecución si se detecta el premio
 }
 
-
-
-
-
-
-
-
-
-
   // Obtener las imágenes de cada carril
   var carril1 = document.getElementById("carril1");
   var carril2 = document.getElementById("carril2");
@@ -670,7 +661,7 @@ i18next.init({
         mensajePremio: "",
         idioma: "Idioma",
         volumenPrincipal: "Volumen principal",
-        blancoYNegro: "Blanco y negro",
+        blancoYNegro: "Modo de color",
         cerrar: "Cerrar",
         introducirDineroLabel: "Introduce dinero",
         aceptar: "Aceptar",
@@ -688,7 +679,7 @@ i18next.init({
         mensajePremio: "",
         idioma: "Language",
         volumenPrincipal: "Main volume",
-        blancoYNegro: "Black and white",
+        blancoYNegro: "Color mode",
         cerrar: "Close",
         introducirDineroLabel: "Enter money",
         aceptar: "Accept",
