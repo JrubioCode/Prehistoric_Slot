@@ -118,6 +118,12 @@
                 <input id="switch" type="checkbox" checked />
                 <span class="slider"></span>
             </label>
+
+            <!-- Botón de información -->
+            <div class="info-button">
+                <p>Info</p>
+                <img id="infoBtn" src="./assets/ajustes/informacion.png" alt="Información">
+            </div>
         </div>
     </div>
 
@@ -165,6 +171,88 @@
         </div>
     </div>
 
+<!-- Modal -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <h2>Manual de la Tragaperras</h2>
+        <p>¡Bienvenido! Aquí están las combinaciones ganadoras y cómo lograrlas:</p>
+
+        <!-- Jackpot -->
+        <section class="combinacion">
+            <h3>1. Jackpot</h3>
+            <p>Cuando todos los símbolos en los tres carriles sean iguales, ¡obtienes el JACKPOT!</p>
+            <div class="tabla-combinaciones">
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Línea Horizontal -->
+        <section class="combinacion">
+            <h3>2. Línea Horizontal</h3>
+            <p>Una fila horizontal con los mismos símbolos en los tres carriles es ganadora.</p>
+            <div class="tabla-combinaciones">
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/mamut.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/pollo.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/mamut.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/pollo.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/mamut.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/pollo.png" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagonal -->
+        <section class="combinacion">
+            <h3>3. Línea Diagonal</h3>
+            <p>Una línea diagonal con los mismos símbolos es una combinación ganadora.</p>
+            <div class="tabla-combinaciones">
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/pollo.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/pollo.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                </div>
+                <div class="carril-modal">
+                    <img src="./assets/tragaperras/cavernicola.png" />
+                    <img src="./assets/tragaperras/fuego.png" />
+                    <img src="./assets/tragaperras/pollo.png" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Intenta de nuevo -->
+        <section class="combinacion">
+            <h3>4. Intenta de nuevo</h3>
+            <p>Si no logras ninguna combinación ganadora, ¡sigue intentándolo!</p>
+        </section>
+    </div>
+</div>
     <script src="./tragaperras.js"></script>
 </body>
 

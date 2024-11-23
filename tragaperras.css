@@ -224,7 +224,7 @@ body::before {
   top: 205px; 
   right: 10px;
   width: 330px;
-  height: 450px;
+  height: 600px;
   z-index: 10;
   justify-content: center;
   transition: transform 0.3s ease-in-out;
@@ -436,4 +436,83 @@ input:checked + .slider:before {
   animation: parpadeo 1s infinite;
   border: 2px solid green;
   border-radius: 5px;
+}
+
+
+
+
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin-top: 50px;
+  padding: 50px;
+  border-radius: 10px;
+  width: 85%; /* Aumento el ancho del modal */
+  max-width: 1000px; /* Limita el tamaño máximo */
+  text-align: center;
+  max-height: 90%;
+  overflow-y: auto; /* Habilitar scroll */
+}
+
+/* Estilo de las combinaciones */
+.combinacion {
+  margin-bottom: 20px;
+}
+
+.combinacion h3 {
+  color: #444;
+}
+
+.tabla-combinaciones {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.carril-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.carril-modal img {
+  width: 60px;
+  height: 60px;
+}
+
+.carril-modal img {
+  transition: transform 0.2s ease;
+}
+
+/* Efecto hover en los símbolos */
+.carril-modal img:hover {
+  transform: scale(1.1);
+}
+
+/* Estilos generales */
+h2, h3 {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+p {
+  color: #555;
+  font-size: 1.1rem;
+  margin-top: 10px;
 }
