@@ -164,4 +164,10 @@ Para cambiar entre idiomas, el usuario puede hacer clic en el botón correspondi
 
 ---
 
+## 📖 Créditos
+
+- **Desarrollador**: [JrubioCode]
+
+---
+
 ¡Gracias por jugar a **Prehistoric Slot Machine**!
