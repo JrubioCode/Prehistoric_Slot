@@ -155,11 +155,19 @@ document.getElementById("boton-cerrar-conversion-saldo").addEventListener("click
 document.getElementById("boton-meter-dinero-modal").addEventListener("click", function () {
     const cantidadDinero = parseFloat(document.getElementById("input-introducir-dinero").value);
     if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
-        document.getElementById("comprobacion-meter-dinero").textContent = "Por favor, ingresa una cantidad válida.";
-        document.getElementById("comprobacion-meter-dinero").style.color = "red";
-        setTimeout(() => {
+        if (estaEnIngles()) {
+          document.getElementById("comprobacion-meter-dinero").textContent = "Please introduce a correct quantity";
+          document.getElementById("comprobacion-meter-dinero").style.color = "red";
+          setTimeout(() => {
             document.getElementById("comprobacion-meter-dinero").textContent = "";
-        }, 1500);
+          }, 1500);
+        } else {
+          document.getElementById("comprobacion-meter-dinero").textContent = "Por favor, ingresa una cantidad válida.";
+          document.getElementById("comprobacion-meter-dinero").style.color = "red";
+          setTimeout(() => {
+            document.getElementById("comprobacion-meter-dinero").textContent = "";
+          }, 1500);
+        }
     } else {
         saldo += cantidadDinero;
         actualizarSaldo();
@@ -171,17 +179,33 @@ document.getElementById("boton-meter-dinero-modal").addEventListener("click", fu
 document.getElementById("boton-retirar-dinero-modal").addEventListener("click", function () {
     const cantidadDinero = parseFloat(document.getElementById("input-retirar-dinero").value);
     if (cantidadDinero <= 0 || isNaN(cantidadDinero)) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-retirar-dinero").textContent = "Please introduce a correct quantity";
+        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
+        setTimeout(() => {
+          document.getElementById("comprobacion-retirar-dinero").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-retirar-dinero").textContent = "Por favor, ingresa una cantidad válida.";
         document.getElementById("comprobacion-retirar-dinero").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-retirar-dinero").textContent = "";
         }, 1500);
+      }
     } else if (cantidadDinero > saldo) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-retirar-dinero").textContent = "Not enough money.";
+        document.getElementById("comprobacion-retirar-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-retirar-dinero").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-retirar-dinero").textContent = "No tienes suficiente saldo.";
         document.getElementById("comprobacion-retirar-dinero").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-retirar-dinero").textContent = "";
         }, 1500);
+      }
     } else {
         saldo -= cantidadDinero;
         actualizarSaldo();
@@ -194,17 +218,33 @@ document.getElementById("boton-convertir-fichas").addEventListener("click", func
     const cantidadEuros = parseFloat(document.getElementById("input-cantidad-conversion-fichas").value);
     
     if (cantidadEuros <= 0 || isNaN(cantidadEuros)) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Please introduce a correct quantity.";
+        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-convertir-a-fichas").textContent = "Por favor, ingresa una cantidad válida.";
         document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
         }, 1500);
+      }
     } else if (cantidadEuros > saldo) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-convertir-a-fichas").textContent = "Not enough money.";
+        document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-convertir-a-fichas").textContent = "No tienes suficiente saldo.";
         document.getElementById("comprobacion-convertir-a-fichas").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-convertir-a-fichas").textContent = "";
         }, 1500);
+      }
     } else {
         const cantidadFichas = cantidadEuros * 100;
         saldo -= cantidadEuros;
@@ -219,17 +259,33 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
     const cantidadFichas = parseInt(document.getElementById("input-cantidad-conversion-saldo").value);
     
     if (cantidadFichas <= 0 || isNaN(cantidadFichas)) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Please introduce a correct quantity.";
+        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-convertir-a-dinero").textContent = "Por favor, ingresa una cantidad válida.";
         document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
         }, 1500);
+      }
     } else if (cantidadFichas > fichas) {
+      if (estaEnIngles()) {
+        document.getElementById("comprobacion-convertir-a-dinero").textContent = "Not enough tokens.";
+        document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
+        }, 1500);
+      } else {
         document.getElementById("comprobacion-convertir-a-dinero").textContent = "No tienes suficientes fichas.";
         document.getElementById("comprobacion-convertir-a-dinero").style.color = "red";
         setTimeout(() => {
             document.getElementById("comprobacion-convertir-a-dinero").textContent = "";
         }, 1500);
+      }
     } else {
         const cantidadEuros = cantidadFichas / 100;
         fichas -= cantidadFichas;
@@ -238,12 +294,6 @@ document.getElementById("boton-convertir-saldo").addEventListener("click", funct
         cerrarModal(document.getElementById("modal-conversion-saldo"));
     }
 });
-
-// Actualizar el saldo y las fichas
-function actualizarSaldo() {
-    document.getElementById("dinero-actual").textContent = "DINERO: " + saldo + "€";
-    document.getElementById("fichas-actuales").textContent = "FICHAS: " + fichas + "🎫";
-}
 
 // Funcionalidad tragaperras
 var cavernicola = "./assets/tragaperras/cavernicola.png";
@@ -558,159 +608,104 @@ function estaGirando() {
   return palanca.disabled;
 }
 
-// Inicialización de i18next
-// Inicialización de i18next
+// ACTUALIZAR SALDO EN LA PANTALLA
+function actualizarSaldo() {
+  if(estaEnIngles()){
+    document.getElementById("dinero-actual").textContent = "MONEY: " + saldo + "€";
+    document.getElementById("fichas-actuales").textContent = "CHIPS: " + fichas + "🎫";
+  } else{
+    document.getElementById("dinero-actual").textContent = "DINERO: " + saldo + "€";
+    document.getElementById("fichas-actuales").textContent = "FICHAS: " + fichas + "🎫";
+  }
+}
+
+/* TRADUCIR A INGLES */
 i18next.init({
-  lng: 'es', // Idioma por defecto
+  lng: 'es',  // Idioma por defecto
   resources: {
     es: {
       translation: {
-        "title": "Tragaperras",
-        "headerTitle": "PREHISTORIC SLOT",
-        "buttonInsertMoney": "Meter dinero",
-        "buttonWithdrawMoney": "Sacar dinero",
-        "buttonConvertToTokens": "Convertir a fichas",
-        "buttonConvertToMoney": "Convertir a dinero",
-        "currentMoney": "DINERO: 0€",
-        "currentTokens": "FICHAS: 0🎫",
-        "prizes": "Premios",
-        "addMoneyText": "Introduce dinero que quieres ingresar",
-        "withdrawMoneyText": "Introduce dinero que quieres retirar",
-        "convertToTokensText": "Convertir dinero a fichas",
-        "convertToMoneyText": "Convertir fichas en dinero",
-        "language": "Idioma",
-        "volume": "Volumen principal",
-        "colorMode": "Modo de color",
-        "accept": "Aceptar",
-        "close": "Cerrar",
-        "noPrize": "¡Intenta de nuevo!"  // Mensaje dinámico
+        meterDinero: "Meter dinero",
+        sacarDinero: "Sacar dinero",
+        convertirDinero: "Convertir a dinero",
+        convertirFichas: "Convertir a fichas",
+        dineroActual: "DINERO: 0€",
+        fichasActuales: "FICHAS: 0🎫",
+        mensajePremio: "",
+        idioma: "Idioma",
+        volumenPrincipal: "Volumen principal",
+        volumenPalanca: "Volumen de la palanca",
+        volumenPremio: "Volumen del premio",
+        blancoYNegro: "Blanco y negro",
+        cerrar: "Cerrar",
+        introducirDineroLabel: "Introduce dinero",
+        aceptar: "Aceptar",
+        cerrarModal: "Cerrar",
       }
     },
     en: {
       translation: {
-        "title": "Slot Machine",
-        "headerTitle": "PREHISTORIC SLOT",
-        "buttonInsertMoney": "Insert Money",
-        "buttonWithdrawMoney": "Withdraw Money",
-        "buttonConvertToTokens": "Convert to Tokens",
-        "buttonConvertToMoney": "Convert to Money",
-        "currentMoney": "MONEY: €0",
-        "currentTokens": "TOKENS: 0🎫",
-        "prizes": "Prizes",
-        "addMoneyText": "Enter the amount you want to deposit",
-        "withdrawMoneyText": "Enter the amount you want to withdraw",
-        "convertToTokensText": "Convert money to tokens",
-        "convertToMoneyText": "Convert tokens to money",
-        "language": "Language",
-        "volume": "Main Volume",
-        "colorMode": "Color Mode",
-        "accept": "Accept",
-        "close": "Close",
-        "noPrize": "Try Again!"  // Mensaje dinámico
+        meterDinero: "Deposit money",
+        sacarDinero: "Withdraw money",
+        convertirFichas: "Convert to chips",
+        convertirDinero: "Convert to money",
+        dineroActual: "MONEY: 0€",
+        fichasActuales: "CHIPS: 0🎫",
+        mensajePremio: "",
+        idioma: "Language",
+        volumenPrincipal: "Main volume",
+        volumenPalanca: "Lever volume",
+        volumenPremio: "Prize volume",
+        blancoYNegro: "Black and white",
+        cerrar: "Close",
+        introducirDineroLabel: "Enter money",
+        aceptar: "Accept",
+        cerrarModal: "Close",
       }
     }
   }
-}, function () {
-  // Traducción dinámica del contenido
-  document.title = i18next.t('title');
-  document.querySelector('h1').textContent = i18next.t('headerTitle');
-  document.getElementById('boton-ingresar-dinero').value = i18next.t('buttonInsertMoney');
-  document.getElementById('boton-retirar-dinero').value = i18next.t('buttonWithdrawMoney');
-  document.getElementById('boton-convertir-a-fichas').value = i18next.t('buttonConvertToTokens');
-  document.getElementById('boton-convertir-a-dinero').value = i18next.t('buttonConvertToMoney');
-  document.getElementById('dinero-actual').textContent = i18next.t('currentMoney');
-  document.getElementById('fichas-actuales').textContent = i18next.t('currentTokens');
-  document.getElementById('cartel-premios').alt = i18next.t('prizes');
-
-  // Modales
-  document.getElementById('parrafo-introducir-dinero').textContent = i18next.t('addMoneyText');
-  document.getElementById('parrafo-retirar-dinero').textContent = i18next.t('withdrawMoneyText');
-  document.querySelector('#modal-conversion-fichas p').textContent = i18next.t('convertToTokensText');
-  document.querySelector('#modal-conversion-saldo p').textContent = i18next.t('convertToMoneyText');
-  document.querySelector('#modal-ajustes p:nth-child(1)').textContent = i18next.t('language');
-  document.querySelector('#modal-ajustes p:nth-child(3)').textContent = i18next.t('volume');
-  document.querySelector('#modal-ajustes p:nth-child(5)').textContent = i18next.t('colorMode');
-  
-  const buttons = document.querySelectorAll('.contenido-modal input[type="button"]');
-  buttons.forEach((button) => {
-      if (button.id.includes('aceptar')) {
-          button.value = i18next.t('accept');
-      } else if (button.id.includes('cerrar')) {
-          button.value = i18next.t('close');
-      }
+},
+function(err, t) {
+  // ACTUALIZAR TRADUCCIONES
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    el.innerHTML = t(key);
+    if (el.tagName.toLowerCase() === 'input') {
+      el.value = t(key);
+    }
   });
-
-  // Llamamos a la función para actualizar la bandera y otros textos
-  actualizarSegunIdioma();
 });
 
-// Función para actualizar el idioma y la bandera
-function actualizarSegunIdioma() {
-  const iconoIdioma = document.getElementById('icono-idioma');
-  const cartelPremios = document.getElementById('cartel-premios');
-  
-  if (i18next.language === 'es') {
-    // Cambiar la bandera a España
-    iconoIdioma.src = './assets/ajustes/español.png';
-    iconoIdioma.alt = 'Español';
-
-    // Cambiar el cartel de premios a español
-    cartelPremios.src = './assets/premios/cartel-premios-español.png';
-
-    // Actualizar el mensaje dinámico
-    mostrarMensajePremio(i18next.t('noPrize'));
-  } else if (i18next.language === 'en') {
-    // Cambiar la bandera a Inglaterra
-    iconoIdioma.src = './assets/ajustes/ingles.png';
-    iconoIdioma.alt = 'English';
-
-    // Cambiar el cartel de premios a inglés
-    cartelPremios.src = './assets/premios/cartel-premios-ingles.png';
-
-    // Actualizar el mensaje dinámico
-    mostrarMensajePremio(i18next.t('noPrize'));
-  }
+// SI ESTA EN INGLES DEVUELVE TRUE, SI ESTA EN ESPAÑOL DEVUELVE FALSE
+function estaEnIngles() {
+  return i18next.language === 'en';
 }
 
-// Función para mostrar el mensaje de premio
-function mostrarMensajePremio(mensaje) {
-  const mensajePremio = document.getElementById('mensajePremio');
-  mensajePremio.textContent = mensaje;
-}
-
-// Función para cambiar el idioma dinámicamente
-function cambiarIdioma() {
+function traducir() {
   const nuevoIdioma = i18next.language === 'es' ? 'en' : 'es';
-  i18next.changeLanguage(nuevoIdioma, () => {
-      // Actualiza las traducciones dinámicamente tras cambiar el idioma
-      document.title = i18next.t('title');
-      document.querySelector('h1').textContent = i18next.t('headerTitle');
-      document.getElementById('boton-ingresar-dinero').value = i18next.t('buttonInsertMoney');
-      document.getElementById('boton-retirar-dinero').value = i18next.t('buttonWithdrawMoney');
-      document.getElementById('boton-convertir-a-fichas').value = i18next.t('buttonConvertToTokens');
-      document.getElementById('boton-convertir-a-dinero').value = i18next.t('buttonConvertToMoney');
-      document.getElementById('dinero-actual').textContent = i18next.t('currentMoney');
-      document.getElementById('fichas-actuales').textContent = i18next.t('currentTokens');
-      document.getElementById('cartel-premios').alt = i18next.t('prizes');
+  
+  i18next.changeLanguage(nuevoIdioma, function(err, t) {
+    // Actualizamos los elementos con las traducciones después de cambiar el idioma
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      el.innerHTML = t(key);
+      if (el.tagName.toLowerCase() === 'input') {
+        el.value = t(key);
+      }
+    });
 
-      document.getElementById('parrafo-introducir-dinero').textContent = i18next.t('addMoneyText');
-      document.getElementById('parrafo-retirar-dinero').textContent = i18next.t('withdrawMoneyText');
-      document.querySelector('#modal-conversion-fichas p').textContent = i18next.t('convertToTokensText');
-      document.querySelector('#modal-conversion-saldo p').textContent = i18next.t('convertToMoneyText');
-      document.querySelector('#modal-ajustes p:nth-child(1)').textContent = i18next.t('language');
-      document.querySelector('#modal-ajustes p:nth-child(3)').textContent = i18next.t('volume');
-      document.querySelector('#modal-ajustes p:nth-child(5)').textContent = i18next.t('colorMode');
-      
-      const buttons = document.querySelectorAll('.contenido-modal input[type="button"]');
-      buttons.forEach((button) => {
-          if (button.id.includes('aceptar')) {
-              button.value = i18next.t('accept');
-          } else if (button.id.includes('cerrar')) {
-              button.value = i18next.t('close');
-          }
-      });
-
-      // Llamamos a la función para actualizar la bandera y otros textos
-      actualizarSegunIdioma();
+    // CAMBIAR ICONO DEPENDIENDO DEL IDIOMA
+    if (estaEnIngles()) {
+      document.getElementById('icono-idioma').src = './assets/ajustes/ingles.png';
+      document.getElementById("cartel-premios").src = "./assets/premios/cartel-premios-ingles.png";
+    } else {
+      document.getElementById('icono-idioma').src = './assets/ajustes/español.png';
+      document.getElementById("cartel-premios").src = "./assets/premios/cartel-premios-español.png";
+    }
   });
+}
+
+// FUNCION PARA COMPROBAR EN QUE IDIOMA ESTA
+function estaEnIngles() {
+  return i18next.language === 'en';
 }
